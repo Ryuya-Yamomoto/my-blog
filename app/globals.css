@@ -1,8 +1,36 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap");
+
+@layer components {
+  .hamMenuTransition {
+    .bar {
+      transition:
+        rotate 0.15s,
+        width 0.15s,
+        top 0.15s 0.15s;
+    }
+    &.open {
+      .bar {
+        transition:
+          top 0.15s,
+          width 0.15s,
+          rotate 0.15s 0.15s;
+      }
+    }
+  }
+  .row {
+    margin-inline: auto;
+    max-width: 1200px;
+    padding-inline: 1rem;
+    width: 100%;
+  }
+}
 
 :root {
-  --background: #ffffff;
+  --background: rgb(203, 203, 201);
   --foreground: #171717;
+
+  --primary: #0a0a0a;
 }
 
 @theme inline {
@@ -10,17 +38,23 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --color-primary: var(--primary);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+
+    --primary: #ffffff;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family:
+    Helvetica "Noto Sans JP",
+    sans-serif;
 }

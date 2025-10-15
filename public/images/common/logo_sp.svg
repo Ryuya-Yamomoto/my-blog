@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 130">
+  <!-- Main text - left aligned -->
+  <text x="0" y="50" font-family="Arial, sans-serif" font-weight="700" font-size="48" text-anchor="start" fill="#1a1a1a">RYUYA</text>
+  <text x="0" y="100" font-family="Arial, sans-serif" font-weight="700" font-size="48" text-anchor="start" fill="#1a1a1a">YAMAMOTO</text>
+  
+  <!-- Top accent line -->
+  <rect x="0" y="0" width="20" height="4" fill="#1a1a1a"/>
+  
+  <!-- Bottom line -->
+  <line x1="0" y1="120" x2="300" y2="120" stroke="#1a1a1a" stroke-width="4"/>
+</svg>

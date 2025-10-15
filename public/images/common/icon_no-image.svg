@@ -1,0 +1,13 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Ultra minimal abstract camera -->
+  <g transform="translate(32, 32)">
+    <!-- Just a square -->
+    <rect x="-25" y="-25" width="50" height="50" rx="2" stroke="#D1D5DB" stroke-width="2" fill="none"/>
+    
+    <!-- Single circle for lens -->
+    <circle cx="0" cy="0" r="12" stroke="#D1D5DB" stroke-width="2" fill="none"/>
+    
+    <!-- Diagonal slash -->
+    <line x1="-30" y1="-30" x2="30" y2="30" stroke="#D1D5DB" stroke-width="2" stroke-linecap="round"/>
+  </g>
+</svg>
