@@ -16,3 +16,21 @@ export interface Category {
   id: string;
   name: string;
 }
+
+export type BaseButtonProps = {
+  label: string;
+  className?: string;
+};
+
+export type LinkButtonProps = BaseButtonProps & {
+  link: {
+    href: string;
+    blank?: boolean;
+  };
+  handleClick?: never;
+} & React.AnchorHTMLAttributes<HTMLAnchorElement>;
+
+export type ButtonProps = BaseButtonProps & {
+  link?: never;
+  handleClick: () => void;
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;

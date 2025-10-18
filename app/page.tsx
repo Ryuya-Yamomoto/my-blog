@@ -3,6 +3,7 @@ import type { Blog } from "@/app/types/common";
 
 import HeadingSection from "./components/common/heading/heading-section";
 import CardBlog from "./components/common/card/card-blog";
+import ButtonPrimary from "./components/common/button/button-rect";
 
 export default async function Home() {
   // 最近の記事
@@ -50,7 +51,16 @@ export default async function Home() {
       </section>
 
       <section className="mt-32">
-        <HeadingSection en="RECENTLY" ja="最近の記事" />
+        <div className="flex flex-wrap items-end justify-between gap-2">
+          <HeadingSection en="RECENTLY" ja="最近の記事" />
+          {dataRecently.contents.length > 2 && (
+            <ButtonPrimary
+              label="一覧を見る"
+              link={{ href: "#" }}
+              className="mt-4"
+            />
+          )}
+        </div>
         <div className="mt-4 grid grid-cols-3 gap-4">
           {dataRecently.contents.length > 0 ? (
             dataRecently.contents.map((item: Blog) => {
@@ -63,7 +73,16 @@ export default async function Home() {
       </section>
 
       <section className="mt-32">
-        <HeadingSection en="TECH" ja="技術" />
+        <div className="flex flex-wrap items-end justify-between gap-2">
+          <HeadingSection en="TECH" ja="技術" />
+          {dataTech.contents.length > 3 && (
+            <ButtonPrimary
+              label="一覧を見る"
+              link={{ href: "#" }}
+              className="mt-4"
+            />
+          )}
+        </div>
         <div className="mt-4 grid grid-cols-3 gap-4">
           {dataTech.contents.length > 0 ? (
             dataTech.contents.map((item: Blog) => {
@@ -76,7 +95,16 @@ export default async function Home() {
       </section>
 
       <section className="mt-32">
-        <HeadingSection en="MUSIC" ja="音楽" />
+        <div className="flex flex-wrap items-end justify-between gap-2">
+          <HeadingSection en="MUSIC" ja="音楽" />
+          {dataMusic.contents.length > 3 && (
+            <ButtonPrimary
+              label="一覧を見る"
+              link={{ href: "#" }}
+              className="mt-4"
+            />
+          )}
+        </div>
         <div className="mt-4 grid grid-cols-3 gap-4">
           {dataMusic.contents.length > 0 ? (
             dataMusic.contents.map((item: Blog) => {
@@ -89,7 +117,16 @@ export default async function Home() {
       </section>
 
       <section className="mt-32">
-        <HeadingSection en="LIFE" ja="生活" />
+        <div className="flex flex-wrap items-end justify-between gap-2">
+          <HeadingSection en="LIFE" ja="生活" />
+          {dataLife.contents.length > 3 && (
+            <ButtonPrimary
+              label="一覧を見る"
+              link={{ href: "#" }}
+              className="mt-4"
+            />
+          )}
+        </div>
         <div className="mt-4 grid grid-cols-3 gap-4">
           {dataLife.contents.length > 0 ? (
             dataLife.contents.map((item: Blog) => {
