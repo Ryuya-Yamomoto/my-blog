@@ -3,7 +3,8 @@ import type { Blog } from "@/app/types/common";
 
 import HeadingSection from "./components/common/heading/heading-section";
 import CardBlog from "./components/common/card/card-blog";
-import ButtonPrimary from "./components/common/button/button-rect";
+import ButtonText from "./components/common/button/button-text";
+import { cn } from "@/lib/utils";
 
 export default async function Home() {
   // 最近の記事
@@ -38,14 +39,22 @@ export default async function Home() {
           <p>
             1997年3月25日生まれ。栃木県出身。
             <br />
-            都内の大学を卒業後、照明メーカーの営業職として就職。
+            都内の大学を卒業後、
+            <br className="md:hidden" />
+            照明メーカーの営業職として就職。
             <br />
-            その後、地元の栃木に戻り、2022年3月からWeb制作会社に転職、フロントエンドエンジニアとして従事。
+            その後、地元の栃木に戻り、
+            <br className="md:hidden" />
+            2022年3月からWeb制作会社に転職、
+            <br className="md:hidden" />
+            フロントエンドエンジニアとして従事。
             <br />
             趣味は音楽と料理。あとプログラミング。
           </p>
           <p className="mt-2">
-            当サイトは Next.js/microCMS にて構築しています。
+            当サイトは
+            <br className="md:hidden" />
+            Next.js/microCMS にて構築しています。
           </p>
         </div>
       </section>
@@ -54,14 +63,14 @@ export default async function Home() {
         <div className="flex flex-wrap items-end justify-between gap-2">
           <HeadingSection en="RECENTLY" ja="最近の記事" />
           {dataRecently.contents.length > 2 && (
-            <ButtonPrimary
+            <ButtonText
               label="一覧を見る"
               link={{ href: "#" }}
               className="mt-4"
             />
           )}
         </div>
-        <div className="mt-4 grid grid-cols-3 gap-4">
+        <div className={cn("mt-4 grid gap-4", "lg:grid-cols-3")}>
           {dataRecently.contents.length > 0 ? (
             dataRecently.contents.map((item: Blog) => {
               return <CardBlog key={item.id} blog={item} />;
@@ -76,14 +85,14 @@ export default async function Home() {
         <div className="flex flex-wrap items-end justify-between gap-2">
           <HeadingSection en="TECH" ja="技術" />
           {dataTech.contents.length > 3 && (
-            <ButtonPrimary
+            <ButtonText
               label="一覧を見る"
               link={{ href: "#" }}
               className="mt-4"
             />
           )}
         </div>
-        <div className="mt-4 grid grid-cols-3 gap-4">
+        <div className={cn("mt-4 grid gap-4", "lg:grid-cols-3")}>
           {dataTech.contents.length > 0 ? (
             dataTech.contents.map((item: Blog) => {
               return <CardBlog key={item.id} blog={item} />;
@@ -98,14 +107,14 @@ export default async function Home() {
         <div className="flex flex-wrap items-end justify-between gap-2">
           <HeadingSection en="MUSIC" ja="音楽" />
           {dataMusic.contents.length > 3 && (
-            <ButtonPrimary
+            <ButtonText
               label="一覧を見る"
               link={{ href: "#" }}
               className="mt-4"
             />
           )}
         </div>
-        <div className="mt-4 grid grid-cols-3 gap-4">
+        <div className={cn("mt-4 grid gap-4", "lg:grid-cols-3")}>
           {dataMusic.contents.length > 0 ? (
             dataMusic.contents.map((item: Blog) => {
               return <CardBlog key={item.id} blog={item} />;
@@ -120,14 +129,14 @@ export default async function Home() {
         <div className="flex flex-wrap items-end justify-between gap-2">
           <HeadingSection en="LIFE" ja="生活" />
           {dataLife.contents.length > 3 && (
-            <ButtonPrimary
+            <ButtonText
               label="一覧を見る"
               link={{ href: "#" }}
               className="mt-4"
             />
           )}
         </div>
-        <div className="mt-4 grid grid-cols-3 gap-4">
+        <div className={cn("mt-4 grid gap-4", "lg:grid-cols-3")}>
           {dataLife.contents.length > 0 ? (
             dataLife.contents.map((item: Blog) => {
               return <CardBlog key={item.id} blog={item} />;

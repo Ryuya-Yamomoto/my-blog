@@ -5,16 +5,16 @@
   .hamMenuTransition {
     .bar {
       transition:
-        rotate 0.15s,
-        width 0.15s,
-        top 0.15s 0.15s;
+        rotate 0.2s,
+        width 0.2s,
+        top 0.2s 0.2s;
     }
     &.open {
       .bar {
         transition:
-          top 0.15s,
-          width 0.15s,
-          rotate 0.15s 0.15s;
+          top 0.2s,
+          width 0.2s,
+          rotate 0.2s 0.2s;
       }
     }
   }
@@ -42,14 +42,14 @@
   --color-primary: var(--primary);
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
 
     --primary: #ffffff;
   }
-}
+} */
 
 body {
   background: var(--background);

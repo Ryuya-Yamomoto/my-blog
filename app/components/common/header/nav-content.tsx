@@ -38,11 +38,11 @@ const NavContent = (props: {
       ></div>
       <div
         className={cn(
-          "bg-background fixed top-0 right-0 h-screen w-[80%] max-w-80 px-4 pt-28 pb-4 shadow-lg",
+          "bg-background fixed top-0 right-0 h-screen w-[80%] max-w-80 px-4 pt-28 pb-4 md:shadow-lg",
           isNavigationOpen
             ? "[clip-path:inset(0_0_0_-10%)]"
             : "[clip-path:inset(0_0_0_100%)]",
-          "transition-clip-path duration-300"
+          "transition-clip-path duration-400"
         )}
       >
         <div className="h-full w-full overflow-y-auto">

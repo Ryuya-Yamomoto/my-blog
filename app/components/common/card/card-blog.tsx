@@ -14,31 +14,43 @@ const CardBlog = ({ blog }: CardBlogProps) => {
   return (
     <Link
       href="#"
-      className="group relative block aspect-square w-full overflow-hidden"
+      className={cn(
+        "group relative grid w-full grid-cols-[40%_1fr] gap-x-2",
+        "lg:aspect-square lg:grid-cols-1 lg:gap-x-0 lg:overflow-hidden"
+      )}
     >
-      <figure className="block h-full w-full">
+      <figure className="block aspect-square w-full overflow-hidden">
         <Image
           src={blog.thumbnail.url}
           alt={blog.title}
           height={blog.thumbnail.height}
           width={blog.thumbnail.width}
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover transition-[scale] duration-300 group-hover:scale-[1.05]"
         />
       </figure>
       <div
         className={cn(
-          "absolute top-0 left-0 grid h-full w-full place-items-center bg-black/50 p-4 backdrop-blur-sm transition-[opacity,filter] duration-300",
-          "opacity-0 blur-sm",
-          "group-hover:opacity-100 group-hover:blur-none"
+          "place-items-[start_center] grid w-full",
+          "lg:absolute lg:top-0 lg:left-0 lg:h-full lg:place-items-center lg:bg-black/50 lg:p-4 lg:backdrop-blur-sm lg:transition-[opacity,filter] lg:duration-400",
+          "lg:opacity-0 lg:blur-sm",
+          "lg:group-hover:opacity-100 lg:group-hover:blur-none"
         )}
       >
-        <div className="text-white">
-          <p className="line-clamp-1 text-xl font-bold">{blog.title}</p>
-          <p className="text-sm">
+        <div className="lg:text-white">
+          <p
+            className={cn(
+              "line-clamp-1 text-xl font-bold",
+              "md:text-2xl",
+              "lg:text-xl"
+            )}
+          >
+            {blog.title}
+          </p>
+          <p className="mt-1 text-sm font-medium">
             {format(new Date(blog.publishedAt), "yyyy-MM-dd")}
           </p>
           <div
-            className="mt-4 line-clamp-2"
+            className="mt-2 line-clamp-2 font-medium"
             dangerouslySetInnerHTML={{ __html: blog.body }}
           />
         </div>
