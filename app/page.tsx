@@ -1,4 +1,3 @@
-import { client } from "@/libs/microcms";
 import type { Blog } from "@/app/types/common";
 
 import HeadingSection from "./components/common/heading/heading-section";
@@ -6,30 +5,25 @@ import CardBlog from "./components/common/card/card-blog";
 import ButtonText from "./components/common/button/button-text";
 import { cn } from "@/lib/utils";
 
+import {
+  getRecentBlogs,
+  getTechBlog,
+  getMusicBlog,
+  getLifeBlog,
+} from "@/libs/microcms";
+
 export default async function Home() {
   // 最近の記事
-  const dataRecently = await client.get({
-    endpoint: "blog",
-    queries: { limit: 3 },
-  });
+  const dataRecently = await getRecentBlogs(3);
 
   // 技術
-  const dataTech = await client.get({
-    endpoint: "blog",
-    queries: { limit: 3, filters: "category[equals]lbtcqgor3ra" },
-  });
+  const dataTech = await getTechBlog(3);
 
   // 音楽
-  const dataMusic = await client.get({
-    endpoint: "blog",
-    queries: { limit: 3, filters: "category[equals]qw7tpo20vys" },
-  });
+  const dataMusic = await getMusicBlog(3);
 
   // 生活
-  const dataLife = await client.get({
-    endpoint: "blog",
-    queries: { limit: 3, filters: "category[equals]0y5yavkzrl3l" },
-  });
+  const dataLife = await getLifeBlog(3);
 
   return (
     <div className="row">

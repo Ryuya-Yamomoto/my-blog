@@ -27,7 +27,7 @@ const Header = () => {
         "transition-background fixed top-0 right-0 left-0 z-10 h-16 duration-300",
         isNavigationOpen
           ? "bg-background"
-          : "bg-background/70 backdrop-blur-[2px]"
+          : "bg-background/70 border-border border-b backdrop-blur-[2px]"
       )}
     >
       <div className="flex h-full items-center justify-between px-4">
