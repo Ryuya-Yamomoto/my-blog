@@ -5,25 +5,20 @@ import CardBlog from "./components/common/card/card-blog";
 import ButtonText from "./components/common/button/button-text";
 import { cn } from "@/lib/utils";
 
-import {
-  getRecentBlogs,
-  getTechBlog,
-  getMusicBlog,
-  getLifeBlog,
-} from "@/libs/microcms";
+import { getBlogs } from "@/libs/microcms";
 
 export default async function Home() {
   // 最近の記事
-  const dataRecently = await getRecentBlogs(3);
+  const dataRecently = await getBlogs({ limit: 3 });
 
   // 技術
-  const dataTech = await getTechBlog(3);
+  const dataTech = await getBlogs({ limit: 3, category: "lbtcqgor3ra" });
 
   // 音楽
-  const dataMusic = await getMusicBlog(3);
+  const dataMusic = await getBlogs({ limit: 3, category: "qw7tpo20vys" });
 
   // 生活
-  const dataLife = await getLifeBlog(3);
+  const dataLife = await getBlogs({ limit: 3, category: "0y5yavkzrl3l" });
 
   return (
     <div className="row">

@@ -15,6 +15,7 @@ export interface Blog {
 export interface Category {
   id: string;
   name: string;
+  slug: string;
 }
 
 export type BaseButtonProps = {

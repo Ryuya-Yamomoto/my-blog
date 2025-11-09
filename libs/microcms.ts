@@ -1,6 +1,6 @@
 import { createClient } from "microcms-js-sdk";
 
-import { Blog } from "@/app/types/common";
+import { Blog, Category } from "@/app/types/common";
 
 // 環境変数にMICROCMS_SERVICE_DOMAINが設定されていない場合はエラーを投げる
 if (!process.env.MICROCMS_SERVICE_DOMAIN) {
@@ -26,52 +26,26 @@ type MicroCMSResponse<T> = {
   limit: number;
 };
 
-// 最近の記事を取得
-export const getRecentBlogs = async (
-  limit: number = 3
-): Promise<MicroCMSResponse<Blog>> => {
-  return await client.get<MicroCMSResponse<Blog>>({
-    endpoint: "blog",
-    queries: { limit },
-  });
-};
-
-// カテゴリ別の記事を取得 ＝＝＝＝＝＝＝＝＝＝
-// 技術
-export const getTechBlog = async (
-  limit: number = 3
-): Promise<MicroCMSResponse<Blog>> => {
+// 記事一覧の取得
+export const getBlogs = async ({
+  limit,
+  category,
+}: {
+  limit?: number;
+  category?: string;
+}): Promise<MicroCMSResponse<Blog>> => {
   return await client.get<MicroCMSResponse<Blog>>({
     endpoint: "blog",
     queries: {
       limit,
-      filters: "category[equals]lbtcqgor3ra",
+      filters: category ? `category[equals]${category}` : undefined,
     },
   });
 };
 
-// 音楽
-export const getMusicBlog = async (
-  limit: number = 3
-): Promise<MicroCMSResponse<Blog>> => {
-  return await client.get<MicroCMSResponse<Blog>>({
-    endpoint: "blog",
-    queries: {
-      limit,
-      filters: "category[equals]qw7tpo20vys",
-    },
-  });
-};
-
-// 生活
-export const getLifeBlog = async (
-  limit: number = 3
-): Promise<MicroCMSResponse<Blog>> => {
-  return await client.get<MicroCMSResponse<Blog>>({
-    endpoint: "blog",
-    queries: {
-      limit,
-      filters: "category[equals]0y5yavkzrl3l",
-    },
+// カテゴリ一覧を取得
+export const getCategories = async (): Promise<MicroCMSResponse<Category>> => {
+  return await client.get<MicroCMSResponse<Category>>({
+    endpoint: "categories",
   });
 };

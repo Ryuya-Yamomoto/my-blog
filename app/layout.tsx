@@ -4,6 +4,7 @@ import "./globals.css";
 import React from "react";
 import { ContextProvider } from "@/app/contexts/context";
 import { LenisProvider } from "./hooks/lenisProvider";
+import { cn } from "@/lib/utils";
 
 import Header from "./components/common/header/header";
 import Footer from "./components/common/footer/footer";
@@ -32,10 +33,18 @@ export default function RootLayout({
     <>
       <LenisProvider />
       <html lang="ja">
-        <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <body
+          className={cn(
+            geistSans.variable,
+            geistMono.variable,
+            "flex min-h-screen flex-col"
+          )}
+        >
           <ContextProvider>
             <Header />
-            <main className="w-hull overflow-clip pt-16">{children}</main>
+            <main className="w-full flex-grow overflow-clip pt-16">
+              {children}
+            </main>
             <Footer />
           </ContextProvider>
         </body>
