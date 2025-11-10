@@ -13,7 +13,7 @@ type cardBlogProps = {
 const CardBlog = ({ blog }: cardBlogProps) => {
   return (
     <Link
-      href={`/blog/${blog.id}`}
+      href={`/blog/post/${blog.id}`}
       className={cn(
         "group relative grid w-full gap-y-2 p-4",
         "hover:[anchor-name:--cover]"

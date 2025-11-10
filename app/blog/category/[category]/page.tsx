@@ -2,9 +2,9 @@ import { getCategories, getBlogs } from "@/libs/microcms";
 import { notFound } from "next/navigation";
 
 import WrapperContent from "@/app/components/common/wrapper/wrapper-content";
-import HeadingSection from "../../components/common/heading/heading-section";
-import CardBlog from "../../components/blog/card/card-blog";
-import ListCategory from "../../components/blog/list/list-category";
+import HeadingSection from "../../../components/common/heading/heading-section";
+import CardBlog from "../../../components/blog/card/card-blog";
+import ListCategory from "../../../components/blog/list/list-category";
 import { cn } from "@/lib/utils";
 
 type Prop = {

@@ -63,14 +63,14 @@ const MenuLink = ({ pathname, slug }: { pathname: string; slug: string }) => {
     return (
       <span className={cn(linkStyle, "before:content-['・']")}>{slug}</span>
     );
-  } else if (pathname === `/blog/${slug}`) {
+  } else if (pathname === `/blog/category/${slug}`) {
     return (
       <span className={cn(linkStyle, "before:content-['・']")}>{slug}</span>
     );
   } else {
     return (
       <Link
-        href={`/blog${slug === "all" ? "" : `/${slug}`}`}
+        href={`/blog${slug === "all" ? "" : `/category/${slug}`}`}
         className={cn(
           linkStyle,
           'before:bg-primary before:absolute before:bottom-0 before:left-0 before:h-[2px] before:w-full before:origin-right before:scale-x-0 before:transition-transform before:duration-300 before:content-[""]',

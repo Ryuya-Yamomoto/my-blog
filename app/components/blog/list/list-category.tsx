@@ -45,7 +45,7 @@ const ListCategory = ({ categories, currentCategory, className }: Props) => {
                 <span className={styleActive}>{category.name}</span>
               ) : (
                 <Link
-                  href={`/blog/${category.slug}`}
+                  href={`/blog/category/${category.slug}`}
                   className={styleNotActive}
                 >
                   {category.name}

@@ -49,3 +49,9 @@ export const getCategories = async (): Promise<MicroCMSResponse<Category>> => {
     endpoint: "categories",
   });
 };
+
+// すべての要素のIDを取得（SSG用）
+export const getAllContentIds = async (endpoint: string): Promise<string[]> => {
+  const contentIds = await client.getAllContentIds({ endpoint });
+  return contentIds;
+};

@@ -77,7 +77,7 @@ export default async function Home() {
           {dataTech.contents.length > 3 && (
             <ButtonText
               label="一覧を見る"
-              link={{ href: "/blog/tech" }}
+              link={{ href: "/blog/category/tech" }}
               className="mt-4"
             />
           )}
@@ -99,7 +99,7 @@ export default async function Home() {
           {dataMusic.contents.length > 3 && (
             <ButtonText
               label="一覧を見る"
-              link={{ href: "/blog/music" }}
+              link={{ href: "/blog/category/music" }}
               className="mt-4"
             />
           )}
@@ -121,7 +121,7 @@ export default async function Home() {
           {dataLife.contents.length > 3 && (
             <ButtonText
               label="一覧を見る"
-              link={{ href: "/blog/life" }}
+              link={{ href: "/blog/category/life" }}
               className="mt-4"
             />
           )}
