@@ -9,18 +9,23 @@ const NavContent = (props: {
 
   const list = [
     {
-      label: "ABOUT",
-      href: "/about",
+      label: "ALL",
+      href: "/blog",
       blank: false,
     },
     {
       label: "TECH",
-      href: "/articles/tech",
+      href: "/blog/tech",
       blank: false,
     },
     {
       label: "MUSIC",
-      href: "/articles/music",
+      href: "/blog/music",
+      blank: false,
+    },
+    {
+      label: "LIFE",
+      href: "/blog/life",
       blank: false,
     },
   ];

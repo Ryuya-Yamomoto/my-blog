@@ -1,22 +1,25 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Noto_Sans_JP, Inter } from "next/font/google";
 import "./globals.css";
 import React from "react";
 import { ContextProvider } from "@/app/contexts/context";
 import { LenisProvider } from "./hooks/lenisProvider";
-import { cn } from "@/lib/utils";
 
 import Header from "./components/common/header/header";
 import Footer from "./components/common/footer/footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Noto Sans JP (Google Fonts)
+const notoSansJP = Noto_Sans_JP({
+  variable: "--font-noto-sans-jp",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+// Inter (Google Fonts) - Helvetica alternative
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -32,17 +35,11 @@ export default function RootLayout({
   return (
     <>
       <LenisProvider />
-      <html lang="ja">
-        <body
-          className={cn(
-            geistSans.variable,
-            geistMono.variable,
-            "flex min-h-screen flex-col"
-          )}
-        >
+      <html lang="ja" className={`${notoSansJP.variable} ${inter.variable}`}>
+        <body className="font-noto-sans-jp flex min-h-screen flex-col">
           <ContextProvider>
             <Header />
-            <main className="w-full flex-grow overflow-clip pt-16">
+            <main className="w-full flex-grow overflow-clip pt-48">
               {children}
             </main>
             <Footer />

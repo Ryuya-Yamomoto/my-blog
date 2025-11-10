@@ -16,10 +16,10 @@ const CardBlog = ({ blog }: CardBlogProps) => {
       href="#"
       className={cn(
         "group relative grid w-full grid-cols-[40%_1fr] gap-x-2",
-        "lg:aspect-square lg:grid-cols-1 lg:gap-x-0 lg:overflow-hidden"
+        "lg:aspect-square lg:grid-cols-1 lg:gap-x-0 lg:overflow-hidden lg:rounded-sm"
       )}
     >
-      <figure className="block aspect-square w-full overflow-hidden">
+      <figure className="block aspect-square w-full overflow-hidden rounded-sm">
         <Image
           src={blog.thumbnail.url}
           alt={blog.title}
@@ -47,7 +47,7 @@ const CardBlog = ({ blog }: CardBlogProps) => {
             {blog.title}
           </p>
           <p className="mt-1 text-sm font-medium">
-            {format(new Date(blog.publishedAt), "yyyy-MM-dd")}
+            {format(new Date(blog.publishedAt), "yyyy.MM.dd")}
           </p>
           <div
             className="mt-2 line-clamp-2 font-medium"

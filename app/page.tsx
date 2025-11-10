@@ -1,5 +1,6 @@
 import type { Blog } from "@/app/types/common";
 
+import WrapperContent from "./components/common/wrapper/wrapper-content";
 import HeadingSection from "./components/common/heading/heading-section";
 import CardBlog from "./components/common/card/card-blog";
 import ButtonText from "./components/common/button/button-text";
@@ -21,8 +22,8 @@ export default async function Home() {
   const dataLife = await getBlogs({ limit: 3, category: "0y5yavkzrl3l" });
 
   return (
-    <div className="row">
-      <section className="mt-32">
+    <WrapperContent>
+      <section>
         <HeadingSection en="ABOUT" ja="私" />
         <div className="mt-4 text-base leading-[1.6] font-medium">
           <p>
@@ -54,7 +55,7 @@ export default async function Home() {
           {dataRecently.contents.length > 2 && (
             <ButtonText
               label="一覧を見る"
-              link={{ href: "#" }}
+              link={{ href: "/blog" }}
               className="mt-4"
             />
           )}
@@ -76,7 +77,7 @@ export default async function Home() {
           {dataTech.contents.length > 3 && (
             <ButtonText
               label="一覧を見る"
-              link={{ href: "#" }}
+              link={{ href: "/blog/tech" }}
               className="mt-4"
             />
           )}
@@ -98,7 +99,7 @@ export default async function Home() {
           {dataMusic.contents.length > 3 && (
             <ButtonText
               label="一覧を見る"
-              link={{ href: "#" }}
+              link={{ href: "/blog/music" }}
               className="mt-4"
             />
           )}
@@ -120,7 +121,7 @@ export default async function Home() {
           {dataLife.contents.length > 3 && (
             <ButtonText
               label="一覧を見る"
-              link={{ href: "#" }}
+              link={{ href: "/blog/life" }}
               className="mt-4"
             />
           )}
@@ -135,6 +136,6 @@ export default async function Home() {
           )}
         </div>
       </section>
-    </div>
+    </WrapperContent>
   );
 }
