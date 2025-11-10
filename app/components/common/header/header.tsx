@@ -2,21 +2,34 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Context } from "@/app/contexts/context";
+import { Category } from "@/app/types/common";
 
 import NavContent from "./nav-content";
 import { useScrollLock } from "@/app/hooks/useScrollLock";
 
-const Header = () => {
+type HeaderProps = {
+  categories: Category[];
+};
+
+const Header = ({ categories }: HeaderProps) => {
   const { isNavigationOpen, setIsNavigationOpen } = useContext(Context);
+  const pathname = usePathname(); // 現在のパスを取得
 
   // バーガーメニュー開閉処理
   const handleIsNavigationOpen = () => {
     setIsNavigationOpen(!isNavigationOpen);
   };
+
+  // URL変更を監視
+  useEffect(() => {
+    // バーガーメニューを閉じる
+    setIsNavigationOpen(false);
+  }, [pathname, setIsNavigationOpen]);
 
   // スクロール固定処理
   useScrollLock(isNavigationOpen);
@@ -72,6 +85,8 @@ const Header = () => {
       <NavContent
         isNavigationOpen={isNavigationOpen}
         handleIsNavigationOpen={handleIsNavigationOpen}
+        categories={categories}
+        currentPathname={pathname}
       />
     </header>
   );

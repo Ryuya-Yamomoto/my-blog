@@ -29,7 +29,7 @@ export default async function Page() {
             className={cn(
               "relative mt-16 grid grid-cols-2",
               "lg:grid-cols-3",
-              "after:bg-foreground/5 after:absolute after:inset-[anchor(--cover_start)] after:z-[-1] after:rounded-sm after:duration-300 after:content-[''] after:[block-size:anchor-size(--cover_block)] after:[inline-size:anchor-size(--cover_inline)]"
+              "after:bg-foreground/5 after:absolute after:inset-[anchor(--cover_start)] after:z-[-1] after:rounded-sm after:duration-300 after:ease-(--easing) after:content-[''] after:[block-size:anchor-size(--cover_block)] after:[inline-size:anchor-size(--cover_inline)]"
             )}
           >
             {data.contents.map((blog) => (

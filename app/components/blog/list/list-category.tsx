@@ -9,7 +9,7 @@ type Props = {
   className?: string;
 };
 
-const listCategory = ({ categories, currentCategory, className }: Props) => {
+const ListCategory = ({ categories, currentCategory, className }: Props) => {
   const styleActive =
     "bg-foreground text-base rounded-sm px-4 py-1 font-bold text-white hover:[anchor-name:--cover] min-h-full inline-grid items-center";
   const styleNotActive = "px-4 py-1 hover:[anchor-name:--cover] inline-grid";
@@ -17,7 +17,8 @@ const listCategory = ({ categories, currentCategory, className }: Props) => {
   return (
     <div
       className={cn(
-        "grid grid-cols-[auto_1fr] items-baseline gap-x-4",
+        "grid items-center gap-x-4 gap-y-2",
+        "md:grid-cols-[auto_1fr] md:gap-y-0",
         className
       )}
     >
@@ -25,7 +26,7 @@ const listCategory = ({ categories, currentCategory, className }: Props) => {
       <ul
         className={cn(
           "relative flex flex-wrap",
-          'after:bg-foreground/10 transition-all after:absolute after:inset-[anchor(--cover_start)] after:z-[-1] after:rounded-sm after:duration-300 after:content-[""] after:[block-size:anchor-size(--cover_block)] after:[inline-size:anchor-size(--cover_inline)]'
+          'after:bg-foreground/10 transition-all after:absolute after:inset-[anchor(--cover_start)] after:z-[-1] after:rounded-sm after:duration-300 after:ease-(--easing) after:content-[""] after:[block-size:anchor-size(--cover_block)] after:[inline-size:anchor-size(--cover_inline)]'
         )}
       >
         <li>
@@ -58,4 +59,4 @@ const listCategory = ({ categories, currentCategory, className }: Props) => {
   );
 };
 
-export default listCategory;
+export default ListCategory;

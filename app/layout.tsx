@@ -4,6 +4,7 @@ import "./globals.css";
 import React from "react";
 import { ContextProvider } from "@/app/contexts/context";
 import { LenisProvider } from "./hooks/lenisProvider";
+import { getCategories } from "@/libs/microcms";
 
 import Header from "./components/common/header/header";
 import Footer from "./components/common/footer/footer";
@@ -27,18 +28,21 @@ export const metadata: Metadata = {
   description: "Ryuya Yamamoto's Portfolio Site",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // カテゴリを取得
+  const categories = await getCategories();
+
   return (
     <>
       <LenisProvider />
       <html lang="ja" className={`${notoSansJP.variable} ${inter.variable}`}>
         <body className="font-noto-sans-jp flex min-h-screen flex-col">
           <ContextProvider>
-            <Header />
+            <Header categories={categories.contents} />
             <main className="w-full flex-grow overflow-clip pt-48">
               {children}
             </main>

@@ -5,7 +5,7 @@ type Props = {
   className?: string;
 };
 
-const badgeRounded = ({ text, className }: Props) => {
+const BadgeRounded = ({ text, className }: Props) => {
   return (
     <span
       className={cn(
@@ -18,4 +18,4 @@ const badgeRounded = ({ text, className }: Props) => {
   );
 };
 
-export default badgeRounded;
+export default BadgeRounded;

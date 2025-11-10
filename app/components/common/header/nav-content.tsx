@@ -1,34 +1,19 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { Category } from "@/app/types/common";
 
 const NavContent = (props: {
   isNavigationOpen: boolean;
   handleIsNavigationOpen: () => void;
+  categories: Category[];
+  currentPathname: string;
 }) => {
-  const { isNavigationOpen, handleIsNavigationOpen } = props;
-
-  const list = [
-    {
-      label: "ALL",
-      href: "/blog",
-      blank: false,
-    },
-    {
-      label: "TECH",
-      href: "/blog/tech",
-      blank: false,
-    },
-    {
-      label: "MUSIC",
-      href: "/blog/music",
-      blank: false,
-    },
-    {
-      label: "LIFE",
-      href: "/blog/life",
-      blank: false,
-    },
-  ];
+  const {
+    isNavigationOpen,
+    handleIsNavigationOpen,
+    categories,
+    currentPathname,
+  } = props;
 
   return (
     <>
@@ -47,26 +32,18 @@ const NavContent = (props: {
           isNavigationOpen
             ? "[clip-path:inset(0_0_0_-10%)]"
             : "[clip-path:inset(0_0_0_100%)]",
-          "transition-clip-path duration-400"
+          "transition-clip-path duration-400 ease-(--easing)"
         )}
       >
         <div className="h-full w-full overflow-y-auto">
           <ul className="grid gap-y-4">
-            {list.map((item, index) => {
+            <li>
+              <MenuLink pathname={currentPathname} slug="all" />
+            </li>
+            {categories.map((category) => {
               return (
-                <li key={index}>
-                  <Link
-                    href={item.href}
-                    target={item.blank ? "_blank" : ""}
-                    rel={item.blank ? "noopener" : ""}
-                    className={cn(
-                      "text-primary relative block w-fit text-xl leading-normal font-bold",
-                      'before:bg-primary before:absolute before:bottom-0 before:left-0 before:h-[2px] before:w-full before:origin-right before:scale-x-0 before:transition-transform before:duration-300 before:content-[""]',
-                      "hover:before:origin-left hover:before:scale-x-100"
-                    )}
-                  >
-                    {item.label}
-                  </Link>
+                <li key={category.id}>
+                  <MenuLink pathname={currentPathname} slug={category.slug} />
                 </li>
               );
             })}
@@ -75,6 +52,35 @@ const NavContent = (props: {
       </div>
     </>
   );
+};
+
+const MenuLink = ({ pathname, slug }: { pathname: string; slug: string }) => {
+  const linkStyle = cn(
+    "text-primary relative block w-fit text-xl leading-normal font-bold uppercase"
+  );
+
+  if (slug === "all" && pathname === "/blog") {
+    return (
+      <span className={cn(linkStyle, "before:content-['・']")}>{slug}</span>
+    );
+  } else if (pathname === `/blog/${slug}`) {
+    return (
+      <span className={cn(linkStyle, "before:content-['・']")}>{slug}</span>
+    );
+  } else {
+    return (
+      <Link
+        href={`/blog${slug === "all" ? "" : `/${slug}`}`}
+        className={cn(
+          linkStyle,
+          'before:bg-primary before:absolute before:bottom-0 before:left-0 before:h-[2px] before:w-full before:origin-right before:scale-x-0 before:transition-transform before:duration-300 before:content-[""]',
+          "hover:before:origin-left hover:before:scale-x-100"
+        )}
+      >
+        {slug}
+      </Link>
+    );
+  }
 };
 
 export default NavContent;

@@ -10,7 +10,7 @@ type cardBlogProps = {
   blog: Blog;
 };
 
-const cardBlog = ({ blog }: cardBlogProps) => {
+const CardBlog = ({ blog }: cardBlogProps) => {
   return (
     <Link
       href={`/blog/${blog.id}`}
@@ -30,12 +30,12 @@ const cardBlog = ({ blog }: cardBlogProps) => {
       <div
         className={cn(
           "relative grid pb-8",
-          "before:bg-foreground/20 before:absolute before:bottom-0 before:left-0 before:block before:h-0.5 before:w-full before:content-['']",
-          "after:bg-foreground after:absolute after:bottom-0 after:left-0 after:block after:h-0.5 after:w-full after:origin-left after:scale-x-[0.2] after:transition-[scale] after:duration-300 after:content-['']",
+          "before:bg-foreground/10 before:absolute before:bottom-0 before:left-0 before:block before:h-0.5 before:w-full before:content-['']",
+          "after:bg-foreground after:absolute after:bottom-0 after:left-0 after:block after:h-0.5 after:w-full after:origin-left after:scale-x-[0.2] after:transition-[scale] after:duration-300 after:ease-(--easing) after:content-['']",
           "group-hover:after:scale-x-100"
         )}
       >
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between">
           <BadgeRounded text={blog.category.name} />
           <p className="text-sm font-medium">
             {format(new Date(blog.publishedAt), "yyyy.MM.dd")}
@@ -59,4 +59,4 @@ const cardBlog = ({ blog }: cardBlogProps) => {
   );
 };
 
-export default cardBlog;
+export default CardBlog;

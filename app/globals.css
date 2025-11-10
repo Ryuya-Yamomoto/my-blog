@@ -31,6 +31,8 @@
   --foreground: #171717;
 
   --primary: #0a0a0a;
+
+  --easing: cubic-bezier(0.9, 0.03, 0.49, 1.02);
 }
 
 @theme inline {
