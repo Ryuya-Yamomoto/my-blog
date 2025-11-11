@@ -11,6 +11,18 @@ type CardBlogProps = {
 };
 
 const CardBlog = ({ blog }: CardBlogProps) => {
+  // HTMLタグを除去してプレーンテキストを抽出
+  const stripHtmlTags = (html: string): string => {
+    return html
+      .replace(/<[^>]*>/g, '') // HTMLタグを削除
+      .replace(/&nbsp;/g, ' ') // &nbsp;をスペースに変換
+      .replace(/&amp;/g, '&') // &amp;を&に変換
+      .replace(/&lt;/g, '<') // &lt;を<に変換
+      .replace(/&gt;/g, '>') // &gt;を>に変換
+      .replace(/&quot;/g, '"') // &quot;を"に変換
+      .trim(); // 前後の空白を削除
+  };
+
   return (
     <Link
       href={`/blog/post/${blog.id}`}
@@ -49,10 +61,9 @@ const CardBlog = ({ blog }: CardBlogProps) => {
           <p className="font-inter mt-1 text-sm font-medium">
             {format(new Date(blog.publishedAt), "yyyy.MM.dd")}
           </p>
-          <div
-            className="mt-2 line-clamp-2 font-medium"
-            dangerouslySetInnerHTML={{ __html: blog.body }}
-          />
+          <p className="mt-2 line-clamp-2 font-medium">
+            {stripHtmlTags(blog.body)}
+          </p>
         </div>
       </div>
     </Link>

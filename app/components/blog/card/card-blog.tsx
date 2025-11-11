@@ -11,6 +11,11 @@ type cardBlogProps = {
 };
 
 const CardBlog = ({ blog }: cardBlogProps) => {
+  // HTMLタグを削除してプレーンテキストに変換
+  const getPlainText = (html: string) => {
+    return html.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ');
+  };
+
   return (
     <Link
       href={`/blog/post/${blog.id}`}
@@ -51,10 +56,9 @@ const CardBlog = ({ blog }: cardBlogProps) => {
         >
           {blog.title}
         </p>
-        <div
-          className="mt-2 line-clamp-2 font-medium"
-          dangerouslySetInnerHTML={{ __html: blog.body }}
-        />
+        <p className="mt-2 line-clamp-2 font-medium">
+          {getPlainText(blog.body)}
+        </p>
       </div>
     </Link>
   );
