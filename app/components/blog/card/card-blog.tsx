@@ -15,7 +15,7 @@ const CardBlog = ({ blog }: cardBlogProps) => {
     <Link
       href={`/blog/post/${blog.id}`}
       className={cn(
-        "group relative grid w-full gap-y-2 p-4",
+        "group relative row-span-4 grid w-full grid-rows-subgrid p-4",
         "hover:[anchor-name:--cover]"
       )}
     >
@@ -25,11 +25,12 @@ const CardBlog = ({ blog }: cardBlogProps) => {
           alt={blog.title}
           width={blog.thumbnail.width}
           height={blog.thumbnail.height}
+          className="h-full w-full object-cover"
         />
       </figure>
       <div
         className={cn(
-          "relative grid pb-8",
+          "relative row-span-3 grid grid-rows-subgrid gap-y-2 pt-1 pb-8",
           "before:bg-foreground/10 before:absolute before:bottom-0 before:left-0 before:block before:h-0.5 before:w-full before:content-['']",
           "after:bg-foreground after:absolute after:bottom-0 after:left-0 after:block after:h-0.5 after:w-full after:origin-left after:scale-x-[0.2] after:transition-[scale] after:duration-300 after:ease-(--easing) after:content-['']",
           "group-hover:after:scale-x-100"
@@ -43,7 +44,7 @@ const CardBlog = ({ blog }: cardBlogProps) => {
         </div>
         <p
           className={cn(
-            "mt-2 line-clamp-1 text-xl font-bold",
+            "line-clamp-1 text-xl font-bold",
             "md:text-2xl",
             "lg:text-xl"
           )}
@@ -51,7 +52,7 @@ const CardBlog = ({ blog }: cardBlogProps) => {
           {blog.title}
         </p>
         <div
-          className="mt-2 line-clamp-2 font-medium"
+          className="line-clamp-2 font-medium"
           dangerouslySetInnerHTML={{ __html: blog.body }}
         />
       </div>
