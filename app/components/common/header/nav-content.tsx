@@ -56,7 +56,8 @@ const NavContent = (props: {
 
 const MenuLink = ({ pathname, slug }: { pathname: string; slug: string }) => {
   const linkStyle = cn(
-    "text-primary relative block w-fit text-xl leading-normal font-bold uppercase"
+    "text-primary relative block w-fit text-xl leading-normal font-bold uppercase",
+    'after:bg-primary after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-right after:scale-x-0 after:transition-transform after:duration-300 after:content-[""]'
   );
 
   if (slug === "all" && pathname === "/blog") {
@@ -73,8 +74,7 @@ const MenuLink = ({ pathname, slug }: { pathname: string; slug: string }) => {
         href={`/blog${slug === "all" ? "" : `/category/${slug}`}`}
         className={cn(
           linkStyle,
-          'before:bg-primary before:absolute before:bottom-0 before:left-0 before:h-[2px] before:w-full before:origin-right before:scale-x-0 before:transition-transform before:duration-300 before:content-[""]',
-          "hover:before:origin-left hover:before:scale-x-100"
+          "hover:after:origin-left hover:after:scale-x-100"
         )}
       >
         {slug}

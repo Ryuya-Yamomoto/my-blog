@@ -52,7 +52,7 @@ const CardBlog = ({ blog }: cardBlogProps) => {
           {blog.title}
         </p>
         <div
-          className="line-clamp-2 font-medium"
+          className="mt-2 line-clamp-2 font-medium"
           dangerouslySetInnerHTML={{ __html: blog.body }}
         />
       </div>
