@@ -46,7 +46,7 @@ const CardBlog = ({ blog }: CardBlogProps) => {
           >
             {blog.title}
           </p>
-          <p className="mt-1 text-sm font-medium">
+          <p className="font-inter mt-1 text-sm font-medium">
             {format(new Date(blog.publishedAt), "yyyy.MM.dd")}
           </p>
           <div

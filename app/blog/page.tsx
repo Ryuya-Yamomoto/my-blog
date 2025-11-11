@@ -1,10 +1,15 @@
 import { getBlogs, getCategories } from "@/libs/microcms";
+import type { Metadata } from "next";
 
 import WrapperContent from "@/app/components/common/wrapper/wrapper-content";
 import HeadingSection from "../components/common/heading/heading-section";
 import CardBlog from "../components/blog/card/card-blog";
 import ListCategory from "../components/blog/list/list-category";
 import { cn } from "@/lib/utils";
+
+export const metadata: Metadata = {
+  title: "記事一覧 | Ryuya Yamamoto",
+};
 
 export default async function Page() {
   // 記事を全て取得
@@ -16,7 +21,7 @@ export default async function Page() {
   return (
     <WrapperContent>
       <section>
-        <HeadingSection en={"ALL"} ja={"記事一覧"} />
+        <HeadingSection en={"ALL"} ja={"すべて"} />
         <ListCategory
           className="mt-16"
           categories={categories.contents}

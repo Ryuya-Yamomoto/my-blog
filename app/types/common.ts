@@ -1,22 +1,36 @@
-export interface Blog {
+export type Blog = {
   id: string;
   updatedAt: string;
   publishedAt: string;
   title: string;
   category: Category;
-  thumbnail: {
-    url: string;
-    height: number;
-    width: number;
-  };
+  thumbnail: Thumbnail;
   body: string;
-}
+};
 
-export interface Category {
+export type BlogArticle = {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  revisedAt: string;
+  title: string;
+  category: Category;
+  thumbnail: Thumbnail;
+  body: string;
+};
+
+export type Category = {
   id: string;
   name: string;
   slug: string;
-}
+};
+
+export type Thumbnail = {
+  url: string;
+  height: number;
+  width: number;
+};
 
 export type BaseButtonProps = {
   label: string;

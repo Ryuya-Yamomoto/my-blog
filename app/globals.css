@@ -18,11 +18,11 @@
       }
     }
   }
-  .row {
-    margin-inline: auto;
-    max-width: 1200px;
-    padding-inline: 1rem;
-    width: 100%;
+
+  .wysiwyg {
+    p {
+      @apply mt-4 font-medium;
+    }
   }
 }
 

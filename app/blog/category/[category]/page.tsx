@@ -1,5 +1,6 @@
 import { getCategories, getBlogs } from "@/libs/microcms";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
 import WrapperContent from "@/app/components/common/wrapper/wrapper-content";
 import HeadingSection from "../../../components/common/heading/heading-section";
@@ -7,13 +8,13 @@ import CardBlog from "../../../components/blog/card/card-blog";
 import ListCategory from "../../../components/blog/list/list-category";
 import { cn } from "@/lib/utils";
 
-type Prop = {
+type Props = {
   params: Promise<{
     category: string;
   }>;
 };
 
-export default async function Page({ params }: Prop) {
+export default async function Page({ params }: Props) {
   // URL からslugパラメータを取得
   const { category: categorySlug } = await params;
 
@@ -55,6 +56,32 @@ export default async function Page({ params }: Prop) {
     </WrapperContent>
   );
 }
+
+// メタの生成
+export const generateMetadata = async ({
+  params,
+}: Props): Promise<Metadata> => {
+  // URL からslugパラメータを取得
+  const { category: categorySlug } = await params;
+
+  // カテゴリ情報を取得
+  const categories = await getCategories();
+  const validCategoryName = categories.contents.find(
+    (category) => category.slug === categorySlug
+  )?.name;
+
+  // 404 メタ
+  if (validCategoryName === undefined) {
+    return {
+      title: "404 - ページが見つかりません | Ryuya Yamamoto",
+      description: "お探しのページは見つかりませんでした。",
+    };
+  }
+
+  return {
+    title: `${validCategoryName ?? categorySlug} 記事一覧 | Ryuya Yamamoto`,
+  };
+};
 
 // SSG用のパスを生成
 export async function generateStaticParams() {

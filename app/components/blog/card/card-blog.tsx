@@ -38,7 +38,7 @@ const CardBlog = ({ blog }: cardBlogProps) => {
       >
         <div className="flex flex-wrap items-center justify-between">
           <BadgeRounded text={blog.category.name} />
-          <p className="text-sm font-medium">
+          <p className="font-inter text-sm font-medium">
             {format(new Date(blog.publishedAt), "yyyy.MM.dd")}
           </p>
         </div>

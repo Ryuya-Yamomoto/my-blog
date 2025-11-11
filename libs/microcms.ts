@@ -1,6 +1,6 @@
 import { createClient } from "microcms-js-sdk";
 
-import { Blog, Category } from "@/app/types/common";
+import type { Blog, Category, BlogArticle } from "@/app/types/common";
 
 // 環境変数にMICROCMS_SERVICE_DOMAINが設定されていない場合はエラーを投げる
 if (!process.env.MICROCMS_SERVICE_DOMAIN) {
@@ -40,6 +40,16 @@ export const getBlogs = async ({
       limit,
       filters: category ? `category[equals]${category}` : undefined,
     },
+  });
+};
+
+// 詳細記事の取得
+export const getBlogArticle = async (
+  contentId: string
+): Promise<BlogArticle> => {
+  return await client.get<BlogArticle>({
+    endpoint: "blog",
+    contentId,
   });
 };
 
