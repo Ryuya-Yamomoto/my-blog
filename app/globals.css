@@ -20,6 +20,10 @@
   }
 
   .wysiwyg {
+    > *:first-child {
+      @apply !mt-0;
+    }
+
     h1 {
       @apply mt-16 text-5xl leading-normal font-bold;
     }
@@ -50,6 +54,8 @@
     }
 
     blockquote {
+      @apply text-foreground/70 border-foreground relative mt-4 w-fit overflow-hidden border py-8 pr-8 pl-12 text-sm;
+      @apply before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-8 before:w-8 before:bg-[url("/images/common/icon_quote.svg")] before:bg-contain before:bg-no-repeat before:opacity-80 before:content-[''];
     }
   }
 }
