@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Noto_Sans_JP, Inter } from "next/font/google";
 import "./globals.css";
 import React from "react";
-import { ContextProvider } from "@/app/contexts/context";
 import { LenisProvider } from "./hooks/lenisProvider";
 import { getCategories } from "@/libs/microcms";
 
@@ -41,13 +40,11 @@ export default async function RootLayout({
       <LenisProvider />
       <html lang="ja" className={`${notoSansJP.variable} ${inter.variable}`}>
         <body className="font-noto-sans-jp flex min-h-screen flex-col">
-          <ContextProvider>
-            <Header categories={categories.contents} />
-            <main className="w-full flex-grow overflow-clip pt-48">
-              {children}
-            </main>
-            <Footer />
-          </ContextProvider>
+          <Header categories={categories.contents} />
+          <main className="w-full flex-grow overflow-clip pt-48">
+            {children}
+          </main>
+          <Footer />
         </body>
       </html>
     </>
