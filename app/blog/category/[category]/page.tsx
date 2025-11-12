@@ -28,7 +28,9 @@ export default async function Page({ params }: Props) {
   if (!isValidCategory) notFound();
 
   // カテゴリに絞り込んだ記事一覧を取得
-  const data = await getBlogs({ category: isValidCategory.id });
+  const data = await getBlogs({
+    filters: `category[equals]${isValidCategory.id}`,
+  });
 
   return (
     <WrapperContent>

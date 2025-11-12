@@ -6,20 +6,32 @@ import CardBlog from "./components/common/card/card-blog";
 import ButtonText from "./components/common/button/button-text";
 import { cn } from "@/lib/utils";
 
-import { getBlogs } from "@/libs/microcms";
+import { getBlogs, getCategories } from "@/libs/microcms";
 
 export default async function Home() {
+  // カテゴリを全て取得
+  const categories = await getCategories();
+
   // 最近の記事
   const dataRecently = await getBlogs({ limit: 3 });
 
   // 技術
-  const dataTech = await getBlogs({ limit: 3, category: "lbtcqgor3ra" });
+  const dataTech = await getBlogs({
+    limit: 3,
+    filters: `category[equals]${categories.contents.find((category) => category.slug === "tech")?.id}`,
+  });
 
   // 音楽
-  const dataMusic = await getBlogs({ limit: 3, category: "qw7tpo20vys" });
+  const dataMusic = await getBlogs({
+    limit: 3,
+    filters: `category[equals]${categories.contents.find((category) => category.slug === "music")?.id}`,
+  });
 
   // 生活
-  const dataLife = await getBlogs({ limit: 3, category: "0y5yavkzrl3l" });
+  const dataLife = await getBlogs({
+    limit: 3,
+    filters: `category[equals]${categories.contents.find((category) => category.slug === "life")?.id}`,
+  });
 
   return (
     <WrapperContent>

@@ -5,24 +5,13 @@ import Image from "next/image";
 
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
+import StripHtmlTags from "@/utils/common/stripHtmlTags";
 
 type CardBlogProps = {
   blog: Blog;
 };
 
 const CardBlog = ({ blog }: CardBlogProps) => {
-  // HTMLタグを除去してプレーンテキストを抽出
-  const stripHtmlTags = (html: string): string => {
-    return html
-      .replace(/<[^>]*>/g, '') // HTMLタグを削除
-      .replace(/&nbsp;/g, ' ') // &nbsp;をスペースに変換
-      .replace(/&amp;/g, '&') // &amp;を&に変換
-      .replace(/&lt;/g, '<') // &lt;を<に変換
-      .replace(/&gt;/g, '>') // &gt;を>に変換
-      .replace(/&quot;/g, '"') // &quot;を"に変換
-      .trim(); // 前後の空白を削除
-  };
-
   return (
     <Link
       href={`/blog/post/${blog.id}`}
@@ -43,7 +32,7 @@ const CardBlog = ({ blog }: CardBlogProps) => {
       <div
         className={cn(
           "place-items-[start_center] grid w-full",
-          "lg:absolute lg:top-0 lg:left-0 lg:h-full lg:place-items-center lg:bg-black/50 lg:p-4 lg:backdrop-blur-sm lg:transition-[opacity,filter] lg:duration-400",
+          "lg:absolute lg:top-0 lg:left-0 lg:h-full lg:items-center lg:justify-items-start lg:bg-black/50 lg:p-4 lg:backdrop-blur-sm lg:transition-[opacity,filter] lg:duration-400",
           "lg:opacity-0 lg:blur-sm",
           "lg:group-hover:opacity-100 lg:group-hover:blur-none"
         )}
@@ -62,7 +51,7 @@ const CardBlog = ({ blog }: CardBlogProps) => {
             {format(new Date(blog.publishedAt), "yyyy.MM.dd")}
           </p>
           <p className="mt-2 line-clamp-2 font-medium">
-            {stripHtmlTags(blog.body)}
+            {StripHtmlTags(blog.body)}
           </p>
         </div>
       </div>

@@ -29,16 +29,16 @@ type MicroCMSResponse<T> = {
 // 記事一覧の取得
 export const getBlogs = async ({
   limit,
-  category,
+  filters,
 }: {
   limit?: number;
-  category?: string;
+  filters?: string;
 }): Promise<MicroCMSResponse<Blog>> => {
   return await client.get<MicroCMSResponse<Blog>>({
     endpoint: "blog",
     queries: {
       limit,
-      filters: category ? `category[equals]${category}` : undefined,
+      filters,
     },
   });
 };

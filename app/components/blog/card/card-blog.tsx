@@ -1,27 +1,26 @@
 import type { Blog } from "@/app/types/common";
 
-import Link from "next/link";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
+import StripHtmlTags from "@/utils/common/stripHtmlTags";
+
+import Link from "next/link";
+import Image from "next/image";
 import BadgeRounded from "../../common/badge/badge-rounded";
 
 type cardBlogProps = {
   blog: Blog;
+  className?: string;
 };
 
-const CardBlog = ({ blog }: cardBlogProps) => {
-  // HTMLタグを削除してプレーンテキストに変換
-  const getPlainText = (html: string) => {
-    return html.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ');
-  };
-
+const CardBlog = ({ blog, className }: cardBlogProps) => {
   return (
     <Link
       href={`/blog/post/${blog.id}`}
       className={cn(
         "group relative row-span-4 grid w-full grid-rows-subgrid p-4",
-        "hover:[anchor-name:--cover]"
+        "hover:[anchor-name:--cover]",
+        className
       )}
     >
       <figure className="block aspect-square w-full overflow-hidden rounded-sm">
@@ -57,7 +56,7 @@ const CardBlog = ({ blog }: cardBlogProps) => {
           {blog.title}
         </p>
         <p className="mt-2 line-clamp-2 font-medium">
-          {getPlainText(blog.body)}
+          {StripHtmlTags(blog.body)}
         </p>
       </div>
     </Link>

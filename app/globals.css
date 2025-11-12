@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap");
 
+@layer base {
+  @import "@splidejs/react-splide/css";
+}
+
 @layer components {
   .hamMenuTransition {
     .bar {
@@ -20,6 +24,8 @@
   }
 
   .wysiwyg {
+    @apply font-medium;
+
     > *:first-child {
       @apply !mt-0;
     }
@@ -41,10 +47,6 @@
       @apply mt-4 text-xl leading-normal font-bold;
     }
 
-    p {
-      @apply font-medium;
-    }
-
     > p {
       @apply mt-4;
     }
@@ -56,6 +58,55 @@
     blockquote {
       @apply text-foreground/70 border-foreground relative mt-4 w-fit overflow-hidden border py-8 pr-8 pl-12 text-sm;
       @apply before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-8 before:w-8 before:bg-[url("/images/common/icon_quote.svg")] before:bg-contain before:bg-no-repeat before:opacity-80 before:content-[''];
+    }
+
+    .container-table {
+      @apply overflow-auto py-1;
+      table {
+        @apply mt-4 border-collapse whitespace-nowrap;
+        tbody {
+          th,
+          td {
+            @apply border-foreground border p-4;
+          }
+          th {
+            @apply bg-foreground/80 font-bold text-white;
+          }
+          td {
+          }
+        }
+      }
+    }
+
+    ul {
+      @apply mt-4 grid gap-y-2;
+      li {
+        @apply relative pl-4;
+        @apply before:bg-foreground before:absolute before:top-2.5 before:left-0 before:block before:h-1 before:w-1 before:rounded-full before:content-[''];
+      }
+    }
+
+    ol {
+      @apply mt-4 grid gap-y-2 [counter-reset:num];
+      li {
+        @apply relative pl-8;
+        @apply before:absolute before:top-0.5 before:left-0 before:grid before:h-5 before:w-5 before:place-items-center before:rounded-full before:border before:text-xs before:content-[counter(num)] before:[counter-increment:num];
+      }
+    }
+
+    a {
+      @apply text-primary underline underline-offset-4;
+      @apply hover:no-underline;
+      &[target="_blank"] {
+        @apply after:ml-1 after:inline-block after:h-4 after:w-4 after:bg-[url('/images/common/icon_blank.svg')] after:bg-contain after:bg-no-repeat after:content-[''];
+      }
+    }
+
+    figure {
+      @apply mx-auto mt-8 w-[90%];
+      figcaption {
+        @apply text-foreground/70 mx-auto mt-1 w-fit text-sm;
+      }
     }
   }
 }

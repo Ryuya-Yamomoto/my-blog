@@ -32,7 +32,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // カテゴリを取得
+  // カテゴリを取得 → storeに保存
   const categories = await getCategories();
 
   return (
