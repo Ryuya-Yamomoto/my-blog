@@ -42,7 +42,7 @@ const SplideCarousel = ({ blogs, category }: SplideCarouselProps) => {
     <Splide
       hasTrack={false}
       options={options}
-      className="relative w-full overflow-hidden pt-12"
+      className={cn("relative w-full overflow-hidden pt-12", "splide-subgrid")}
       aria-labelledby="label-otherArticles"
     >
       <div className="flex flex-wrap items-center justify-between gap-y-4">
@@ -75,7 +75,10 @@ const SplideCarousel = ({ blogs, category }: SplideCarouselProps) => {
 
       <SplideTrack className="mt-8">
         {blogs.map((blog) => (
-          <SplideSlide key={blog.id} className="grid">
+          <SplideSlide
+            key={blog.id}
+            className="row-span-4 grid grid-rows-subgrid"
+          >
             <CardBlog blog={blog} className={cn("w-60 p-0", "md:w-80")} />
           </SplideSlide>
         ))}

@@ -109,6 +109,12 @@
       }
     }
   }
+
+  .splide-subgrid {
+    .splide__list {
+      @apply grid grid-flow-col;
+    }
+  }
 }
 
 :root {
