@@ -12,7 +12,8 @@ type Props = {
 const ListCategory = ({ categories, currentCategory, className }: Props) => {
   const styleActive =
     "bg-foreground text-base rounded-sm px-4 py-1 font-bold text-white hover:[anchor-name:--cover] min-h-full inline-grid items-center";
-  const styleNotActive = "px-4 py-1 hover:[anchor-name:--cover] inline-grid";
+  const styleNotActive =
+    "px-4 py-1 hover:[anchor-name:--cover] focus:[anchor-name:--cover] inline-grid ";
 
   return (
     <div

@@ -34,7 +34,8 @@ const CardBlog = ({ blog }: CardBlogProps) => {
           "place-items-[start_center] grid w-full",
           "lg:absolute lg:top-0 lg:left-0 lg:h-full lg:items-center lg:justify-items-start lg:bg-black/50 lg:p-4 lg:backdrop-blur-sm lg:transition-[opacity,filter] lg:duration-400",
           "lg:opacity-0 lg:blur-sm",
-          "lg:group-hover:opacity-100 lg:group-hover:blur-none"
+          "lg:group-hover:opacity-100 lg:group-hover:blur-none",
+          "lg:group-focus:opacity-100 lg:group-focus:blur-none"
         )}
       >
         <div className="lg:text-white">

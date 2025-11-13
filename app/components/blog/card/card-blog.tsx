@@ -20,6 +20,7 @@ const CardBlog = ({ blog, className }: cardBlogProps) => {
       className={cn(
         "group relative row-span-4 grid w-full grid-rows-subgrid p-4",
         "hover:[anchor-name:--cover]",
+        "focus:[anchor-name:--cover]",
         className
       )}
     >
@@ -37,7 +38,8 @@ const CardBlog = ({ blog, className }: cardBlogProps) => {
           "relative row-span-3 grid grid-rows-subgrid gap-y-2 pt-1 pb-8",
           "before:bg-foreground/10 before:absolute before:bottom-0 before:left-0 before:block before:h-0.5 before:w-full before:content-['']",
           "after:bg-foreground after:absolute after:bottom-0 after:left-0 after:block after:h-0.5 after:w-full after:origin-left after:scale-x-[0.2] after:transition-[scale] after:duration-300 after:ease-(--easing) after:content-['']",
-          "group-hover:after:scale-x-100"
+          "group-hover:after:scale-x-100",
+          "group-focus:after:scale-x-100"
         )}
       >
         <div className="flex flex-wrap items-center justify-between">
