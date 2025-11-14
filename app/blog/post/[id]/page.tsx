@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { getBlogArticle, getAllContentIds, getBlogs } from "@/libs/microcms";
 import type { BlogArticle } from "@/app/types/common";
+
+import { getBlogArticle, getAllContentIds, getBlogs } from "@/libs/microcms";
 
 import ParseWysiwyg from "@/utils/blog/post/parseWysiwyg";
 
@@ -10,6 +11,8 @@ import WrapperContent from "@/app/components/common/wrapper/wrapper-content";
 import BlockArticleBottom from "@/app/components/blog/block/block-articleBottom";
 
 import { notFound } from "next/navigation";
+
+import { cn } from "@/lib/utils";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -49,10 +52,10 @@ export default async function Page({
         title={article.title}
         date={article.publishedAt}
         category={article.category.name}
-        className="mt-16"
+        className={cn("mt-16", "md:mt-32")}
       />
       <div
-        className="wysiwyg mt-32 px-4"
+        className={cn("wysiwyg mt-8 px-4", "md:mt-16")}
         dangerouslySetInnerHTML={{ __html: article.body }}
       ></div>
       <BlockArticleBottom

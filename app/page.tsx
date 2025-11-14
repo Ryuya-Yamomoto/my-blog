@@ -62,7 +62,12 @@ export default async function Home() {
       </section>
 
       <section className="mt-32">
-        <div className="flex flex-wrap items-end justify-between gap-2">
+        <div
+          className={cn(
+            "flex flex-col flex-wrap items-start gap-2",
+            "md:flex-row md:items-end md:justify-between"
+          )}
+        >
           <HeadingSection en="RECENTLY" ja="最近の記事" notShowJa={true} />
           {dataRecently.contents.length > 2 && (
             <ButtonText
@@ -84,7 +89,12 @@ export default async function Home() {
       </section>
 
       <section className="mt-32">
-        <div className="flex flex-wrap items-end justify-between gap-2">
+        <div
+          className={cn(
+            "flex flex-col flex-wrap items-start gap-2",
+            "md:flex-row md:items-end md:justify-between"
+          )}
+        >
           <HeadingSection en="TECH" ja="技術" notShowJa={true} />
           {dataTech.contents.length > 2 && (
             <ButtonText
@@ -106,7 +116,12 @@ export default async function Home() {
       </section>
 
       <section className="mt-32">
-        <div className="flex flex-wrap items-end justify-between gap-2">
+        <div
+          className={cn(
+            "flex flex-col flex-wrap items-start gap-2",
+            "md:flex-row md:items-end md:justify-between"
+          )}
+        >
           <HeadingSection en="MUSIC" ja="音楽" notShowJa={true} />
           {dataMusic.contents.length > 2 && (
             <ButtonText
@@ -128,7 +143,12 @@ export default async function Home() {
       </section>
 
       <section className="mt-32">
-        <div className="flex flex-wrap items-end justify-between gap-2">
+        <div
+          className={cn(
+            "flex flex-col flex-wrap items-start gap-2",
+            "md:flex-row md:items-end md:justify-between"
+          )}
+        >
           <HeadingSection en="LIFE" ja="生活" notShowJa={true} />
           {dataLife.contents.length > 2 && (
             <ButtonText

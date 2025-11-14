@@ -35,7 +35,8 @@ const CardBlog = ({ blog, className }: cardBlogProps) => {
       </figure>
       <div
         className={cn(
-          "relative row-span-3 grid grid-rows-subgrid gap-y-2 pt-1 pb-8",
+          "relative row-span-3 grid grid-rows-subgrid gap-y-1 pt-1 pb-8",
+          "md:gap-y-2",
           "before:bg-foreground/10 before:absolute before:bottom-0 before:left-0 before:block before:h-0.5 before:w-full before:content-['']",
           "after:bg-foreground after:absolute after:bottom-0 after:left-0 after:block after:h-0.5 after:w-full after:origin-left after:scale-x-[0.2] after:transition-[scale] after:duration-300 after:ease-(--easing) after:content-['']",
           "group-hover:after:scale-x-100",
@@ -50,14 +51,14 @@ const CardBlog = ({ blog, className }: cardBlogProps) => {
         </div>
         <p
           className={cn(
-            "line-clamp-1 text-xl font-bold",
-            "md:text-2xl",
+            "line-clamp-2 text-base font-bold",
+            "md:mt-2 md:line-clamp-1 md:text-2xl",
             "lg:text-xl"
           )}
         >
           {blog.title}
         </p>
-        <p className="mt-2 line-clamp-2 font-medium">
+        <p className={cn("line-clamp-2 text-sm font-medium", "md:text-base")}>
           {StripHtmlTags(blog.body)}
         </p>
       </div>

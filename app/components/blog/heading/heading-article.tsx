@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import { cn } from "@/lib/utils";
 
 import BadgeRounded from "../../common/badge/badge-rounded";
 
@@ -17,7 +18,9 @@ const HeadingArticle = ({
 }: HeadingArticleProps) => {
   return (
     <hgroup className={className}>
-      <h2 className="border-b-2 pb-4 text-5xl font-bold">{title}</h2>
+      <h2 className={cn("border-b-2 pb-4 text-3xl font-bold", "md:text-5xl")}>
+        {title}
+      </h2>
       <div className="mt-1 flex flex-wrap items-center justify-between">
         <BadgeRounded text={category} />
         <p className="font-inter text-sm font-medium">
