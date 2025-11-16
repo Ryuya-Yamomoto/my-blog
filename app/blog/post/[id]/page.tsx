@@ -9,6 +9,7 @@ import HeadingSection from "@/app/components/common/heading/heading-section";
 import HeadingArticle from "@/app/components/blog/heading/heading-article";
 import WrapperContent from "@/app/components/common/wrapper/wrapper-content";
 import BlockArticleBottom from "@/app/components/blog/block/block-articleBottom";
+import Image from "next/image";
 
 import { notFound } from "next/navigation";
 
@@ -54,6 +55,17 @@ export default async function Page({
         category={article.category.name}
         className={cn("mt-16", "md:mt-32")}
       />
+      <figure
+        className={cn("mx-auto mt-8 aspect-video w-full max-w-210", "md-16")}
+      >
+        <Image
+          src={article.thumbnail.url}
+          alt="サムネイル"
+          width={article.thumbnail.width}
+          height={article.thumbnail.height}
+          className="h-full w-full object-cover"
+        />
+      </figure>
       <div
         className={cn("wysiwyg mt-8 px-4", "md:mt-16")}
         dangerouslySetInnerHTML={{ __html: article.body }}
