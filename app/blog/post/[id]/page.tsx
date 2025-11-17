@@ -3,7 +3,7 @@ import type { BlogArticle } from "@/app/types/common";
 
 import { getBlogArticle, getAllContentIds, getBlogs } from "@/libs/microcms";
 
-import ParseWysiwyg from "@/utils/blog/post/parseWysiwyg";
+// import ParseWysiwyg from "@/utils/blog/post/parseWysiwyg";
 
 import HeadingSection from "@/app/components/common/heading/heading-section";
 import HeadingArticle from "@/app/components/blog/heading/heading-article";
@@ -11,6 +11,7 @@ import WrapperContent from "@/app/components/common/wrapper/wrapper-content";
 import BlockArticleBottom from "@/app/components/blog/block/block-articleBottom";
 import Image from "next/image";
 import { unstable_ViewTransition as ViewTransition } from "react";
+import BlockWysiwygContent from "@/app/components/blog/block/block-wysiwyg-content";
 
 import { notFound } from "next/navigation";
 
@@ -36,10 +37,6 @@ export default async function Page({
 
   // 詳細記事の情報を取得
   const article: BlogArticle = await getBlogArticle(blogId);
-
-  // article.body パース・変換処理
-  const parsedArticleBody = ParseWysiwyg(article.body);
-  article.body = parsedArticleBody;
 
   // 他の記事情報を取得（当ページを除いた、同じカテゴリの最新6件を取得する）
   const otherArticles = await getBlogs({
@@ -69,10 +66,10 @@ export default async function Page({
           />
         </ViewTransition>
       </figure>
-      <div
-        className={cn("wysiwyg mt-8 px-4", "md:mt-16")}
-        dangerouslySetInnerHTML={{ __html: article.body }}
-      ></div>
+
+      <div className={cn("wysiwyg mt-8 px-4", "md:mt-16")}>
+        <BlockWysiwygContent html={article.body} />
+      </div>
       <BlockArticleBottom
         category={article.category}
         otherArticles={otherArticles.contents}

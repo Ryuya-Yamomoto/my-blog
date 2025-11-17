@@ -24,7 +24,7 @@ const BlockArticleBottom = ({
       <ButtonText
         link={{ href: `/blog/category/${category.slug}` }}
         label={`${category.name} 記事一覧へ`}
-        className="mt-4"
+        className="mt-8"
       />
       <ButtonText link={{ href: "/blog" }} label="記事一覧へ" />
     </div>

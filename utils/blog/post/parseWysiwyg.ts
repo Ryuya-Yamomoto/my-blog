@@ -54,7 +54,8 @@ const ParseWysiwyg = (body: string): string => {
     $(elem).wrap('<div class="container-table"></div>');
   });
 
-  result = $.html();
+  // body部分のHTMLのみを取得（html, head, bodyタグを含めない）
+  result = $("body").html() || $.html();
 
   return result;
 };
