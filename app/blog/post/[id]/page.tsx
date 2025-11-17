@@ -56,10 +56,10 @@ export default async function Page({
         category={article.category.name}
         className={cn("mt-16", "md:mt-32")}
       />
-      <ViewTransition name={`thumb-${article.id}`}>
-        <figure
-          className={cn("mx-auto mt-8 aspect-video w-full max-w-210", "md-16")}
-        >
+      <figure
+        className={cn("mx-auto mt-8 aspect-video w-full max-w-210", "md-16")}
+      >
+        <ViewTransition name={`thumb-${article.id}`}>
           <Image
             src={article.thumbnail.url}
             alt="サムネイル"
@@ -67,8 +67,8 @@ export default async function Page({
             height={article.thumbnail.height}
             className="h-full w-full object-cover"
           />
-        </figure>
-      </ViewTransition>
+        </ViewTransition>
+      </figure>
       <div
         className={cn("wysiwyg mt-8 px-4", "md:mt-16")}
         dangerouslySetInnerHTML={{ __html: article.body }}

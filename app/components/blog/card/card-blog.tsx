@@ -27,8 +27,8 @@ const CardBlog = ({ blog, className }: cardBlogProps) => {
         className
       )}
     >
-      <ViewTransition name={`thumb-${blog.id}`}>
-        <figure className="block aspect-square w-full overflow-hidden rounded-sm">
+      <figure className="block aspect-square w-full overflow-hidden rounded-sm">
+        <ViewTransition name={`thumb-${blog.id}`}>
           <Image
             src={blog.thumbnail.url}
             alt={blog.title}
@@ -36,8 +36,8 @@ const CardBlog = ({ blog, className }: cardBlogProps) => {
             height={blog.thumbnail.height}
             className="h-full w-full object-cover"
           />
-        </figure>
-      </ViewTransition>
+        </ViewTransition>
+      </figure>
       <div
         className={cn(
           "relative row-span-3 grid grid-rows-subgrid gap-y-1 pt-1 pb-8",

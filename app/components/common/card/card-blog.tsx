@@ -21,8 +21,8 @@ const CardBlog = ({ blog }: CardBlogProps) => {
         "lg:aspect-square lg:grid-cols-1 lg:gap-x-0 lg:overflow-hidden lg:rounded-sm"
       )}
     >
-      <ViewTransition name={`thumb-${blog.id}`}>
-        <figure className="block aspect-square w-full overflow-hidden rounded-sm">
+      <figure className="block aspect-square w-full overflow-hidden rounded-sm">
+        <ViewTransition name={`thumb-${blog.id}`}>
           <Image
             src={blog.thumbnail.url}
             alt={blog.title}
@@ -30,8 +30,8 @@ const CardBlog = ({ blog }: CardBlogProps) => {
             width={blog.thumbnail.width}
             className="h-full w-full object-cover transition-[scale] duration-300 group-hover:scale-[1.05]"
           />
-        </figure>
-      </ViewTransition>
+        </ViewTransition>
+      </figure>
       <div
         className={cn(
           "place-items-[start_center] grid w-full",
