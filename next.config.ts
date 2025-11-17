@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   images: {
     domains: ["images.microcms-assets.io"],
   },
+  experimental: {
+    viewTransition: true,
+  },
 };
 
 export default nextConfig;

@@ -1,3 +1,5 @@
+"use client";
+
 import type { Blog } from "@/app/types/common";
 
 import { cn } from "@/lib/utils";
@@ -7,6 +9,7 @@ import StripHtmlTags from "@/utils/common/stripHtmlTags";
 import Link from "next/link";
 import Image from "next/image";
 import BadgeRounded from "../../common/badge/badge-rounded";
+import { unstable_ViewTransition as ViewTransition } from "react";
 
 type cardBlogProps = {
   blog: Blog;
@@ -24,15 +27,17 @@ const CardBlog = ({ blog, className }: cardBlogProps) => {
         className
       )}
     >
-      <figure className="block aspect-square w-full overflow-hidden rounded-sm">
-        <Image
-          src={blog.thumbnail.url}
-          alt={blog.title}
-          width={blog.thumbnail.width}
-          height={blog.thumbnail.height}
-          className="h-full w-full object-cover"
-        />
-      </figure>
+      <ViewTransition name={`thumb-${blog.id}`}>
+        <figure className="block aspect-square w-full overflow-hidden rounded-sm">
+          <Image
+            src={blog.thumbnail.url}
+            alt={blog.title}
+            width={blog.thumbnail.width}
+            height={blog.thumbnail.height}
+            className="h-full w-full object-cover"
+          />
+        </figure>
+      </ViewTransition>
       <div
         className={cn(
           "relative row-span-3 grid grid-rows-subgrid gap-y-1 pt-1 pb-8",
