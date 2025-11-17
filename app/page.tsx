@@ -13,7 +13,7 @@ export default async function Home() {
   const categories = await getCategories();
 
   // 最近の記事
-  const dataRecently = await getBlogs({ limit: 3 });
+  // const dataRecently = await getBlogs({ limit: 3 });
 
   // 技術
   const dataTech = await getBlogs({
@@ -62,6 +62,10 @@ export default async function Home() {
       </section>
 
       <section className="mt-32">
+        <ButtonText label="すべての記事を見る" link={{ href: "/blog" }} />
+      </section>
+
+      {/* <section className="mt-32">
         <div
           className={cn(
             "flex flex-col flex-wrap items-start gap-2",
@@ -86,9 +90,9 @@ export default async function Home() {
             <p className="text-lg font-medium">記事がありません。</p>
           )}
         </div>
-      </section>
+      </section> */}
 
-      <section className="mt-32">
+      <section className="mt-16">
         <div
           className={cn(
             "flex flex-col flex-wrap items-start gap-2",

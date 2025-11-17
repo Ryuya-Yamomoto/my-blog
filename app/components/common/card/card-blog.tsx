@@ -2,6 +2,7 @@ import type { Blog } from "@/app/types/common";
 
 import Link from "next/link";
 import Image from "next/image";
+import { unstable_ViewTransition as ViewTransition } from "react";
 
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
@@ -20,15 +21,17 @@ const CardBlog = ({ blog }: CardBlogProps) => {
         "lg:aspect-square lg:grid-cols-1 lg:gap-x-0 lg:overflow-hidden lg:rounded-sm"
       )}
     >
-      <figure className="block aspect-square w-full overflow-hidden rounded-sm">
-        <Image
-          src={blog.thumbnail.url}
-          alt={blog.title}
-          height={blog.thumbnail.height}
-          width={blog.thumbnail.width}
-          className="h-full w-full object-cover transition-[scale] duration-300 group-hover:scale-[1.05]"
-        />
-      </figure>
+      <ViewTransition name={`thumb-${blog.id}`}>
+        <figure className="block aspect-square w-full overflow-hidden rounded-sm">
+          <Image
+            src={blog.thumbnail.url}
+            alt={blog.title}
+            height={blog.thumbnail.height}
+            width={blog.thumbnail.width}
+            className="h-full w-full object-cover transition-[scale] duration-300 group-hover:scale-[1.05]"
+          />
+        </figure>
+      </ViewTransition>
       <div
         className={cn(
           "place-items-[start_center] grid w-full",
