@@ -12,6 +12,7 @@
   "dependencies": {
     "@splidejs/react-splide": "^0.7.12",
     "@studio-freight/lenis": "^1.0.42",
+    "@types/uuid": "^10.0.0",
     "cheerio": "^1.1.2",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
@@ -24,6 +25,7 @@
     "react-dom": "experimental",
     "tailwind-merge": "^3.3.0",
     "tailwind-variants": "^1.0.0",
+    "uuid": "^13.0.0",
     "zustand": "^5.0.8"
   },
   "devDependencies": {
