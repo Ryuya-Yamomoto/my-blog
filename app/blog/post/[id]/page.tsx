@@ -69,7 +69,7 @@ export default async function Page({
       />
       <figure
         className={cn(
-          "mx-auto mt-8 aspect-square w-full max-w-210",
+          "mx-auto mt-8 aspect-square w-full max-w-160",
           "md:mt-16"
         )}
       >

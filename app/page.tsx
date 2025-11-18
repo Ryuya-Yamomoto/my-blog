@@ -99,7 +99,7 @@ export default async function Home() {
             "md:flex-row md:items-end md:justify-between"
           )}
         >
-          <HeadingSection en="TECH" ja="技術" notShowJa={true} />
+          <HeadingSection en="TECH" ja="技術" />
           {dataTech.contents.length > 2 && (
             <ButtonText
               label="一覧を見る"
@@ -126,7 +126,7 @@ export default async function Home() {
             "md:flex-row md:items-end md:justify-between"
           )}
         >
-          <HeadingSection en="MUSIC" ja="音楽" notShowJa={true} />
+          <HeadingSection en="MUSIC" ja="音楽" />
           {dataMusic.contents.length > 2 && (
             <ButtonText
               label="一覧を見る"
@@ -153,7 +153,7 @@ export default async function Home() {
             "md:flex-row md:items-end md:justify-between"
           )}
         >
-          <HeadingSection en="LIFE" ja="生活" notShowJa={true} />
+          <HeadingSection en="LIFE" ja="生活" />
           {dataLife.contents.length > 2 && (
             <ButtonText
               label="一覧を見る"

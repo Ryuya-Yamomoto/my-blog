@@ -34,7 +34,7 @@ const WysiwygImage = ({ image, figCaption }: WysiwygImageProps) => {
     <>
       {/* クリッカブルイメージ */}
       {isModalOpen ? (
-        <figure>
+        <figure className="relative overflow-hidden rounded-sm">
           <Image
             src={src}
             alt={alt}
@@ -46,7 +46,7 @@ const WysiwygImage = ({ image, figCaption }: WysiwygImageProps) => {
           {figCaption && <figcaption>{figCaption}</figcaption>}
         </figure>
       ) : (
-        <figure>
+        <figure className="relative overflow-hidden rounded-sm">
           <ViewTransition name={`wysiwyg-thumb-${id}`}>
             <Image
               src={src}
@@ -58,6 +58,15 @@ const WysiwygImage = ({ image, figCaption }: WysiwygImageProps) => {
             />
           </ViewTransition>
           {figCaption && <figcaption>{figCaption}</figcaption>}
+          <div className="font-Inter pointer-events-none absolute top-0 right-0 flex items-center gap-x-1 bg-black/70 px-1 py-1 text-xs text-white">
+            ZOOM UP
+            <Image
+              src="/images/common/icon_zoom.svg"
+              alt="Zoom In"
+              width={12}
+              height={12}
+            />
+          </div>
         </figure>
       )}
 
