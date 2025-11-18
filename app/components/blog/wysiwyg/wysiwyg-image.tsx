@@ -74,7 +74,7 @@ const WysiwygImage = ({ image, figCaption }: WysiwygImageProps) => {
               width={width}
               height={height}
               className={cn(
-                `aspect-[${width}/${height}] absolute top-1/2 left-1/2 z-10 block h-auto max-h-[80%] w-auto max-w-[80%] -translate-x-1/2 -translate-y-1/2`
+                `aspect-[${width}/${height}] absolute top-1/2 left-1/2 z-10 block h-auto max-h-[80%] w-auto max-w-[80%] -translate-x-1/2 -translate-y-1/2 [box-shadow:3px_3px_4px_2px_rgba(0,0,0,0.4)]`
               )}
               onClick={(e) => e.stopPropagation()}
             />

@@ -115,6 +115,31 @@
       @apply grid grid-flow-col;
     }
   }
+
+  /* view transition API スタイル */
+  @keyframes slide-in {
+    from {
+      clip-path: inset(0 100% 0 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+  @keyframes slide-out {
+    from {
+      clip-path: inset(0 0 0 0);
+    }
+    to {
+      clip-path: inset(0 0 0 100%);
+    }
+  }
+
+  ::view-transition-old(heading-pageTtl) {
+    animation: slide-out 1s ease forwards;
+  }
+  ::view-transition-new(heading-pageTtl) {
+    animation: slide-in 1s ease forwards;
+  }
 }
 
 :root {

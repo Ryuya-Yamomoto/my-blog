@@ -1,6 +1,7 @@
 import { getBlogs, getCategories } from "@/libs/microcms";
 import type { Metadata } from "next";
 
+import { unstable_ViewTransition as ViewTransition } from "react";
 import WrapperContent from "@/app/components/common/wrapper/wrapper-content";
 import HeadingSection from "../components/common/heading/heading-section";
 import CardBlog from "../components/blog/card/card-blog";
@@ -21,7 +22,9 @@ export default async function Page() {
   return (
     <WrapperContent>
       <section>
-        <HeadingSection en={"ALL"} ja={"すべて"} />
+        <ViewTransition name="heading-pageTtl">
+          <HeadingSection en={"ALL"} ja={"すべて"} />
+        </ViewTransition>
         <ListCategory
           className="mt-16"
           categories={categories.contents}
