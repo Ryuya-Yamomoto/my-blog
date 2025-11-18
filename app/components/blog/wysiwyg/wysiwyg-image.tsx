@@ -33,7 +33,19 @@ const WysiwygImage = ({ image, figCaption }: WysiwygImageProps) => {
   return (
     <>
       {/* クリッカブルイメージ */}
-      {!isModalOpen && (
+      {isModalOpen ? (
+        <figure>
+          <Image
+            src={src}
+            alt={alt}
+            width={width}
+            height={height}
+            onClick={handleToggleModal}
+            className={cn(`cursor-pointer aspect-[${width}/${height}]`)}
+          />
+          {figCaption && <figcaption>{figCaption}</figcaption>}
+        </figure>
+      ) : (
         <figure>
           <ViewTransition name={`wysiwyg-thumb-${id}`}>
             <Image
@@ -42,7 +54,7 @@ const WysiwygImage = ({ image, figCaption }: WysiwygImageProps) => {
               width={width}
               height={height}
               onClick={handleToggleModal}
-              className={cn("cursor-pointer")}
+              className={cn(`cursor-pointer aspect-[${width}/${height}]`)}
             />
           </ViewTransition>
           {figCaption && <figcaption>{figCaption}</figcaption>}
@@ -61,7 +73,10 @@ const WysiwygImage = ({ image, figCaption }: WysiwygImageProps) => {
               alt={alt}
               width={width}
               height={height}
-              className={cn("h-full w-full object-contain")}
+              className={cn(
+                `aspect-[${width}/${height}] absolute top-1/2 left-1/2 z-10 block h-auto max-h-[80%] w-auto max-w-[80%] -translate-x-1/2 -translate-y-1/2`
+              )}
+              onClick={(e) => e.stopPropagation()}
             />
           </ViewTransition>
         </WysiwygModalImage>

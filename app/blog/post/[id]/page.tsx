@@ -66,7 +66,10 @@ export default async function Page({
         className={cn("mt-16", "md:mt-32")}
       />
       <figure
-        className={cn("mx-auto mt-8 aspect-video w-full max-w-210", "md-16")}
+        className={cn(
+          "mx-auto mt-8 aspect-square w-full max-w-210",
+          "md:mt-16"
+        )}
       >
         <ViewTransition name={`thumb-${article.id}`}>
           <Image
@@ -79,7 +82,7 @@ export default async function Page({
         </ViewTransition>
       </figure>
 
-      <div className={cn("wysiwyg mt-8 px-4", "md:mt-16")}>
+      <div className={cn("wysiwyg mt-16 px-0", "md:mt-24 md:px-4")}>
         <BlockWysiwygContent html={article.body} />
       </div>
       <BlockArticleBottom

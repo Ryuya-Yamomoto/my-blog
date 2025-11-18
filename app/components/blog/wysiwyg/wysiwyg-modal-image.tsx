@@ -20,7 +20,7 @@ const WysiwygModalImage = ({
     <div
       onClick={handleToggleModal}
       className={cn(
-        "pointer-events-none fixed inset-0 z-100 grid place-items-center p-4 opacity-0",
+        "pointer-events-none fixed inset-0 z-100 grid place-items-center px-4 py-20 opacity-0",
         "md:p-20",
         isOpen && "pointer-events-auto opacity-100"
       )}
@@ -31,18 +31,7 @@ const WysiwygModalImage = ({
           isOpen ? "bg-black/50 backdrop-blur-sm" : ""
         )}
       ></div>
-      <figure
-        className={cn(
-          "relative m-0 h-full max-h-[70vh] w-full max-w-full",
-          "md:max-h-[80vh] md:max-w-[80vw]"
-        )}
-        onClick={(e) => {
-          e.stopPropagation();
-          e.preventDefault();
-        }}
-      >
-        {children}
-      </figure>
+      {children}
       <ButtonClose label="close" handleClick={handleToggleModal} />
     </div>
   );
