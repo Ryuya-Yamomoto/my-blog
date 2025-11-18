@@ -1,8 +1,11 @@
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 type ButtonCloseProps = {
   label: string;
-  handleClick: () => void;
+  handleClick: (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => void | (() => void);
   className?: string;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
@@ -13,7 +16,7 @@ const ButtonClose = ({
   ...props
 }: ButtonCloseProps) => {
   const style = cn(
-    "h-10 w-10 bg-primary rounded-full absolute cursor-pointer -top-2 -right-2 z-1",
+    "h-10 w-10 bg-primary rounded-full absolute cursor-pointer top-2 right-2 z-10 grid place-items-center",
     className
   );
 
@@ -23,7 +26,14 @@ const ButtonClose = ({
       className={style}
       onClick={handleClick}
       {...props}
-    />
+    >
+      <Image
+        src="/images/common/icon_cross.svg"
+        alt="閉じる"
+        width={20}
+        height={20}
+      />
+    </button>
   );
 };
 

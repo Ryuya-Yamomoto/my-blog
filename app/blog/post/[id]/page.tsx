@@ -10,12 +10,24 @@ import HeadingArticle from "@/app/components/blog/heading/heading-article";
 import WrapperContent from "@/app/components/common/wrapper/wrapper-content";
 import BlockArticleBottom from "@/app/components/blog/block/block-articleBottom";
 import Image from "next/image";
-import { unstable_ViewTransition as ViewTransition } from "react";
+import {
+  HTMLAttributes,
+  unstable_ViewTransition as ViewTransition,
+} from "react";
 import BlockWysiwygContent from "@/app/components/blog/block/block-wysiwyg-content";
 
 import { notFound } from "next/navigation";
 
 import { cn } from "@/lib/utils";
+
+export type WysiwygModalImageProps = {
+  id: string;
+  src: string;
+  alt: string;
+  height: number;
+  width: number;
+  className?: string;
+} & HTMLAttributes<HTMLImageElement>;
 
 type Props = {
   params: Promise<{ id: string }>;

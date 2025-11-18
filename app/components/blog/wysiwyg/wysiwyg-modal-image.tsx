@@ -1,10 +1,13 @@
 import { cn } from "@/lib/utils";
 
 import ButtonClose from "../../common/button/button-close";
+import React from "react";
 
 type WysiwygModalImageProps = {
   isOpen: boolean;
-  handleToggleModal: () => void;
+  handleToggleModal: (
+    e: React.MouseEvent<HTMLDivElement | HTMLButtonElement, MouseEvent>
+  ) => void;
   children: React.ReactNode;
 };
 
@@ -17,14 +20,14 @@ const WysiwygModalImage = ({
     <div
       onClick={handleToggleModal}
       className={cn(
-        "pointer-events-none fixed inset-0 z-100 grid place-items-center p-4 opacity-0 transition-opacity duration-600",
+        "pointer-events-none fixed inset-0 z-100 grid place-items-center p-4 opacity-0",
         "md:p-20",
         isOpen && "pointer-events-auto opacity-100"
       )}
     >
       <div
         className={cn(
-          "transition-[background, backdrop-blur] absolute inset-0 duration-600",
+          "absolute inset-0",
           isOpen ? "bg-black/50 backdrop-blur-sm" : ""
         )}
       ></div>
@@ -39,8 +42,8 @@ const WysiwygModalImage = ({
         }}
       >
         {children}
-        <ButtonClose label="close" handleClick={handleToggleModal} />
       </figure>
+      <ButtonClose label="close" handleClick={handleToggleModal} />
     </div>
   );
 };
