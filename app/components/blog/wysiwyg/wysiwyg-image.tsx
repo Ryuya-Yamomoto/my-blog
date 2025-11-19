@@ -17,6 +17,7 @@ type WysiwygImageProps = {
 const WysiwygImage = ({ image, figCaption }: WysiwygImageProps) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const { id, src, alt, width, height } = image;
+  const isPortrait = height > width; //- 縦長の画像か否か
 
   const handleToggleModal = (
     e: React.MouseEvent<
@@ -33,20 +34,18 @@ const WysiwygImage = ({ image, figCaption }: WysiwygImageProps) => {
   return (
     <>
       {/* クリッカブルイメージ */}
-      {isModalOpen ? (
-        <figure className="relative overflow-hidden rounded-sm">
-          <Image
-            src={src}
-            alt={alt}
-            width={width}
-            height={height}
-            onClick={handleToggleModal}
-            className={cn(`cursor-pointer aspect-[${width}/${height}]`)}
-          />
-          {figCaption && <figcaption>{figCaption}</figcaption>}
-        </figure>
-      ) : (
-        <figure className="relative overflow-hidden rounded-sm">
+      <ClickableImage figCaption={figCaption}>
+        {isModalOpen ? (
+          <div
+            style={{ aspectRatio: `${width}/${height}` }}
+            className={cn(
+              "mx-auto block",
+              isPortrait
+                ? "max-h-130 w-auto max-w-full md:h-130"
+                : "h-auto w-130 max-w-full"
+            )}
+          ></div>
+        ) : (
           <ViewTransition name={`wysiwyg-thumb-${id}`}>
             <Image
               src={src}
@@ -54,21 +53,17 @@ const WysiwygImage = ({ image, figCaption }: WysiwygImageProps) => {
               width={width}
               height={height}
               onClick={handleToggleModal}
-              className={cn(`cursor-pointer aspect-[${width}/${height}]`)}
+              style={{ aspectRatio: `${width}/${height}` }}
+              className={cn(
+                "mx-auto cursor-pointer rounded-sm",
+                isPortrait
+                  ? "max-h-130 w-auto max-w-full md:h-130"
+                  : "h-auto w-130 max-w-full"
+              )}
             />
           </ViewTransition>
-          {figCaption && <figcaption>{figCaption}</figcaption>}
-          <div className="font-Inter pointer-events-none absolute top-0 right-0 flex items-center gap-x-1 bg-black/70 px-1 py-1 text-xs text-white">
-            ZOOM UP
-            <Image
-              src="/images/common/icon_zoom.svg"
-              alt="Zoom In"
-              width={12}
-              height={12}
-            />
-          </div>
-        </figure>
-      )}
+        )}
+      </ClickableImage>
 
       {/* モーダル要素 */}
       {isModalOpen && (
@@ -82,8 +77,9 @@ const WysiwygImage = ({ image, figCaption }: WysiwygImageProps) => {
               alt={alt}
               width={width}
               height={height}
+              style={{ aspectRatio: `${width}/${height}` }}
               className={cn(
-                `aspect-[${width}/${height}] absolute top-1/2 left-1/2 z-10 block h-auto max-h-[80%] w-auto max-w-[80%] -translate-x-1/2 -translate-y-1/2 [box-shadow:3px_3px_4px_2px_rgba(0,0,0,0.4)]`
+                "absolute top-1/2 left-1/2 z-10 block h-auto max-h-[80%] w-auto max-w-[80%] -translate-x-1/2 -translate-y-1/2 [box-shadow:3px_3px_4px_2px_rgba(0,0,0,0.4)]"
               )}
               onClick={(e) => e.stopPropagation()}
             />
@@ -93,5 +89,21 @@ const WysiwygImage = ({ image, figCaption }: WysiwygImageProps) => {
     </>
   );
 };
+
+const ClickableImage = ({
+  children,
+  figCaption,
+}: {
+  children: React.ReactNode;
+  figCaption?: string;
+}) => (
+  <figure className="relative">
+    <p className="font-Inter mx-auto w-fit text-xs font-bold">↓ZOOM UP↓</p>
+    {children}
+    {figCaption && (
+      <figcaption className="mx-auto w-fit">{figCaption}</figcaption>
+    )}
+  </figure>
+);
 
 export default WysiwygImage;
