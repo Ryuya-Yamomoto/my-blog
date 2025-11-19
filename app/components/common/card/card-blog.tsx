@@ -10,9 +10,10 @@ import StripHtmlTags from "@/utils/common/stripHtmlTags";
 
 type CardBlogProps = {
   blog: Blog;
+  isViewTransition?: boolean;
 };
 
-const CardBlog = ({ blog }: CardBlogProps) => {
+const CardBlog = ({ blog, isViewTransition = true }: CardBlogProps) => {
   return (
     <Link
       href={`/blog/post/${blog.id}`}
@@ -27,7 +28,37 @@ const CardBlog = ({ blog }: CardBlogProps) => {
           blog.thumbnail ?? "bg-foreground/50 grid place-items-center"
         )}
       >
-        <ViewTransition name={`thumb-${blog.id}`}>
+        {blog.thumbnail &&
+          (isViewTransition ? (
+            <ViewTransition name={`thumb-${blog.id}`}>
+              <Image
+                src={blog.thumbnail.url}
+                alt={blog.title}
+                height={blog.thumbnail.height}
+                width={blog.thumbnail.width}
+                className="h-full w-full object-cover transition-[scale] duration-300 group-hover:scale-[1.05]"
+              />
+            </ViewTransition>
+          ) : (
+            <Image
+              src={blog.thumbnail.url}
+              alt={blog.title}
+              height={blog.thumbnail.height}
+              width={blog.thumbnail.width}
+              className="h-full w-full object-cover transition-[scale] duration-300 group-hover:scale-[1.05]"
+            />
+          ))}
+
+        {!blog.thumbnail && (
+          <Image
+            src="/images/common/icon_no-image.svg"
+            alt="No Image"
+            height={42}
+            width={42}
+          />
+        )}
+
+        {/* <ViewTransition name={`thumb-${blog.id}`}>
           {blog.thumbnail ? (
             <Image
               src={blog.thumbnail.url}
@@ -44,7 +75,7 @@ const CardBlog = ({ blog }: CardBlogProps) => {
               width={42}
             />
           )}
-        </ViewTransition>
+        </ViewTransition> */}
       </figure>
       <div
         className={cn(

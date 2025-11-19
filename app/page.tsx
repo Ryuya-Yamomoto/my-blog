@@ -13,7 +13,7 @@ export default async function Home() {
   const categories = await getCategories();
 
   // 最近の記事
-  // const dataRecently = await getBlogs({ limit: 3 });
+  const dataRecently = await getBlogs({ limit: 3 });
 
   // 技術
   const dataTech = await getBlogs({
@@ -56,16 +56,14 @@ export default async function Home() {
           <p className="mt-2">
             当サイトは
             <br className="md:hidden" />
-            Next.js/microCMS にて構築しています。
+            Next.js / microCMS / vercel
+            <br className="md:hidden" />
+            にて構築しています。
           </p>
         </div>
       </section>
 
       <section className="mt-32">
-        <ButtonText label="すべての記事を見る" link={{ href: "/blog" }} />
-      </section>
-
-      {/* <section className="mt-32">
         <div
           className={cn(
             "flex flex-col flex-wrap items-start gap-2",
@@ -84,15 +82,17 @@ export default async function Home() {
         <div className={cn("mt-4 grid gap-4", "lg:grid-cols-3")}>
           {dataRecently.contents.length > 0 ? (
             dataRecently.contents.map((item: Blog) => {
-              return <CardBlog key={item.id} blog={item} />;
+              return (
+                <CardBlog key={item.id} blog={item} isViewTransition={false} />
+              );
             })
           ) : (
             <p className="text-lg font-medium">記事がありません。</p>
           )}
         </div>
-      </section> */}
+      </section>
 
-      <section className="mt-16">
+      <section className="mt-32">
         <div
           className={cn(
             "flex flex-col flex-wrap items-start gap-2",
