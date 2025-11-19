@@ -1,5 +1,6 @@
 import type { Category } from "@/app/types/common";
 
+import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
@@ -31,7 +32,7 @@ const NavContent = (props: NavContentProps) => {
           "transition-clip-path duration-400 ease-(--easing)"
         )}
       >
-        <div className="h-full w-full overflow-y-auto">
+        <div className="h-full w-full overflow-y-auto" data-lenis-prevent>
           <ul className="grid gap-y-4">
             <li>
               <MenuLink pathname={currentPathname} slug="all" />
@@ -44,6 +45,29 @@ const NavContent = (props: NavContentProps) => {
               );
             })}
           </ul>
+          <div className="mt-16 w-full border-t px-2 pt-8">
+            <ul className="flex flex-wrap items-baseline gap-x-4">
+              <li>
+                <Link
+                  href="https://x.com/ryu_yama_0325"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(
+                    "relative",
+                    "before:background before:absolute before:-inset-1 before:rounded-sm before:bg-transparent before:duration-300 before:content-['']",
+                    "hover:before:bg-primary/10"
+                  )}
+                >
+                  <Image
+                    src="/images/common/logo_x.svg"
+                    alt="X Logo"
+                    width={24}
+                    height={24}
+                  />
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </>
