@@ -27,15 +27,29 @@ const CardBlog = ({ blog, className }: cardBlogProps) => {
         className
       )}
     >
-      <figure className="block aspect-square w-full overflow-hidden rounded-sm">
+      <figure
+        className={cn(
+          "block aspect-square w-full overflow-hidden rounded-sm",
+          blog.thumbnail ?? "bg-foreground/50 grid place-items-center"
+        )}
+      >
         <ViewTransition name={`thumb-${blog.id}`}>
-          <Image
-            src={blog.thumbnail.url}
-            alt={blog.title}
-            width={blog.thumbnail.width}
-            height={blog.thumbnail.height}
-            className="h-full w-full object-cover"
-          />
+          {blog.thumbnail ? (
+            <Image
+              src={blog.thumbnail.url}
+              alt={blog.title}
+              width={blog.thumbnail.width}
+              height={blog.thumbnail.height}
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <Image
+              src="/images/common/icon_no-image.svg"
+              alt="No Image"
+              width={42}
+              height={42}
+            />
+          )}
         </ViewTransition>
       </figure>
       <div

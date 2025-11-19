@@ -67,22 +67,24 @@ export default async function Page({
         category={article.category.name}
         className={cn("mt-16", "md:mt-32")}
       />
-      <figure
-        className={cn(
-          "mx-auto mt-8 aspect-square w-full max-w-160",
-          "md:mt-16"
-        )}
-      >
-        <ViewTransition name={`thumb-${article.id}`}>
-          <Image
-            src={article.thumbnail.url}
-            alt="サムネイル"
-            width={article.thumbnail.width}
-            height={article.thumbnail.height}
-            className="h-full w-full object-cover"
-          />
-        </ViewTransition>
-      </figure>
+      {article.thumbnail && (
+        <figure
+          className={cn(
+            "mx-auto mt-8 aspect-square w-full max-w-160",
+            "md:mt-16"
+          )}
+        >
+          <ViewTransition name={`thumb-${article.id}`}>
+            <Image
+              src={article.thumbnail.url}
+              alt="サムネイル"
+              width={article.thumbnail.width}
+              height={article.thumbnail.height}
+              className="h-full w-full object-cover"
+            />
+          </ViewTransition>
+        </figure>
+      )}
 
       <div className={cn("wysiwyg mt-16 px-0", "md:mt-24 md:px-4")}>
         <BlockWysiwygContent html={article.body} />
