@@ -1,11 +1,15 @@
 "use client";
 
-import { useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef } from "react";
 import Lenis from "@studio-freight/lenis";
 
 export const LenisProvider = () => {
+  const lenisRef = useRef<Lenis | null>(null);
+  const pathname = usePathname();
+
   useEffect(() => {
-    const lenis = new Lenis({
+    lenisRef.current = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       wheelMultiplier: 1,
@@ -14,16 +18,27 @@ export const LenisProvider = () => {
     });
 
     const raf = (time: number) => {
-      lenis.raf(time);
+      lenisRef.current?.raf(time);
       requestAnimationFrame(raf);
     };
 
     requestAnimationFrame(raf);
 
     return () => {
-      lenis.destroy();
+      lenisRef.current?.destroy();
+      lenisRef.current = null;
     };
   }, []);
+
+  // URL変更時を監視
+  useEffect(() => {
+    lenisRef.current?.stop();
+    const timer = setTimeout(() => {
+      lenisRef.current?.start();
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [pathname]);
 
   return null;
 };
