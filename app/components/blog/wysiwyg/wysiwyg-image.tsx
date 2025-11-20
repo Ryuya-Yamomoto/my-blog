@@ -56,6 +56,7 @@ const WysiwygImage = ({ image, figCaption }: WysiwygImageProps) => {
               style={{ aspectRatio: `${width}/${height}` }}
               className={cn(
                 "mx-auto cursor-pointer rounded-sm",
+                "origin-bottom-right transition-[box-shadow,scale,translate] duration-300 hover:-translate-2 hover:scale-101 hover:[box-shadow:3px_3px_4px_2px_rgba(0,0,0,0.4)]",
                 isPortrait
                   ? "max-h-130 w-auto max-w-full md:h-130"
                   : "h-auto w-130 max-w-full"
@@ -98,7 +99,6 @@ const ClickableImage = ({
   figCaption?: string;
 }) => (
   <figure className="relative">
-    <p className="font-Inter mx-auto w-fit text-xs font-bold">↓ZOOM UP↓</p>
     {children}
     {figCaption && (
       <figcaption className="mx-auto w-fit">{figCaption}</figcaption>
