@@ -56,7 +56,7 @@ const WysiwygImage = ({ image, figCaption }: WysiwygImageProps) => {
               style={{ aspectRatio: `${width}/${height}` }}
               className={cn(
                 "mx-auto cursor-pointer rounded-sm",
-                "origin-bottom-right transition-[box-shadow,scale,translate] duration-300 hover:-translate-2 hover:scale-101 hover:[box-shadow:3px_3px_4px_2px_rgba(0,0,0,0.4)]",
+                "origin-bottom-right -translate-2 [box-shadow:3px_3px_4px_2px_rgba(0,0,0,0.4)] transition-[box-shadow,translate] duration-300 hover:-translate-0 hover:[box-shadow:1px_1px_2px_0px_rgba(0,0,0,0)]",
                 isPortrait
                   ? "max-h-130 w-auto max-w-full md:h-130"
                   : "h-auto w-130 max-w-full"
