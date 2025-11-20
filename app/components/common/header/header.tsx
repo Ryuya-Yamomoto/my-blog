@@ -9,7 +9,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { cn } from "@/lib/utils";
-import { Category } from "@/app/types/common";
+import type { Category } from "@/app/types/common";
 
 import NavContent from "./nav-content";
 

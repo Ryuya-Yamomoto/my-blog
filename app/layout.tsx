@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Noto_Sans_JP, Inter } from "next/font/google";
 import "./globals.css";
 import React from "react";
-import { LenisProvider } from "./hooks/lenisProvider";
+import { LenisProvider } from "./provider/lenisProvider";
 import { getCategories } from "@/libs/microcms";
 
 import Header from "./components/common/header/header";
@@ -32,7 +32,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // カテゴリを取得 → storeに保存
   const categories = await getCategories();
 
   return (

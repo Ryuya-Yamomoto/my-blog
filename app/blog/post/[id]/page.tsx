@@ -86,13 +86,11 @@ export default async function Page({
         </figure>
       )}
 
-      <BlockWysiwygContent html={article.body} />
-
-      {/* <div className={cn("mt-8 grid border-t pt-16", "md:mt-24 md:px-4")}>
+      <div className={cn("mt-8 grid border-t pt-16", "md:mt-24 md:px-4")}>
         <div className={cn("wysiwyg px-0")}>
           <BlockWysiwygContent html={article.body} />
         </div>
-      </div> */}
+      </div>
 
       <BlockArticleBottom
         category={article.category}

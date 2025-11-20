@@ -1,10 +1,10 @@
 import parse, { DOMNode, Element } from "html-react-parser";
 import { v4 as uuidv4 } from "uuid";
-import { cn } from "@/lib/utils";
 
 import ParseWysiwyg from "@/utils/blog/post/parseWysiwyg";
 
 import WysiwygImage from "../wysiwyg/wysiwyg-image";
+import WysiwygMokujiHeading from "../wysiwyg/wysiwyg-mokuji-heading";
 
 const BlockWysiwygContent = ({ html }: { html: string }): React.ReactNode => {
   // 渡されたwysiwygのHTMLをパース
@@ -13,6 +13,7 @@ const BlockWysiwygContent = ({ html }: { html: string }): React.ReactNode => {
   // ReactNodeに置換
   // figure → onClickイベントを付与
   // h2 → IntersectionObserver付与 / h2要素の情報を用いて目次を生成
+  const arrayMokuji: { id: string; text: string }[] = [];
   const parsedReactNode: React.ReactNode = parse(parsedArticleBody, {
     replace: (domNode: DOMNode) => {
       // figure
@@ -88,29 +89,22 @@ const BlockWysiwygContent = ({ html }: { html: string }): React.ReactNode => {
             .join("");
         };
 
-        const headingText = getTextContent(domNode);
+        const id = uuidv4();
+        const text = getTextContent(domNode);
+        arrayMokuji.push({ id, text });
 
-        // カスタムh2コンポーネントに置き換え
-        return <h2 className="custom-h2-class">{headingText}</h2>;
+        // h2 クライアントサイドコンポーネントとして生成
+        return <WysiwygMokujiHeading id={id} text={text} />;
       }
+
+      // 目次ブロックを生成して、domNodeに含めてまとめてreturnする
 
       // その他の要素はそのまま返す
       return domNode;
     },
   });
 
-  return (
-    <div
-      className={cn(
-        "relative mt-8 grid pt-16",
-        "before:bg-primary before:absolute before:top-0 before:left-1/2 before:h-px before:w-[40%] before:-translate-x-1/2 before:content-['']",
-        "md:mt-24 md:px-4"
-      )}
-    >
-      {/* この位置に目次ブロックが入ります。 ここのあるなしでhas()で親のレイアウト指定を分岐 */}
-      <div className={cn("wysiwyg")}>{parsedReactNode}</div>
-    </div>
-  );
+  return parsedReactNode;
 };
 
 export default BlockWysiwygContent;
