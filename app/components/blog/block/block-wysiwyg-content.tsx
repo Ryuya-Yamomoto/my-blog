@@ -5,6 +5,7 @@ import ParseWysiwyg from "@/utils/blog/post/parseWysiwyg";
 
 import WysiwygImage from "../wysiwyg/wysiwyg-image";
 import WysiwygMokujiHeading from "../wysiwyg/wysiwyg-mokuji-heading";
+import WysiwygMokujiBlock from "../wysiwyg/wysiwyg-mokuji-block";
 
 const BlockWysiwygContent = ({ html }: { html: string }): React.ReactNode => {
   // 渡されたwysiwygのHTMLをパース
@@ -97,14 +98,17 @@ const BlockWysiwygContent = ({ html }: { html: string }): React.ReactNode => {
         return <WysiwygMokujiHeading id={id} text={text} />;
       }
 
-      // 目次ブロックを生成して、domNodeに含めてまとめてreturnする
-
       // その他の要素はそのまま返す
       return domNode;
     },
   });
 
-  return parsedReactNode;
+  return (
+    <>
+      {parsedReactNode}
+      <WysiwygMokujiBlock arrayMokuji={arrayMokuji} />
+    </>
+  );
 };
 
 export default BlockWysiwygContent;
