@@ -7,26 +7,27 @@ import { cn } from "@/lib/utils";
 type NavContentProps = {
   categories: Category[];
   currentPathname: string;
-  isMenuOpen: boolean;
-  handleMenuOpen: (isOpen: boolean) => void;
+  isOpen: boolean;
+  handleOpen: (isOpen: boolean) => void;
 };
 
 const NavContent = (props: NavContentProps) => {
-  const { categories, currentPathname, isMenuOpen, handleMenuOpen } = props;
-
+  const { categories, currentPathname, isOpen, handleOpen } = props;
   return (
     <>
       <div
         className={cn(
-          "transition-[background, backdrop-blur] pointer-events-none h-screen w-screen duration-600",
-          isMenuOpen ? "pointer-events-auto bg-black/50 backdrop-blur-sm" : ""
+          "transition-[background, backdrop-blur] pointer-events-none absolute h-screen w-screen duration-600",
+          isOpen
+            ? "pointer-events-auto relative bg-black/50 backdrop-blur-sm"
+            : ""
         )}
-        onClick={() => handleMenuOpen(!isMenuOpen)}
+        onClick={() => handleOpen(!isOpen)}
       ></div>
       <div
         className={cn(
           "bg-background fixed top-0 right-0 h-screen w-[80%] max-w-80 px-4 pt-28 pb-4 md:shadow-lg",
-          isMenuOpen
+          isOpen
             ? "[clip-path:inset(0_0_0_-10%)]"
             : "[clip-path:inset(0_0_0_100%)]",
           "transition-clip-path duration-400 ease-(--easing)"

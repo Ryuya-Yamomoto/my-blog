@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 import type { Category } from "@/app/types/common";
 
 import NavContent from "./nav-content";
+import KensakuContent from "./kensaku-content";
 
 type HeaderProps = {
   categories: Category[];
@@ -22,7 +23,7 @@ const Header = ({ categories }: HeaderProps) => {
   const pathname = usePathname();
 
   // Storeから開閉の状態を取得
-  const { isMenuOpen, setMenuOpen } = useStore();
+  const { isMenuOpen, setMenuOpen, isKensakuOpen, setKensakuOpen } = useStore();
 
   // URL変更を監視
   useEffect(() => {
@@ -32,23 +33,29 @@ const Header = ({ categories }: HeaderProps) => {
 
   // スクロール固定処理
   useScrollLock(isMenuOpen);
+  useScrollLock(isKensakuOpen);
 
   // 状態更新ハンドラー
   const handleSetMenuOpen = (isOpen: boolean) => {
     setMenuOpen(isOpen);
   };
 
+  // 検索モーダル 状態更新ハンドラー
+  const handleSetKensakuOpen = (isOpen: boolean) => {
+    setKensakuOpen(isOpen);
+  };
+
   return (
     <header
       className={cn(
         "transition-background fixed top-0 right-0 left-0 z-10 h-16 duration-300",
-        isMenuOpen
+        isMenuOpen || isKensakuOpen
           ? "bg-background"
           : "bg-background/70 border-border border-b backdrop-blur-[2px]"
       )}
     >
       <div className="flex h-full items-center justify-between px-4">
-        <h1 className="z-1 w-56">
+        <h1 className="w-56">
           <Link href="/" className="block w-full">
             <Image
               src="/images/common/logo.svg"
@@ -60,37 +67,56 @@ const Header = ({ categories }: HeaderProps) => {
             />
           </Link>
         </h1>
-        <button
-          className={cn(
-            "relative z-1 block h-3 w-10 cursor-pointer",
-            "hamMenuTransition",
-            isMenuOpen ? "open" : ""
-          )}
-          onClick={() => handleSetMenuOpen(!isMenuOpen)}
-        >
-          <span
+        <div className="relative z-10 flex items-center gap-x-4">
+          <button
+            className="cursor-pointer"
+            onClick={() => setKensakuOpen(!isKensakuOpen)}
+          >
+            <span>
+              <Image
+                src="/images/common/icon_search.svg"
+                alt="検索"
+                width={28}
+                height={28}
+              />
+            </span>
+          </button>
+          <button
             className={cn(
-              "bar-01 bar",
-              "bg-primary absolute top-0 right-0 block h-[2px] w-full",
-              "transform-origin-center",
-              isMenuOpen ? "top-1.5 rotate-[30deg]" : ""
+              "relative block h-3 w-10 cursor-pointer",
+              "hamMenuTransition",
+              isMenuOpen ? "open" : ""
             )}
-          ></span>
-          <span
-            className={cn(
-              "bar-02 bar",
-              "bg-primary absolute top-3 right-0 block h-[2px] w-1/2",
-              "transform-origin-center",
-              isMenuOpen ? "top-1.5 w-full rotate-[-30deg]" : ""
-            )}
-          ></span>
-        </button>
+            onClick={() => handleSetMenuOpen(!isMenuOpen)}
+          >
+            <span
+              className={cn(
+                "bar-01 bar",
+                "bg-primary absolute top-0 right-0 block h-[2px] w-full",
+                "transform-origin-center",
+                isMenuOpen ? "top-1.5 rotate-[30deg]" : ""
+              )}
+            ></span>
+            <span
+              className={cn(
+                "bar-02 bar",
+                "bg-primary absolute top-3 right-0 block h-[2px] w-1/2",
+                "transform-origin-center",
+                isMenuOpen ? "top-1.5 w-full rotate-[-30deg]" : ""
+              )}
+            ></span>
+          </button>
+        </div>
       </div>
+      <KensakuContent
+        isOpen={isKensakuOpen}
+        handleOpen={handleSetKensakuOpen}
+      />
       <NavContent
         categories={categories}
         currentPathname={pathname}
-        isMenuOpen={isMenuOpen}
-        handleMenuOpen={handleSetMenuOpen}
+        isOpen={isMenuOpen}
+        handleOpen={handleSetMenuOpen}
       />
     </header>
   );
