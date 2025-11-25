@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import useStore from "@/app/store/useStore";
 import { cn } from "@/lib/utils";
 
@@ -14,6 +14,7 @@ type WysiwygMokujiBlockProps = {
 };
 
 const WysiwygMokujiBlock = ({ arrayMokuji }: WysiwygMokujiBlockProps) => {
+  const headerRef = useRef<HTMLElement | null>(null);
   const { activeMokujiId } = useStore();
   const [isMokujiOpen, setIsMokujiOpen] = useState(true);
 
@@ -21,6 +22,8 @@ const WysiwygMokujiBlock = ({ arrayMokuji }: WysiwygMokujiBlockProps) => {
     if (window.innerWidth < 768) {
       setIsMokujiOpen(false);
     }
+
+    headerRef.current = window.document.querySelector("header");
   }, []);
 
   const handleClick = (id: string) => {
@@ -28,7 +31,8 @@ const WysiwygMokujiBlock = ({ arrayMokuji }: WysiwygMokujiBlockProps) => {
     if (element) {
       const offsetTop = element.getBoundingClientRect().top + window.scrollY;
       window.scrollTo({
-        top: offsetTop - window.innerHeight / 2, // ヘッダー分のオフセットなどを考慮
+        top:
+          offsetTop - (headerRef.current ? headerRef.current.clientHeight : 0),
         behavior: "smooth",
       });
     }
@@ -82,8 +86,7 @@ const WysiwygMokujiBlock = ({ arrayMokuji }: WysiwygMokujiBlockProps) => {
 
             <ul
               className={cn(
-                "mt-0 flex max-h-[20rem] flex-col gap-1 overflow-y-auto overscroll-contain",
-                ""
+                "mt-0 flex max-h-[20rem] flex-col gap-1 overflow-y-auto overscroll-contain"
               )}
               data-lenis-prevent
             >
