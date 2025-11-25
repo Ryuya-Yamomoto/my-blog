@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useStore from "@/app/store/useStore";
 import { cn } from "@/lib/utils";
 
@@ -17,12 +17,17 @@ const WysiwygMokujiBlock = ({ arrayMokuji }: WysiwygMokujiBlockProps) => {
   const { activeMokujiId } = useStore();
   const [isMokujiOpen, setIsMokujiOpen] = useState(true);
 
+  useEffect(() => {
+    if (window.innerWidth < 768) {
+      setIsMokujiOpen(false);
+    }
+  }, []);
+
   const handleClick = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
       const offsetTop = element.getBoundingClientRect().top + window.scrollY;
       window.scrollTo({
-        // top: offsetTop - 80, // ヘッダー分のオフセットなどを考慮
         top: offsetTop - window.innerHeight / 2, // ヘッダー分のオフセットなどを考慮
         behavior: "smooth",
       });

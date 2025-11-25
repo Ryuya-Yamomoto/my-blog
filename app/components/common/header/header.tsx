@@ -57,7 +57,7 @@ const Header = ({ categories }: HeaderProps) => {
       )}
     >
       <div className="flex h-full items-center justify-between px-4">
-        <h1 className="w-56">
+        <h1 className="relative z-1 w-56">
           <Link href="/" className="block w-full">
             <Image
               src="/images/common/logo.svg"
