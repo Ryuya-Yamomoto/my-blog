@@ -29,26 +29,28 @@ const Header = ({ categories }: HeaderProps) => {
   useEffect(() => {
     // バーガーメニューを閉じる
     setMenuOpen(false);
+    setKensakuOpen(false);
   }, [pathname, setMenuOpen]);
 
   // スクロール固定処理
-  useScrollLock(isMenuOpen);
-  useScrollLock(isKensakuOpen);
+  useScrollLock(isMenuOpen || isKensakuOpen);
 
-  // 状態更新ハンドラー
+  // バーガーメニュー 状態更新ハンドラー
   const handleSetMenuOpen = (isOpen: boolean) => {
+    setKensakuOpen(false);
     setMenuOpen(isOpen);
   };
 
   // 検索モーダル 状態更新ハンドラー
   const handleSetKensakuOpen = (isOpen: boolean) => {
+    setMenuOpen(false);
     setKensakuOpen(isOpen);
   };
 
   return (
     <header
       className={cn(
-        "transition-background fixed top-0 right-0 left-0 z-10 h-16 duration-300",
+        "transition-background fixed top-0 right-0 left-0 z-100 h-16 duration-300",
         isMenuOpen || isKensakuOpen
           ? "bg-background"
           : "bg-background/70 border-border border-b backdrop-blur-[2px]"
@@ -70,7 +72,7 @@ const Header = ({ categories }: HeaderProps) => {
         <div className="relative z-10 flex items-center gap-x-4">
           <button
             className="cursor-pointer"
-            onClick={() => setKensakuOpen(!isKensakuOpen)}
+            onClick={() => handleSetKensakuOpen(!isKensakuOpen)}
           >
             <span>
               <Image
