@@ -16,16 +16,27 @@ const KensakuResult = ({ filteredBlogs }: KensakuResultProps) => {
       {filteredBlogs === null ? (
         <></>
       ) : (
-        <div className="mt-8">
+        <div className="mt-4">
           {filteredBlogs.length === 0 ? (
             <p>該当の記事が見つかりません。</p>
           ) : (
-            <ul className="grid max-h-[60vh] overflow-auto" data-lenis-prevent>
+            <ul
+              className={cn(
+                "relative grid max-h-[60vh] overflow-auto",
+                "after:bg-foreground/80 after:absolute after:inset-[anchor(--cover_start)] after:z-[-1] after:rounded-sm after:duration-300 after:content-[''] after:[block-size:anchor-size(--cover_block)] after:[inline-size:anchor-size(--cover_inline)]"
+              )}
+              data-lenis-prevent
+            >
               {filteredBlogs.map((blog) => (
                 <li key={blog.id}>
                   <Link
                     href={`/blog/post/${blog.id}`}
-                    className="grid grid-cols-[8rem_1fr] place-items-start gap-x-4 px-2 py-2"
+                    className={cn(
+                      "grid grid-cols-[6rem_1fr] place-items-start gap-x-4 px-0 py-4",
+                      "md:grid-cols-[8rem_1fr] md:px-4",
+                      "hover:[anchor-name:--cover]",
+                      "focus:[anchor-name:--cover]"
+                    )}
                   >
                     <figure className="aspect-square w-full">
                       <Image

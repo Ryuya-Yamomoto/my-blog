@@ -1,6 +1,7 @@
 "use client";
 
 import useStore from "@/app/store/useStore";
+import { cn } from "@/lib/utils";
 
 import Image from "next/image";
 
@@ -13,7 +14,12 @@ const KensakuInput = () => {
   };
 
   return (
-    <div className="grid grid-cols-[3rem_1fr] overflow-hidden rounded-sm">
+    <div
+      className={cn(
+        "grid grid-cols-[2rem_1fr] overflow-hidden rounded-sm",
+        "md:grid-cols-[3rem_1fr]"
+      )}
+    >
       <span className="grid min-h-full w-full place-items-center bg-black/80">
         <Image
           src="/images/common/icon_search.svg"
@@ -28,7 +34,10 @@ const KensakuInput = () => {
         placeholder="検索..."
         value={searchQuery}
         onChange={handleInputChange}
-        className="w-full bg-black/50 px-4 py-4 text-base placeholder:text-white/40"
+        className={cn(
+          "w-full bg-black/50 px-4 py-2 text-base outline-none placeholder:text-white/40",
+          "md:py-4"
+        )}
       />
     </div>
   );
