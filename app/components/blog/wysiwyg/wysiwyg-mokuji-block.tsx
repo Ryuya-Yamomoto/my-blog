@@ -14,7 +14,7 @@ type WysiwygMokujiBlockProps = {
 };
 
 const WysiwygMokujiBlock = ({ arrayMokuji }: WysiwygMokujiBlockProps) => {
-  const { activeMokujiId, setActiveMokujiId } = useStore();
+  const { activeMokujiId } = useStore();
   const [isMokujiOpen, setIsMokujiOpen] = useState(true);
 
   const handleClick = (id: string) => {

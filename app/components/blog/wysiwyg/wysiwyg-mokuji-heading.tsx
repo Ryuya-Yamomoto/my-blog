@@ -22,7 +22,7 @@ const WysiwygMokujiHeading = ({ id, text }: WysiwygMokujiHeadingProps) => {
     if (inView && activeMokujiId !== id) {
       setActiveMokujiId(id);
     }
-  }, [inView, setActiveMokujiId, id, activeMokujiId]);
+  }, [inView, setActiveMokujiId, id]);
 
   // クリーンナップ関数 アンマウント時はnullに戻す
   useEffect(() => {
