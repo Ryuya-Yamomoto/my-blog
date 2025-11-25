@@ -52,12 +52,12 @@ const WysiwygMokujiBlock = ({ arrayMokuji }: WysiwygMokujiBlockProps) => {
       {/* つまみ */}
       <button
         onClick={() => setIsMokujiOpen(!isMokujiOpen)}
-        className="flex h-6 w-full cursor-pointer flex-row items-center justify-center gap-0.5 rounded-t-lg hover:bg-white/10 md:h-auto md:w-6 md:flex-col md:rounded-l-lg md:rounded-tr-none"
+        className="flex h-6 w-full cursor-pointer flex-row items-center justify-center gap-0.5 rounded-t-lg hover:bg-white/10 md:h-auto md:w-6 md:rounded-l-lg md:rounded-tr-none"
         aria-label={isMokujiOpen ? "目次を閉じる" : "目次を開く"}
       >
-        <div className="h-3 w-0.5 rounded-full bg-gray-500 md:bg-gray-400/50" />
-        <div className="h-3 w-0.5 rounded-full bg-gray-500 md:bg-gray-400/50" />
-        <div className="h-3 w-0.5 rounded-full bg-gray-500 md:bg-gray-400/50" />
+        <div className="h-3 w-0.5 rounded-full bg-gray-500" />
+        <div className="h-3 w-0.5 rounded-full bg-gray-500" />
+        <div className="h-3 w-0.5 rounded-full bg-gray-500" />
       </button>
 
       {/* 目次リスト */}
