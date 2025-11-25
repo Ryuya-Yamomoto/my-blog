@@ -19,7 +19,7 @@ export const client = createClient({
 });
 
 // 型定義
-type MicroCMSResponse<T> = {
+export type MicroCMSResponse<T> = {
   contents: T[];
   totalCount: number;
   offset: number;

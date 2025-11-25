@@ -1,11 +1,15 @@
 import { cn } from "@/lib/utils";
+import type { Blog } from "@/app/types/common";
+
+import BlockKensaku from "./block-kensaku";
 
 type KensakuContentProps = {
   isOpen: boolean;
   handleOpen: (isOpen: boolean) => void;
+  blogs: Blog[];
 };
 
-const KensakuContent = ({ isOpen, handleOpen }: KensakuContentProps) => {
+const KensakuContent = ({ isOpen, handleOpen, blogs }: KensakuContentProps) => {
   return (
     <>
       <div
@@ -17,6 +21,7 @@ const KensakuContent = ({ isOpen, handleOpen }: KensakuContentProps) => {
         )}
         onClick={() => handleOpen(!isOpen)}
       ></div>
+      <BlockKensaku isOpen={isOpen} blogs={blogs} />
     </>
   );
 };

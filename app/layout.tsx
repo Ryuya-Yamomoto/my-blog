@@ -3,7 +3,7 @@ import { Noto_Sans_JP, Inter } from "next/font/google";
 import "./globals.css";
 import React from "react";
 import { LenisProvider } from "./provider/lenisProvider";
-import { getCategories } from "@/libs/microcms";
+import { getCategories, getBlogs } from "@/libs/microcms";
 
 import Header from "./components/common/header/header";
 import Footer from "./components/common/footer/footer";
@@ -32,14 +32,17 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const categories = await getCategories();
+  const [categories, blogs] = await Promise.all([
+    getCategories(),
+    getBlogs({}),
+  ]);
 
   return (
     <>
       <LenisProvider />
       <html lang="ja" className={`${notoSansJP.variable} ${inter.variable}`}>
         <body className="font-noto-sans-jp flex min-h-screen flex-col">
-          <Header categories={categories.contents} />
+          <Header categories={categories.contents} blogs={blogs.contents} />
           <main className="w-full flex-grow overflow-clip pt-48">
             {children}
           </main>

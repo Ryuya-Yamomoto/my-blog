@@ -9,16 +9,17 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { cn } from "@/lib/utils";
-import type { Category } from "@/app/types/common";
+import type { Category, Blog } from "@/app/types/common";
 
 import NavContent from "./nav-content";
 import KensakuContent from "./kensaku-content";
 
 type HeaderProps = {
   categories: Category[];
+  blogs: Blog[];
 };
 
-const Header = ({ categories }: HeaderProps) => {
+const Header = ({ categories, blogs }: HeaderProps) => {
   // 現在のパスを取得
   const pathname = usePathname();
 
@@ -113,6 +114,7 @@ const Header = ({ categories }: HeaderProps) => {
       <KensakuContent
         isOpen={isKensakuOpen}
         handleOpen={handleSetKensakuOpen}
+        blogs={blogs}
       />
       <NavContent
         categories={categories}

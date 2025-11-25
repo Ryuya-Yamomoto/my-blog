@@ -3,8 +3,6 @@ import type { BlogArticle } from "@/app/types/common";
 
 import { getBlogArticle, getAllContentIds, getBlogs } from "@/libs/microcms";
 
-// import ParseWysiwyg from "@/utils/blog/post/parseWysiwyg";
-
 import HeadingSection from "@/app/components/common/heading/heading-section";
 import HeadingArticle from "@/app/components/blog/heading/heading-article";
 import WrapperContent from "@/app/components/common/wrapper/wrapper-content";

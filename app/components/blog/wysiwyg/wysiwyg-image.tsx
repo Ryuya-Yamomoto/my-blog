@@ -56,7 +56,7 @@ const WysiwygImage = ({ image, figCaption }: WysiwygImageProps) => {
               style={{ aspectRatio: `${width}/${height}` }}
               className={cn(
                 "mx-auto cursor-pointer rounded-sm",
-                "origin-bottom-right -translate-2 [box-shadow:3px_3px_4px_2px_rgba(0,0,0,0.4)] transition-[box-shadow,translate] duration-600 ease-[var(--spring-easing)] hover:-translate-0 hover:[box-shadow:1px_1px_2px_0px_rgba(0,0,0,0)]",
+                "box-shadow-primary origin-bottom-right -translate-2 transition-[box-shadow,translate] duration-600 ease-[var(--spring-easing)] hover:-translate-0 hover:[box-shadow:1px_1px_2px_0px_rgba(0,0,0,0)]",
                 isPortrait
                   ? "max-h-130 w-auto max-w-full md:h-130"
                   : "h-auto w-130 max-w-full"
@@ -80,7 +80,7 @@ const WysiwygImage = ({ image, figCaption }: WysiwygImageProps) => {
               height={height}
               style={{ aspectRatio: `${width}/${height}` }}
               className={cn(
-                "absolute top-1/2 left-1/2 z-10 block h-auto max-h-[80%] w-auto max-w-[80%] -translate-x-1/2 -translate-y-1/2 [box-shadow:3px_3px_4px_2px_rgba(0,0,0,0.4)]"
+                "box-shadow-primary absolute top-1/2 left-1/2 z-10 block h-auto max-h-[80%] w-auto max-w-[80%] -translate-x-1/2 -translate-y-1/2"
               )}
               onClick={(e) => e.stopPropagation()}
             />
