@@ -47,7 +47,7 @@ export default async function RootLayout({
         suppressHydrationWarning
       >
         <body className="font-noto-sans-jp flex min-h-screen flex-col">
-          <ThemeProvider>
+          <ThemeProvider storageKey="theme">
             <Header categories={categories.contents} blogs={blogs.contents} />
             <main className="w-full flex-grow overflow-clip pt-48">
               {children}
