@@ -13,7 +13,7 @@ const BadgeRounded = ({ text, className }: Props) => {
         className
       )}
     >
-      <span className="text-primary text-xs leading-none">{text}</span>
+      <span className="text-foreground text-xs leading-none">{text}</span>
     </span>
   );
 };

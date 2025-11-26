@@ -60,19 +60,19 @@ const WysiwygMokujiBlock = ({ arrayMokuji }: WysiwygMokujiBlockProps) => {
       >
         <div
           className={cn(
-            "h-0.5 w-3 rounded-full bg-gray-500",
+            "bg-foreground/50 h-0.5 w-3 rounded-full",
             "md:h-3 md:w-0.5"
           )}
         />
         <div
           className={cn(
-            "h-0.5 w-3 rounded-full bg-gray-500",
+            "bg-foreground/50 h-0.5 w-3 rounded-full",
             "md:h-3 md:w-0.5"
           )}
         />
         <div
           className={cn(
-            "h-0.5 w-3 rounded-full bg-gray-500",
+            "bg-foreground/50 h-0.5 w-3 rounded-full",
             "md:h-3 md:w-0.5"
           )}
         />
@@ -113,10 +113,10 @@ const WysiwygMokujiBlock = ({ arrayMokuji }: WysiwygMokujiBlockProps) => {
                   <button
                     onClick={() => handleClick(item.id)}
                     className={cn(
-                      "hover:text-primary cursor-pointer text-left text-xs transition-colors",
+                      "hover:text-foreground cursor-pointer text-left text-xs transition-colors",
                       activeMokujiId === item.id
-                        ? "text-primary font-bold"
-                        : "text-primary/45"
+                        ? "text-foreground font-bold"
+                        : "text-foreground/45"
                     )}
                   >
                     <span

@@ -11,6 +11,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import type { Category, Blog } from "@/app/types/common";
 
+import ButtonTheme from "./button-theme";
 import NavContent from "./nav-content";
 import KensakuContent from "./kensaku-content";
 
@@ -70,7 +71,9 @@ const Header = ({ categories, blogs }: HeaderProps) => {
             />
           </Link>
         </h1>
+
         <div className="relative z-10 flex items-center gap-x-4">
+          <ButtonTheme />
           <button
             className="cursor-pointer"
             onClick={() => handleSetKensakuOpen(!isKensakuOpen)}
@@ -95,7 +98,7 @@ const Header = ({ categories, blogs }: HeaderProps) => {
             <span
               className={cn(
                 "bar-01 bar",
-                "bg-primary absolute top-0 right-0 block h-[2px] w-full",
+                "bg-foreground absolute top-0 right-0 block h-[2px] w-full",
                 "transform-origin-center",
                 isMenuOpen ? "top-1.5 rotate-[30deg]" : ""
               )}
@@ -103,7 +106,7 @@ const Header = ({ categories, blogs }: HeaderProps) => {
             <span
               className={cn(
                 "bar-02 bar",
-                "bg-primary absolute top-3 right-0 block h-[2px] w-1/2",
+                "bg-foreground absolute top-3 right-0 block h-[2px] w-1/2",
                 "transform-origin-center",
                 isMenuOpen ? "top-1.5 w-full rotate-[-30deg]" : ""
               )}

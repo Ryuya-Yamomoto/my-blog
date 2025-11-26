@@ -156,13 +156,12 @@
 
 :root {
   --background: rgb(203, 203, 201);
-  --foreground: #171717;
+  --foreground: rgb(23, 23, 23);
+  --foreground-invert: rgb(203, 203, 201);
 
-  --primary: #0a0a0a;
   --code: #0d1117;
 
   --easing: cubic-bezier(0.9, 0.03, 0.49, 1.02);
-
   --spring-easing: linear(
     0,
     0.01,
@@ -189,9 +188,16 @@
   );
 }
 
+[data-theme="dark"] {
+  --background: rgb(23, 23, 23);
+  --foreground: rgb(203, 203, 201);
+  --foreground-invert: rgb(23, 23, 23);
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-foreground-invert: var(--foreground-invert);
 
   --font-noto-sans-jp: var(--font-noto-sans-jp);
   --font-inter: var(--font-inter);

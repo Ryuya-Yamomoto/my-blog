@@ -77,8 +77,8 @@ const NavContent = (props: NavContentProps) => {
 
 const MenuLink = ({ pathname, slug }: { pathname: string; slug: string }) => {
   const linkStyle = cn(
-    "text-primary relative block w-fit text-xl leading-normal font-bold uppercase",
-    'after:bg-primary after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-right after:scale-x-0 after:transition-transform after:duration-300 after:content-[""]'
+    "text-foreground relative block w-fit text-xl leading-normal font-bold uppercase",
+    'after:bg-foreground after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-right after:scale-x-0 after:transition-transform after:duration-300 after:content-[""]'
   );
 
   if (slug === "all" && pathname === "/blog") {
