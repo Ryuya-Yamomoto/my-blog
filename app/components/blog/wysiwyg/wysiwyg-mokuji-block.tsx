@@ -52,12 +52,30 @@ const WysiwygMokujiBlock = ({ arrayMokuji }: WysiwygMokujiBlockProps) => {
       {/* つまみ */}
       <button
         onClick={() => setIsMokujiOpen(!isMokujiOpen)}
-        className="flex h-6 w-full cursor-pointer flex-row items-center justify-center gap-0.5 rounded-t-lg hover:bg-white/10 md:h-auto md:w-6 md:rounded-l-lg md:rounded-tr-none"
+        className={cn(
+          "flex h-6 w-full cursor-pointer flex-col items-center justify-center gap-0.5 rounded-t-lg hover:bg-white/10 md:h-auto md:w-6 md:rounded-l-lg md:rounded-tr-none",
+          "md:flex-row"
+        )}
         aria-label={isMokujiOpen ? "目次を閉じる" : "目次を開く"}
       >
-        <div className="h-3 w-0.5 rounded-full bg-gray-500" />
-        <div className="h-3 w-0.5 rounded-full bg-gray-500" />
-        <div className="h-3 w-0.5 rounded-full bg-gray-500" />
+        <div
+          className={cn(
+            "h-0.5 w-3 rounded-full bg-gray-500",
+            "md:h-3 md:w-0.5"
+          )}
+        />
+        <div
+          className={cn(
+            "h-0.5 w-3 rounded-full bg-gray-500",
+            "md:h-3 md:w-0.5"
+          )}
+        />
+        <div
+          className={cn(
+            "h-0.5 w-3 rounded-full bg-gray-500",
+            "md:h-3 md:w-0.5"
+          )}
+        />
       </button>
 
       {/* 目次リスト */}
@@ -86,7 +104,7 @@ const WysiwygMokujiBlock = ({ arrayMokuji }: WysiwygMokujiBlockProps) => {
 
             <ul
               className={cn(
-                "mt-0 flex max-h-[20rem] flex-col gap-1 overflow-y-auto overscroll-contain"
+                "no-defaultScrollbar mt-0 flex max-h-[20rem] flex-col gap-1 overflow-y-auto overscroll-contain"
               )}
               data-lenis-prevent
             >

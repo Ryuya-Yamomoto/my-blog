@@ -27,6 +27,14 @@
     box-shadow: 3px 3px 4px 2px rgb(0, 0, 0, 0.4);
   }
 
+  .no-defaultScrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-defaultScrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
   .wysiwyg {
     @apply font-medium;
 
