@@ -35,6 +35,7 @@ const SplideCarousel = ({ blogs, category }: SplideCarouselProps) => {
 
   const arrowCommonStyle = cn(
     "relative w-full aspect-square bg-contain bg-center h-auto bg-no-repeat bg-[url(/images/common/icon_arrow-right.svg)] inset-0 rounded-none bg-transparent transform-[revert]",
+    "dark-filter-to-foreground",
     "disabled:pointer-events-none"
   );
 

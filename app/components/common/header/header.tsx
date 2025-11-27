@@ -5,12 +5,12 @@ import useStore from "@/app/store/useStore";
 import { useEffect } from "react";
 import { useScrollLock } from "@/app/hooks/useScrollLock";
 
-import Link from "next/link";
 import Image from "next/image";
 
 import { cn } from "@/lib/utils";
 import type { Category, Blog } from "@/app/types/common";
 
+import Logo from "./logo";
 import ButtonTheme from "./button-theme";
 import NavContent from "./nav-content";
 import KensakuContent from "./kensaku-content";
@@ -59,18 +59,7 @@ const Header = ({ categories, blogs }: HeaderProps) => {
       )}
     >
       <div className="flex h-full items-center justify-between px-4">
-        <h1 className="relative z-1 w-56">
-          <Link href="/" className="block w-full">
-            <Image
-              src="/images/common/logo.svg"
-              alt="RYUYA YAMAMOTO"
-              height="200"
-              width="200"
-              priority
-              className="dark-filter-to-foreground h-auto w-full"
-            />
-          </Link>
-        </h1>
+        <Logo />
 
         <div
           className={cn(
