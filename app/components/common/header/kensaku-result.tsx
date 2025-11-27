@@ -23,7 +23,7 @@ const KensakuResult = ({ filteredBlogs }: KensakuResultProps) => {
             <ul
               className={cn(
                 "relative grid max-h-[60vh] overflow-auto",
-                "after:bg-foreground/80 after:absolute after:inset-[anchor(--cover_start)] after:z-[-1] after:rounded-sm after:duration-300 after:content-[''] after:[block-size:anchor-size(--cover_block)] after:[inline-size:anchor-size(--cover_inline)]"
+                "after:absolute after:inset-[anchor(--cover_start)] after:z-[-1] after:rounded-sm after:bg-white/10 after:duration-300 after:content-[''] after:[block-size:anchor-size(--cover_block)] after:[inline-size:anchor-size(--cover_inline)]"
               )}
               data-lenis-prevent
             >

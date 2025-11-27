@@ -63,7 +63,7 @@ const Header = ({ categories, blogs }: HeaderProps) => {
 
         <div
           className={cn(
-            "relative z-10 flex items-center gap-x-2",
+            "relative z-10 flex items-center gap-x-4",
             "md:gap-x-4"
           )}
         >

@@ -31,7 +31,7 @@ const KensakuInput = () => {
       </span>
       <input
         type="text"
-        placeholder="検索..."
+        placeholder="記事を検索..."
         value={searchQuery}
         onChange={handleInputChange}
         className={cn(

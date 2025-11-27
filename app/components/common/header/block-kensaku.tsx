@@ -55,8 +55,8 @@ const BlockKensaku = ({ isOpen, blogs }: BlockKensakuProps) => {
   return (
     <div
       className={cn(
-        "box-shadow-primary absolute top-20 left-1/2 w-[90%] max-w-300 -translate-x-1/2 rounded-sm bg-black/60 px-4 py-4 text-white",
-        "md:w-[80%] md:px-8 md:pt-8 md:pb-16",
+        "box-shadow-primary bg-gray-dark/90 absolute top-20 left-1/2 w-[90%] max-w-300 -translate-x-1/2 rounded-sm px-4 py-4 text-white",
+        "md:w-[80%] md:px-8 md:py-8",
         isOpen ? "pointer-events-auto block" : "pointer-events-none hidden"
       )}
     >
