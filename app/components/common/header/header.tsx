@@ -61,12 +61,7 @@ const Header = ({ categories, blogs }: HeaderProps) => {
       <div className="flex h-full items-center justify-between px-4">
         <Logo />
 
-        <div
-          className={cn(
-            "relative z-10 flex items-center gap-x-4",
-            "md:gap-x-4"
-          )}
-        >
+        <div className={cn("relative z-10 flex items-center gap-x-4")}>
           <ButtonTheme />
           <button
             className="cursor-pointer"
@@ -88,6 +83,7 @@ const Header = ({ categories, blogs }: HeaderProps) => {
               "hamMenuTransition",
               isMenuOpen ? "open" : ""
             )}
+            aria-label={isMenuOpen ? "メニューを閉じる" : "メニューを開く"}
             onClick={() => handleSetMenuOpen(!isMenuOpen)}
           >
             <span

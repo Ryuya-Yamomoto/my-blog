@@ -56,7 +56,7 @@ const NavContent = (props: NavContentProps) => {
                   className={cn(
                     "relative",
                     "before:background before:absolute before:-inset-1 before:rounded-sm before:bg-transparent before:duration-300 before:content-['']",
-                    "hover:before:bg-primary/10"
+                    "hover:before:bg-foreground/10"
                   )}
                 >
                   <Image
