@@ -64,6 +64,7 @@ const NavContent = (props: NavContentProps) => {
                     alt="X Logo"
                     width={24}
                     height={24}
+                    className="dark-filter-to-foreground"
                   />
                 </Link>
               </li>

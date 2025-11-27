@@ -60,20 +60,14 @@ const WysiwygMokujiBlock = ({ arrayMokuji }: WysiwygMokujiBlockProps) => {
       >
         <div
           className={cn(
-            "bg-foreground/50 h-0.5 w-3 rounded-full",
-            "md:h-3 md:w-0.5"
+            "bg-foreground/50 h-0.5 w-4 rounded-full",
+            "md:h-4 md:w-0.5"
           )}
         />
         <div
           className={cn(
-            "bg-foreground/50 h-0.5 w-3 rounded-full",
-            "md:h-3 md:w-0.5"
-          )}
-        />
-        <div
-          className={cn(
-            "bg-foreground/50 h-0.5 w-3 rounded-full",
-            "md:h-3 md:w-0.5"
+            "bg-foreground/50 h-0.5 w-4 rounded-full",
+            "md:h-4 md:w-0.5"
           )}
         />
       </button>

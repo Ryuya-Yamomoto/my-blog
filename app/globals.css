@@ -128,7 +128,7 @@
     }
   }
 
-  .filter-to-foreground {
+  [data-theme="dark"] .dark-filter-to-foreground {
     filter: brightness(0) saturate(100%) invert(100%) sepia(4%) saturate(441%)
       hue-rotate(342deg) brightness(83%) contrast(91%);
   }
@@ -193,6 +193,8 @@
   );
 }
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 [data-theme="dark"] {
   --background: rgb(23, 23, 23);
   --foreground: rgb(203, 203, 201);
@@ -210,8 +212,6 @@
   --color-primary: var(--primary);
   --color-code: var(--code);
 }
-
-@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /* @media (prefers-color-scheme: dark) {
   :root {

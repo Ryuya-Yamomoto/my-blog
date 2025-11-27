@@ -67,12 +67,17 @@ const Header = ({ categories, blogs }: HeaderProps) => {
               height="200"
               width="200"
               priority
-              className="h-auto w-full"
+              className="dark-filter-to-foreground h-auto w-full"
             />
           </Link>
         </h1>
 
-        <div className="relative z-10 flex items-center gap-x-4">
+        <div
+          className={cn(
+            "relative z-10 flex items-center gap-x-2",
+            "md:gap-x-4"
+          )}
+        >
           <ButtonTheme />
           <button
             className="cursor-pointer"
@@ -84,6 +89,7 @@ const Header = ({ categories, blogs }: HeaderProps) => {
                 alt="検索"
                 width={28}
                 height={28}
+                className="dark-filter-to-foreground"
               />
             </span>
           </button>
