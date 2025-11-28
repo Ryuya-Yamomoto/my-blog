@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import useStore from "@/app/store/useStore";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useScrollLock } from "@/app/hooks/useScrollLock";
 
 import Image from "next/image";
@@ -23,19 +23,27 @@ type HeaderProps = {
 const Header = ({ categories, blogs }: HeaderProps) => {
   // 現在のパスを取得
   const pathname = usePathname();
+  const prevPathnameRef = useRef(pathname);
 
   // Storeから開閉の状態を取得
   const { isMenuOpen, setMenuOpen, isKensakuOpen, setKensakuOpen } = useStore();
+
+  // pathname変更検知
+  const hasPathnameChanged = prevPathnameRef.current !== pathname;
 
   // URL変更を監視
   useEffect(() => {
     // バーガーメニューを閉じる
     setMenuOpen(false);
     setKensakuOpen(false);
-  }, [pathname, setMenuOpen]);
+    prevPathnameRef.current = pathname;
+  }, [pathname, setMenuOpen, setKensakuOpen]);
 
-  // スクロール固定処理
-  useScrollLock(isMenuOpen || isKensakuOpen);
+  // スクロール固定処理（pathname変更時はリセット）
+  useScrollLock({
+    isLocked: isMenuOpen || isKensakuOpen,
+    resetPositionY: hasPathnameChanged,
+  });
 
   // バーガーメニュー 状態更新ハンドラー
   const handleSetMenuOpen = (isOpen: boolean) => {

@@ -2,7 +2,13 @@
 
 import { useEffect, useRef } from "react";
 
-export const useScrollLock = (isLocked: boolean) => {
+export const useScrollLock = ({
+  isLocked,
+  resetPositionY = false,
+}: {
+  isLocked: boolean;
+  resetPositionY?: boolean;
+}) => {
   const scrollPositionY = useRef(0);
   const wasLocked = useRef(false); //- 前回ロック処理が行われたかの判別 ページリロード時の実行を防止
 
@@ -26,6 +32,8 @@ export const useScrollLock = (isLocked: boolean) => {
       document.body.style.left = "";
       document.body.style.width = "";
 
+      if (resetPositionY) scrollPositionY.current = 0;
+
       window.scrollTo({
         top: scrollPositionY.current,
         left: 0,
@@ -40,5 +48,5 @@ export const useScrollLock = (isLocked: boolean) => {
       document.body.style.width = "";
       document.body.style.overflow = "";
     };
-  }, [isLocked]);
+  }, [isLocked, resetPositionY]);
 };
