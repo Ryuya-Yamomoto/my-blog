@@ -33,6 +33,8 @@ const Header = ({ categories, blogs }: HeaderProps) => {
 
   // URL変更を監視
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     // バーガーメニューを閉じる
     setMenuOpen(false);
     setKensakuOpen(false);
