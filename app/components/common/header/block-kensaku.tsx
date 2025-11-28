@@ -46,6 +46,11 @@ const BlockKensaku = ({ isOpen, blogs }: BlockKensakuProps) => {
     }, 500);
   }, [searchQuery, blogs]);
 
+  // 検索テキスト削除ボタン ハンドラー
+  const handleDeleteSearchQuery = () => {
+    setSearchQuery("");
+  };
+
   // URLが切り替わったら、検索テキストをクリア
   const pathname = usePathname();
   useEffect(() => {
@@ -60,7 +65,7 @@ const BlockKensaku = ({ isOpen, blogs }: BlockKensakuProps) => {
         isOpen ? "pointer-events-auto block" : "pointer-events-none hidden"
       )}
     >
-      <KensakuInput />
+      <KensakuInput handleDeleteSearchQuery={handleDeleteSearchQuery} />
       <KensakuResult filteredBlogs={filteredBlogs} />
     </div>
   );
