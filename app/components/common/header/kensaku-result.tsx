@@ -62,7 +62,10 @@ const KensakuResult = ({ filteredBlogs }: KensakuResultProps) => {
                         {blog.title}
                       </p>
                       <div className="mt-1 flex items-baseline gap-x-2">
-                        <BadgeRounded text={blog.category.name} />
+                        <BadgeRounded
+                          text={blog.category.name}
+                          className="text-white"
+                        />
                         <p
                           className={cn("font-inter mt-1 text-sm font-medium")}
                         >

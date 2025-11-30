@@ -9,11 +9,11 @@ const BadgeRounded = ({ text, className }: Props) => {
   return (
     <span
       className={cn(
-        "inline-grid w-fit items-center rounded-sm border px-4 py-1",
+        "text-foreground inline-grid w-fit items-center rounded-sm border px-4 py-1",
         className
       )}
     >
-      <span className="text-foreground text-xs leading-none">{text}</span>
+      <span className="text-xs leading-none">{text}</span>
     </span>
   );
 };
