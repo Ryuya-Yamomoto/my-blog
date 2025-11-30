@@ -70,19 +70,20 @@
     blockquote {
       @apply text-foreground/70 border-foreground relative mt-4 w-fit overflow-hidden border py-8 pr-8 pl-12 text-sm;
       @apply before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-8 before:w-8 before:bg-[url("/images/common/icon_quote.svg")] before:bg-contain before:bg-no-repeat before:opacity-80 before:content-[''];
+      @apply dark:before:filter-(--filter-in-dark);
     }
 
     .container-table {
       @apply overflow-auto py-1;
       table {
-        @apply mt-4 border-collapse whitespace-nowrap;
+        @apply mx-auto mt-4 border-collapse whitespace-nowrap;
         tbody {
           th,
           td {
             @apply border-foreground border p-4;
           }
           th {
-            @apply bg-foreground/80 font-bold text-white;
+            @apply bg-foreground/80 text-foreground-invert dark:bg-foreground/60 font-bold;
           }
           td {
           }
@@ -111,6 +112,7 @@
       @apply hover:no-underline;
       &[target="_blank"] {
         @apply after:ml-1 after:inline-block after:h-4 after:w-4 after:bg-[url('/images/common/icon_blank.svg')] after:bg-contain after:bg-no-repeat after:content-[''];
+        @apply dark:after:filter-(--filter-in-dark);
       }
     }
 
@@ -133,8 +135,7 @@
   }
 
   [data-theme="dark"] .dark-filter-to-foreground {
-    filter: brightness(0) saturate(100%) invert(100%) sepia(4%) saturate(441%)
-      hue-rotate(342deg) brightness(83%) contrast(91%);
+    @apply filter-(--filter-in-dark);
   }
 
   /* view transition API スタイル */
@@ -171,7 +172,7 @@
   --red-soft: oklch(0.62 0.18 35);
   --green-soft: oklch(0.62 0.18 140);
   --gray-dark: oklch(0.25 0.008 270);
-  --code: #0d1117;
+  --code: oklch(0.08 0.01 264);
 
   --easing: cubic-bezier(0.9, 0.03, 0.49, 1.02);
   --spring-easing: linear(
@@ -198,6 +199,9 @@
     1.001 85.5%,
     1
   );
+
+  --filter-in-dark: brightness(0) saturate(100%) invert(100%) sepia(4%)
+    saturate(441%) hue-rotate(342deg) brightness(83%) contrast(91%);
 }
 
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));

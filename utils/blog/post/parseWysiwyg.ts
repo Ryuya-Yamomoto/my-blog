@@ -38,14 +38,16 @@ const ParseWysiwyg = (body: string): string => {
 
     if (fileName) {
       const fileNameStyle = cn(
-        "bg-code text-background/50 border-b px-4 py-2 tracking-wide font-inter"
+        "bg-code text-white/50 border-b px-4 py-2 tracking-wide font-inter"
       );
 
       $(elem)
         .parent()
         .before(`<div class="${fileNameStyle}"><span>${fileName}</span></div>`);
       const grandParent = $(elem).parent().parent();
-      grandParent.addClass("rounded-t-xl overflow-hidden rounded-b-sm mt-4");
+      grandParent.addClass(
+        "rounded-t-xl overflow-hidden rounded-b-sm mt-4 dark:border"
+      );
     }
   });
 
