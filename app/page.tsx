@@ -53,12 +53,21 @@ export default async function Home() {
             <br />
             趣味は音楽と料理。あとプログラミング。
           </p>
-          <p className="mt-2">
+          <p className="mt-4">
             当サイトは
             <br className="md:hidden" />
             Next.js / microCMS / vercel
             <br className="md:hidden" />
             にて構築しています。
+          </p>
+          <p className="mt-4">
+            平日夜、土日稼働の副業案件を
+            <br className="md:hidden" />
+            募集しております。
+            <br />
+            (Next.js、React、TypeScript...etc.)
+            <br />
+            お気軽にご相談ください。
           </p>
         </div>
       </section>
