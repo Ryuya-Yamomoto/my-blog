@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { format } from "date-fns";
 import StripHtmlTags from "@/utils/common/stripHtmlTags";
+import BadgeRounded from "../badge/badge-rounded";
 
 type KensakuResultProps = {
   filteredBlogs: Blog[] | null;
@@ -60,9 +61,14 @@ const KensakuResult = ({ filteredBlogs }: KensakuResultProps) => {
                       >
                         {blog.title}
                       </p>
-                      <p className={cn("font-inter mt-1 text-sm font-medium")}>
-                        {format(new Date(blog.publishedAt), "yyyy.MM.dd")}
-                      </p>
+                      <div className="mt-1 flex items-baseline gap-x-2">
+                        <BadgeRounded text={blog.category.name} />
+                        <p
+                          className={cn("font-inter mt-1 text-sm font-medium")}
+                        >
+                          {format(new Date(blog.publishedAt), "yyyy.MM.dd")}
+                        </p>
+                      </div>
                       <p
                         className={cn(
                           "mt-2 line-clamp-2 text-sm font-medium",

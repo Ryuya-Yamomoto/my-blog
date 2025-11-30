@@ -64,7 +64,7 @@
     }
 
     p > code {
-      @apply bg-code text-background rounded-sm p-2;
+      @apply bg-code rounded-sm p-2 text-white;
     }
 
     blockquote {
