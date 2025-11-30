@@ -21,7 +21,8 @@ const CardBlog = ({ blog, className }: cardBlogProps) => {
     <Link
       href={`/blog/post/${blog.id}`}
       className={cn(
-        "group relative row-span-4 grid w-full grid-rows-subgrid p-4",
+        "group relative row-span-4 grid w-full grid-rows-subgrid px-1 py-4",
+        "md:px-4",
         "hover:[anchor-name:--cover]",
         "focus:[anchor-name:--cover]",
         className
