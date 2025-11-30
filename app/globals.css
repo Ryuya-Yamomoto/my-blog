@@ -157,10 +157,10 @@
   }
 
   ::view-transition-old(heading-pageTtl) {
-    animation: slide-out 1s ease forwards;
+    animation: slide-out 0.3s ease forwards;
   }
   ::view-transition-new(heading-pageTtl) {
-    animation: slide-in 1s ease forwards;
+    animation: slide-in 0.3s ease forwards;
   }
 }
 
