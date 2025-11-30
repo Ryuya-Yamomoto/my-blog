@@ -36,7 +36,7 @@
   }
 
   .wysiwyg {
-    @apply font-medium;
+    @apply grid font-medium;
 
     > *:first-child {
       @apply !mt-0;
@@ -119,6 +119,10 @@
       figcaption {
         @apply text-foreground/70 mx-auto mt-1 w-fit text-sm;
       }
+    }
+
+    div:has(> iframe) {
+      @apply mt-8;
     }
   }
 
