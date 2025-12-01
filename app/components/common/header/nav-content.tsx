@@ -13,6 +13,7 @@ type NavContentProps = {
 
 const NavContent = (props: NavContentProps) => {
   const { categories, currentPathname, isOpen, handleOpen } = props;
+
   return (
     <>
       <div
@@ -36,15 +37,30 @@ const NavContent = (props: NavContentProps) => {
         <div className="h-full w-full overflow-y-auto" data-lenis-prevent>
           <ul className="grid gap-y-4">
             <li>
-              <MenuLink pathname={currentPathname} slug="all" />
+              <MenuLink
+                currentPathname={currentPathname}
+                matchPath="/blog"
+                slug="all"
+              />
             </li>
             {categories.map((category) => {
               return (
                 <li key={category.id}>
-                  <MenuLink pathname={currentPathname} slug={category.slug} />
+                  <MenuLink
+                    currentPathname={currentPathname}
+                    matchPath={`/blog/category/${category.slug}`}
+                    slug={category.slug}
+                  />
                 </li>
               );
             })}
+            <li>
+              <MenuLink
+                currentPathname={currentPathname}
+                matchPath="/contact"
+                slug="contact"
+              />
+            </li>
           </ul>
           <div className="mt-16 w-full border-t px-2 pt-8">
             <ul className="flex flex-wrap items-baseline gap-x-4">
@@ -76,24 +92,28 @@ const NavContent = (props: NavContentProps) => {
   );
 };
 
-const MenuLink = ({ pathname, slug }: { pathname: string; slug: string }) => {
+const MenuLink = ({
+  currentPathname,
+  matchPath,
+  slug,
+}: {
+  currentPathname: string;
+  matchPath: string;
+  slug: string;
+}) => {
   const linkStyle = cn(
     "text-foreground relative block w-fit text-xl leading-normal font-bold uppercase",
     'after:bg-foreground after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-right after:scale-x-0 after:transition-transform after:duration-300 after:content-[""]'
   );
 
-  if (slug === "all" && pathname === "/blog") {
-    return (
-      <span className={cn(linkStyle, "before:content-['・']")}>{slug}</span>
-    );
-  } else if (pathname === `/blog/category/${slug}`) {
+  if (currentPathname === matchPath) {
     return (
       <span className={cn(linkStyle, "before:content-['・']")}>{slug}</span>
     );
   } else {
     return (
       <Link
-        href={`/blog${slug === "all" ? "" : `/category/${slug}`}`}
+        href={matchPath}
         className={cn(
           linkStyle,
           "hover:after:origin-left hover:after:scale-x-100"
