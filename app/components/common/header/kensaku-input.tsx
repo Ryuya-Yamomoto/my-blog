@@ -21,7 +21,7 @@ const KensakuInput = ({ handleDeleteSearchQuery }: KensakuInputProps) => {
   return (
     <div
       className={cn(
-        "relative grid grid-cols-[2rem_1fr] overflow-hidden rounded-sm",
+        "relative grid grid-cols-[2rem_1fr] overflow-hidden rounded-sm border border-white/30",
         "md:grid-cols-[3rem_1fr]"
       )}
     >
