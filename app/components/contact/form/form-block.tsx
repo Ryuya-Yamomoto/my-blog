@@ -1,6 +1,5 @@
 "use client";
 
-import { useActionState } from "react";
 import { cn } from "@/lib/utils";
 
 import FormRow from "./form-row";
@@ -8,21 +7,36 @@ import FormInput from "./form-input";
 import FormLabel from "./form-label";
 import ButtonRect from "../../common/button/button-rect";
 
+import { useActionState } from "react";
+import { actionContactForm } from "@/app/server/action";
+
 const FormBlock = () => {
+  const [state, contactAction, isPending] = useActionState(actionContactForm, {
+    name: "",
+    department: "",
+    email: "",
+    inquiry: "",
+    zodErrors: null,
+    contactFormErrors: null,
+    message: null,
+  });
+
   return (
-    <form action="" className={cn("border-t px-8 pt-16")}>
+    <form action={contactAction} className={cn("border-t px-8 pt-16")}>
       <div className={cn("grid grid-cols-[max-content_1fr] gap-y-8")}>
         <FormRow>
           <FormLabel htmlFor="name">お名前</FormLabel>
-          <div className={cn("w-full")}>
-            <FormInput
-              type="text"
-              id="name"
-              name="name"
-              placeholder="山本 竜也"
-              required
-            />
-          </div>
+          <FormInput
+            type="text"
+            id="name"
+            name="name"
+            placeholder="山本 竜也"
+            errorMsg={
+              state.zodErrors && state.zodErrors.name
+                ? state.zodErrors.name[0]
+                : ""
+            }
+          />
         </FormRow>
         <FormRow>
           <FormLabel htmlFor="department">所属</FormLabel>
@@ -31,7 +45,11 @@ const FormBlock = () => {
             id="department"
             name="department"
             placeholder="会社名 or 個人 ...etc"
-            required
+            errorMsg={
+              state.zodErrors && state.zodErrors.department
+                ? state.zodErrors.department[0]
+                : ""
+            }
           />
         </FormRow>
         <FormRow>
@@ -41,7 +59,11 @@ const FormBlock = () => {
             id="email"
             name="email"
             placeholder="example@example.com"
-            required
+            errorMsg={
+              state.zodErrors && state.zodErrors.email
+                ? state.zodErrors.email[0]
+                : ""
+            }
           />
         </FormRow>
         <FormRow className="items-baseline">
@@ -51,17 +73,17 @@ const FormBlock = () => {
             id="inquiry"
             placeholder="お問い合わせ内容を入力してください"
             className={cn(
-              "min-h-40 w-full rounded-sm border px-4 py-4 leading-[2] outline-none"
+              "onFocus min-h-40 w-full rounded-sm border px-4 py-4 leading-[2]"
             )}
-            required
           />
         </FormRow>
       </div>
 
       <div className="mx-auto mt-8 flex w-fit items-center">
         <ButtonRect
-          label="確認する"
-          handleClick={() => console.log("確認するよ")}
+          label={isPending ? "送信中..." : "送信する"}
+          type="submit"
+          disabled={isPending}
         />
       </div>
     </form>

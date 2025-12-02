@@ -74,7 +74,7 @@ const Header = ({ categories, blogs }: HeaderProps) => {
         <div className={cn("relative z-10 flex items-center gap-x-4")}>
           <ButtonTheme />
           <button
-            className="cursor-pointer"
+            className="onFocus cursor-pointer"
             onClick={() => handleSetKensakuOpen(!isKensakuOpen)}
           >
             <span>
@@ -89,7 +89,7 @@ const Header = ({ categories, blogs }: HeaderProps) => {
           </button>
           <button
             className={cn(
-              "relative block h-3 w-10 cursor-pointer",
+              "onFocus relative block h-3 w-10 cursor-pointer",
               "hamMenuTransition",
               isMenuOpen ? "open" : ""
             )}

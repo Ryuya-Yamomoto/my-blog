@@ -20,7 +20,7 @@ const ButtonTheme = () => {
     <div className="relative">
       <button
         className={cn(
-          "grid h-7 w-7 cursor-pointer place-items-center rounded-full p-1",
+          "onFocus grid h-7 w-7 cursor-pointer place-items-center rounded-full p-1",
           resolvedTheme === "dark" ? "bg-green-soft" : "bg-red-soft"
         )}
         onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}

@@ -6,7 +6,7 @@ import Image from "next/image";
 const Logo = () => {
   return (
     <h1 className={cn("relative z-1 w-36", "md:w-56")}>
-      <Link href="/" className="block w-full">
+      <Link href="/" className="onFocus block w-full">
         <picture>
           <source media="(min-width: 768px)" srcSet="/images/common/logo.svg" />
           <Image

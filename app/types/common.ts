@@ -47,5 +47,5 @@ export type LinkButtonProps = BaseButtonProps & {
 
 export type ButtonProps = BaseButtonProps & {
   link?: never;
-  handleClick: () => void;
+  handleClick?: () => void;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;

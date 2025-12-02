@@ -7,9 +7,10 @@ type ButtonRectProps = LinkButtonProps | ButtonProps;
 
 const ButtonRect = ({ label, className, ...props }: ButtonRectProps) => {
   const style = cn(
-    "cursor-pointer grid place-items-center font-medium px-12 py-2 bg-foreground text-background rounded-sm w-fit border-2 border-foreground transition-[color,background] duration-400",
+    "cursor-pointer grid outline-none place-items-center font-medium px-12 py-2 bg-foreground text-background rounded-sm w-fit border-2 border-foreground transition-[color,background] duration-400",
     "hover:bg-white hover:text-foreground",
-    "dark:hover:bg-background",
+    "focus:bg-white focus:text-foreground",
+    "dark:hover:bg-background dark:focus:bg-background",
     className
   );
 

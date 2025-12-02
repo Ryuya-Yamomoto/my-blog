@@ -138,6 +138,10 @@
     @apply filter-(--filter-in-dark);
   }
 
+  .onFocus {
+    @apply outline-none focus:shadow-lg;
+  }
+
   /* view transition API スタイル */
   @keyframes slide-in {
     from {

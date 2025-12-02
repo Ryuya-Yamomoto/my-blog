@@ -1,18 +1,20 @@
 import { cn } from "@/lib/utils";
 
-type FormInputProps = React.InputHTMLAttributes<HTMLInputElement>;
+import FormErrorText from "./form-errorText";
 
-const FormInput = (props: FormInputProps) => {
-  const { className, ...rest } = props;
+type FormInputProps = {
+  errorMsg?: string;
+} & React.InputHTMLAttributes<HTMLInputElement>;
 
+const FormInput = ({ errorMsg = "", className, ...rest }: FormInputProps) => {
   return (
-    <input
-      {...rest}
-      className={cn(
-        "w-full rounded-sm border px-4 py-4 outline-none",
-        className
-      )}
-    />
+    <div className="w-full">
+      <input
+        {...rest}
+        className={cn("onFocus w-full rounded-sm border px-4 py-4", className)}
+      />
+      {errorMsg !== "" && <FormErrorText message={errorMsg} />}
+    </div>
   );
 };
 

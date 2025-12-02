@@ -70,9 +70,10 @@ const NavContent = (props: NavContentProps) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={cn(
-                    "relative",
+                    "relative outline-none",
                     "before:background before:absolute before:-inset-1 before:rounded-sm before:bg-transparent before:duration-300 before:content-['']",
-                    "hover:before:bg-foreground/10"
+                    "hover:before:bg-foreground/10",
+                    "focus:before:bg-foreground/10"
                   )}
                 >
                   <Image
@@ -102,7 +103,7 @@ const MenuLink = ({
   slug: string;
 }) => {
   const linkStyle = cn(
-    "text-foreground relative block w-fit text-xl leading-normal font-bold uppercase",
+    "text-foreground relative block w-fit text-xl leading-normal font-bold uppercase outline-none",
     'after:bg-foreground after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-right after:scale-x-0 after:transition-transform after:duration-300 after:content-[""]'
   );
 
@@ -116,7 +117,8 @@ const MenuLink = ({
         href={matchPath}
         className={cn(
           linkStyle,
-          "hover:after:origin-left hover:after:scale-x-100"
+          "hover:after:origin-left hover:after:scale-x-100",
+          "focus:after:origin-left focus:after:scale-x-100"
         )}
       >
         {slug}
