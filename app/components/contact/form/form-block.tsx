@@ -23,7 +23,7 @@ const FormBlock = () => {
   });
 
   return (
-    <form action={contactAction} className={cn("border-t pt-16", "md:px-8")}>
+    <form action={contactAction} className={cn("pt-16", "md:px-8")}>
       <div className={cn("grid gap-y-8", "md:grid-cols-[max-content_1fr]")}>
         <FormRow>
           <FormLabel htmlFor="name">お名前</FormLabel>

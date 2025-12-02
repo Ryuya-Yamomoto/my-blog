@@ -61,7 +61,7 @@ export default async function Home() {
             にて構築しています。
           </p>
           <p className="mt-4">
-            平日夜、土日稼働の副業案件を
+            平日夜、土日祝日稼働の副業案件を
             <br className="md:hidden" />
             募集しております。
             <br />
