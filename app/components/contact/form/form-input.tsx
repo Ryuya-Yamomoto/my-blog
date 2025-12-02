@@ -11,7 +11,16 @@ const FormInput = ({ errorMsg = "", className, ...rest }: FormInputProps) => {
     <div className="w-full">
       <input
         {...rest}
-        className={cn("onFocus w-full rounded-sm border px-4 py-4", className)}
+        className={cn(
+          "onFocus w-full rounded-sm border px-4 py-4",
+          errorMsg && "border-red-500/70",
+          className
+        )}
+        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+          }
+        }}
       />
       {errorMsg !== "" && <FormErrorText message={errorMsg} />}
     </div>

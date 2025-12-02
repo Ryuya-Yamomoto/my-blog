@@ -7,7 +7,7 @@ type FormErrorTextProps = {
 
 const FormErrorText = ({ message, className }: FormErrorTextProps) => {
   return (
-    <p className={cn("mt-1 text-sm text-red-600", className)}>{message}</p>
+    <p className={cn("text-sm text-red-600 md:mt-1", className)}>{message}</p>
   );
 };
 

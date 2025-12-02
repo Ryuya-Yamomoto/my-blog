@@ -27,15 +27,18 @@ type ContactActionStateProps = ContactFormData & {
 const contactScheme = z.object({
   name: z
     .string()
+    .trim()
     .min(1, "お名前は必須項目です")
     .max(20, "お名前は20文字以内で入力してください"),
-  department: z.string().min(1, "所属は必須項目です"),
+  department: z.string().trim().min(1, "所属は必須項目です"),
   email: z
     .string()
+    .trim()
     .min(1, "メールアドレスは必須項目です")
     .email("有効なメールアドレスを入力してください。"),
   inquiry: z
     .string()
+    .trim()
     .min(1, "お問い合わせは必須項目です")
     .max(400, "お問い合わせは400文字以内で入力してください"),
 });
@@ -73,9 +76,13 @@ export const actionContactForm = async (
   }
 
   // ここでresendでメール処理
+
   // 一旦受け取った値を返す
   return {
-    ...payload,
+    name: "",
+    department: "",
+    email: "",
+    inquiry: "",
     zodErrors: null,
     contactFormErrors: null,
     message: "お問い合わせを送信しました。ありがとうございました。",

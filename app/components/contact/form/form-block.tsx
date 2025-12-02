@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 
 import FormRow from "./form-row";
 import FormInput from "./form-input";
+import FormTextarea from "./form-textarea";
 import FormLabel from "./form-label";
 import ButtonRect from "../../common/button/button-rect";
 
@@ -22,8 +23,8 @@ const FormBlock = () => {
   });
 
   return (
-    <form action={contactAction} className={cn("border-t px-8 pt-16")}>
-      <div className={cn("grid grid-cols-[max-content_1fr] gap-y-8")}>
+    <form action={contactAction} className={cn("border-t pt-16", "md:px-8")}>
+      <div className={cn("grid gap-y-8", "md:grid-cols-[max-content_1fr]")}>
         <FormRow>
           <FormLabel htmlFor="name">お名前</FormLabel>
           <FormInput
@@ -31,6 +32,7 @@ const FormBlock = () => {
             id="name"
             name="name"
             placeholder="山本 竜也"
+            defaultValue={state.name}
             errorMsg={
               state.zodErrors && state.zodErrors.name
                 ? state.zodErrors.name[0]
@@ -45,6 +47,7 @@ const FormBlock = () => {
             id="department"
             name="department"
             placeholder="会社名 or 個人 ...etc"
+            defaultValue={state.department}
             errorMsg={
               state.zodErrors && state.zodErrors.department
                 ? state.zodErrors.department[0]
@@ -59,6 +62,7 @@ const FormBlock = () => {
             id="email"
             name="email"
             placeholder="example@example.com"
+            defaultValue={state.email}
             errorMsg={
               state.zodErrors && state.zodErrors.email
                 ? state.zodErrors.email[0]
@@ -66,15 +70,23 @@ const FormBlock = () => {
             }
           />
         </FormRow>
-        <FormRow className="items-baseline">
-          <FormLabel htmlFor="inquiry">お問い合わせ内容</FormLabel>
-          <textarea
+        <FormRow className="md:items-start">
+          <FormLabel className="mt-5" htmlFor="inquiry">
+            お問い合わせ内容
+          </FormLabel>
+          <FormTextarea
             name="inquiry"
             id="inquiry"
             placeholder="お問い合わせ内容を入力してください"
+            defaultValue={state.inquiry}
             className={cn(
               "onFocus min-h-40 w-full rounded-sm border px-4 py-4 leading-[2]"
             )}
+            errorMsg={
+              state.zodErrors && state.zodErrors.inquiry
+                ? state.zodErrors.inquiry[0]
+                : ""
+            }
           />
         </FormRow>
       </div>

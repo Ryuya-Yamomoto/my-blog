@@ -9,7 +9,8 @@ const FormRow = ({ children, className }: FormRowProps) => {
   return (
     <div
       className={cn(
-        "col-span-full grid grid-cols-subgrid items-baseline justify-items-start gap-x-8",
+        "grid justify-items-start gap-y-2",
+        "md:col-span-full md:grid-cols-subgrid md:items-baseline md:gap-x-8 md:gap-y-0",
         className
       )}
     >
