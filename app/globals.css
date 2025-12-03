@@ -139,7 +139,7 @@
   }
 
   .onFocus {
-    @apply outline-none focus:shadow-lg;
+    @apply outline-none focus-visible:shadow-lg;
   }
 
   /* view transition API スタイル */

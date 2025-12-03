@@ -80,7 +80,10 @@ const SplideCarousel = ({ blogs, category }: SplideCarouselProps) => {
             key={blog.id}
             className="row-span-4 grid grid-rows-subgrid"
           >
-            <CardBlog blog={blog} className={cn("w-60 p-0", "md:w-80")} />
+            <CardBlog
+              blog={blog}
+              className={cn("onFocus w-60 p-0", "md:w-80")}
+            />
           </SplideSlide>
         ))}
       </SplideTrack>

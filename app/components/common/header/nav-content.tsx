@@ -41,6 +41,7 @@ const NavContent = (props: NavContentProps) => {
                 currentPathname={currentPathname}
                 matchPath="/blog"
                 slug="all"
+                isOpen={isOpen}
               />
             </li>
             {categories.map((category) => {
@@ -50,6 +51,7 @@ const NavContent = (props: NavContentProps) => {
                     currentPathname={currentPathname}
                     matchPath={`/blog/category/${category.slug}`}
                     slug={category.slug}
+                    isOpen={isOpen}
                   />
                 </li>
               );
@@ -59,6 +61,7 @@ const NavContent = (props: NavContentProps) => {
                 currentPathname={currentPathname}
                 matchPath="/contact"
                 slug="contact"
+                isOpen={isOpen}
               />
             </li>
           </ul>
@@ -75,6 +78,8 @@ const NavContent = (props: NavContentProps) => {
                     "hover:before:bg-foreground/10",
                     "focus:before:bg-foreground/10"
                   )}
+                  tabIndex={isOpen ? 0 : -1}
+                  aria-disabled={!isOpen}
                 >
                   <Image
                     src="/images/common/logo_x.svg"
@@ -97,10 +102,12 @@ const MenuLink = ({
   currentPathname,
   matchPath,
   slug,
+  isOpen,
 }: {
   currentPathname: string;
   matchPath: string;
   slug: string;
+  isOpen: boolean;
 }) => {
   const linkStyle = cn(
     "text-foreground relative block w-fit text-xl leading-normal font-bold uppercase outline-none",
@@ -120,6 +127,8 @@ const MenuLink = ({
           "hover:after:origin-left hover:after:scale-x-100",
           "focus:after:origin-left focus:after:scale-x-100"
         )}
+        tabIndex={isOpen ? 0 : -1}
+        aria-disabled={!isOpen}
       >
         {slug}
       </Link>

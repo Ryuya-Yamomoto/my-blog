@@ -25,6 +25,9 @@ const Header = ({ categories, blogs }: HeaderProps) => {
   const pathname = usePathname();
   const prevPathnameRef = useRef(pathname);
 
+  // main 要素を取得
+  const mainRef = useRef<HTMLElement | null>(null);
+
   // Storeから開閉の状態を取得
   const { isMenuOpen, setMenuOpen, isKensakuOpen, setKensakuOpen } = useStore();
 
@@ -40,6 +43,22 @@ const Header = ({ categories, blogs }: HeaderProps) => {
     setKensakuOpen(false);
     prevPathnameRef.current = pathname;
   }, [pathname, setMenuOpen, setKensakuOpen]);
+
+  // マウント時を監視
+  useEffect(() => {
+    mainRef.current = window.document.querySelector("main");
+  }, []);
+
+  // メニューやケンサク開閉時のinert属性制御
+  useEffect(() => {
+    if (mainRef.current) {
+      if (isMenuOpen || isKensakuOpen) {
+        mainRef.current.setAttribute("inert", "true");
+      } else {
+        mainRef.current.removeAttribute("inert");
+      }
+    }
+  }, [isMenuOpen, isKensakuOpen]);
 
   // スクロール固定処理（pathname変更時はリセット）
   useScrollLock({

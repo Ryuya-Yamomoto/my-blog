@@ -53,7 +53,8 @@ const WysiwygMokujiBlock = ({ arrayMokuji }: WysiwygMokujiBlockProps) => {
       <button
         onClick={() => setIsMokujiOpen(!isMokujiOpen)}
         className={cn(
-          "flex h-6 w-full cursor-pointer flex-col items-center justify-center gap-0.5 rounded-t-lg hover:bg-white/10 md:h-auto md:w-6 md:rounded-l-lg md:rounded-tr-none",
+          "flex h-6 w-full cursor-pointer flex-col items-center justify-center gap-0.5 rounded-t-lg outline-none md:h-auto md:w-6 md:rounded-l-lg md:rounded-tr-none",
+          "hover:bg-white/10 focus-visible:bg-white/10",
           "md:flex-row"
         )}
         aria-label={isMokujiOpen ? "目次を閉じる" : "目次を開く"}
