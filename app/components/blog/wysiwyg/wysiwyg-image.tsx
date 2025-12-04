@@ -64,9 +64,7 @@ const WysiwygImage = ({ image, figCaption }: WysiwygImageProps) => {
               style={{ aspectRatio: `${width}/${height}` }}
               className={cn(
                 "mx-auto cursor-pointer rounded-sm",
-                "box-shadow-primary origin-bottom-right -translate-2 transition-[box-shadow,translate] duration-600 ease-[var(--spring-easing)] outline-none",
-                "hover:-translate-0 hover:[box-shadow:1px_1px_2px_0px_rgba(0,0,0,0)]",
-                "focus:-translate-0 focus:[box-shadow:1px_1px_2px_0px_rgba(0,0,0,0)]",
+                "outline-none",
                 isPortrait
                   ? "max-h-130 w-auto max-w-full md:h-130"
                   : "h-auto w-130 max-w-full"
@@ -91,7 +89,7 @@ const WysiwygImage = ({ image, figCaption }: WysiwygImageProps) => {
               height={height}
               style={{ aspectRatio: `${width}/${height}` }}
               className={cn(
-                "box-shadow-primary absolute top-1/2 left-1/2 z-10 block h-auto max-h-[80%] w-auto max-w-[80%] -translate-x-1/2 -translate-y-1/2"
+                "absolute z-10 block h-auto max-h-[80%] w-auto max-w-[80%]"
               )}
               onClick={(e) => e.stopPropagation()}
             />
