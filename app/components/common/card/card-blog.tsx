@@ -81,7 +81,7 @@ const CardBlog = ({ blog, isViewTransition = true }: CardBlogProps) => {
           <div className="mt-2 flex items-baseline gap-x-2">
             <BadgeRounded
               text={blog.category.name}
-              className={cn("text-foreground")}
+              className={cn("text-foreground", "lg:text-white")}
             />
             <p className="font-inter mt-1 text-xs">
               {format(new Date(blog.publishedAt), "yyyy.MM.dd")}
