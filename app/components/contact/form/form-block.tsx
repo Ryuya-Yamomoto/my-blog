@@ -93,7 +93,7 @@ const FormBlock = () => {
 
       <div className="mx-auto mt-8 flex w-fit items-center">
         <ButtonRect
-          label={isPending ? "送信中..." : "送信する"}
+          label={isPending ? "SENDING..." : "SEND"}
           type="submit"
           disabled={isPending}
         />
