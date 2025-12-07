@@ -66,18 +66,11 @@ const KensakuResult = ({ filteredBlogs }: KensakuResultProps) => {
                           text={blog.category.name}
                           className="text-white"
                         />
-                        <p
-                          className={cn("font-inter mt-1 text-sm font-medium")}
-                        >
+                        <p className={cn("font-inter mt-1 text-xs")}>
                           {format(new Date(blog.publishedAt), "yyyy.MM.dd")}
                         </p>
                       </div>
-                      <p
-                        className={cn(
-                          "mt-2 line-clamp-2 text-sm font-medium",
-                          "md:text-base"
-                        )}
-                      >
+                      <p className={cn("mt-2 line-clamp-2 text-sm")}>
                         {StripHtmlTags(blog.body)}
                       </p>
                     </div>

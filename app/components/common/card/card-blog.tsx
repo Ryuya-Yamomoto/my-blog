@@ -3,6 +3,7 @@ import type { Blog } from "@/app/types/common";
 import Link from "next/link";
 import Image from "next/image";
 import { unstable_ViewTransition as ViewTransition } from "react";
+import BadgeRounded from "../badge/badge-rounded";
 
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
@@ -57,25 +58,6 @@ const CardBlog = ({ blog, isViewTransition = true }: CardBlogProps) => {
             width={42}
           />
         )}
-
-        {/* <ViewTransition name={`thumb-${blog.id}`}>
-          {blog.thumbnail ? (
-            <Image
-              src={blog.thumbnail.url}
-              alt={blog.title}
-              height={blog.thumbnail.height}
-              width={blog.thumbnail.width}
-              className="h-full w-full object-cover transition-[scale] duration-300 group-hover:scale-[1.05]"
-            />
-          ) : (
-            <Image
-              src="/images/common/icon_no-image.svg"
-              alt="No Image"
-              height={42}
-              width={42}
-            />
-          )}
-        </ViewTransition> */}
       </figure>
       <div
         className={cn(
@@ -96,12 +78,13 @@ const CardBlog = ({ blog, isViewTransition = true }: CardBlogProps) => {
           >
             {blog.title}
           </p>
-          <p className="font-inter mt-1 text-sm font-medium">
-            {format(new Date(blog.publishedAt), "yyyy.MM.dd")}
-          </p>
-          <p className="mt-2 line-clamp-2 font-medium">
-            {StripHtmlTags(blog.body)}
-          </p>
+          <div className="mt-2 flex items-baseline gap-x-2">
+            <BadgeRounded text={blog.category.name} className="text-white" />
+            <p className="font-inter mt-1 text-xs">
+              {format(new Date(blog.publishedAt), "yyyy.MM.dd")}
+            </p>
+          </div>
+          <p className="mt-4 line-clamp-2">{StripHtmlTags(blog.body)}</p>
         </div>
       </div>
     </Link>

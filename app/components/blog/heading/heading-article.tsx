@@ -23,7 +23,7 @@ const HeadingArticle = ({
       </h2>
       <div className="mt-1 flex flex-wrap items-center justify-between">
         <BadgeRounded text={category} />
-        <p className="font-inter text-sm font-medium">
+        <p className="font-inter text-xs">
           {format(new Date(date), "yyyy.MM.dd")}
         </p>
       </div>

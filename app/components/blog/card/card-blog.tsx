@@ -65,7 +65,7 @@ const CardBlog = ({ blog, className }: cardBlogProps) => {
       >
         <div className="flex flex-wrap items-center justify-between">
           <BadgeRounded text={blog.category.name} />
-          <p className="font-inter text-sm font-medium">
+          <p className="font-inter text-xs">
             {format(new Date(blog.publishedAt), "yyyy.MM.dd")}
           </p>
         </div>
@@ -78,9 +78,7 @@ const CardBlog = ({ blog, className }: cardBlogProps) => {
         >
           {blog.title}
         </p>
-        <p className={cn("line-clamp-2 text-sm font-medium", "md:text-base")}>
-          {StripHtmlTags(blog.body)}
-        </p>
+        <p className={"line-clamp-2 text-sm"}>{StripHtmlTags(blog.body)}</p>
       </div>
     </Link>
   );

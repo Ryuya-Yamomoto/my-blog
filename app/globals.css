@@ -36,7 +36,7 @@
   }
 
   .wysiwyg {
-    @apply grid font-medium;
+    @apply grid;
 
     > *:first-child {
       @apply !mt-0;
