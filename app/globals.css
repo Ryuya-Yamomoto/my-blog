@@ -173,8 +173,6 @@
   --foreground: oklch(0.19 0.008 270);
   --foreground-invert: oklch(0.84 0.006 106.1);
 
-  --red-soft: oklch(0.62 0.18 35);
-  --green-soft: oklch(0.62 0.18 140);
   --gray-dark: oklch(0.25 0.008 270);
   --code: oklch(0.08 0.01 264);
 

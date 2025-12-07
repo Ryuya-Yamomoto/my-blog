@@ -34,10 +34,10 @@ export default async function Home() {
   });
 
   return (
-    <WrapperContent>
+    <WrapperContent className="max-w-none">
       <section>
         <HeadingSection en="ABOUT" ja="私" />
-        <div className="mt-4 text-base leading-[1.6] font-medium">
+        <div className="mt-16 text-sm leading-[1.6]">
           <p>
             1997年3月25日生まれ。栃木県出身。
             <br />
@@ -72,19 +72,19 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="mt-32">
+      <section className="mt-56">
         <div
           className={cn(
-            "flex flex-col flex-wrap items-start gap-2",
-            "md:flex-row md:items-end md:justify-between"
+            "flex flex-col flex-wrap items-start gap-3",
+            "md:flex-row md:items-end md:justify-between md:gap-0"
           )}
         >
           <HeadingSection en="RECENTLY" ja="最近の記事" notShowJa={true} />
           {dataRecently.contents.length > 2 && (
             <ButtonText
-              label="一覧を見る"
               link={{ href: "/blog" }}
-              className="mt-4"
+              className="font-inter"
+              label="MORE"
             />
           )}
         </div>
@@ -96,12 +96,12 @@ export default async function Home() {
               );
             })
           ) : (
-            <p className="text-lg font-medium">記事がありません。</p>
+            <p className="text-lg">記事がありません。</p>
           )}
         </div>
       </section>
 
-      <section className="mt-32">
+      <section className="mt-56">
         <div
           className={cn(
             "flex flex-col flex-wrap items-start gap-2",
@@ -111,9 +111,9 @@ export default async function Home() {
           <HeadingSection en="TECH" ja="技術" />
           {dataTech.contents.length > 2 && (
             <ButtonText
-              label="一覧を見る"
               link={{ href: "/blog/category/tech" }}
-              className="mt-4"
+              className="font-inter"
+              label="MORE"
             />
           )}
         </div>
@@ -123,12 +123,12 @@ export default async function Home() {
               return <CardBlog key={item.id} blog={item} />;
             })
           ) : (
-            <p className="text-lg font-medium">記事がありません。</p>
+            <p className="text-lg">記事がありません。</p>
           )}
         </div>
       </section>
 
-      <section className="mt-32">
+      <section className="mt-56">
         <div
           className={cn(
             "flex flex-col flex-wrap items-start gap-2",
@@ -138,9 +138,9 @@ export default async function Home() {
           <HeadingSection en="MUSIC" ja="音楽" />
           {dataMusic.contents.length > 2 && (
             <ButtonText
-              label="一覧を見る"
               link={{ href: "/blog/category/music" }}
-              className="mt-4"
+              className="font-inter"
+              label="MORE"
             />
           )}
         </div>
@@ -150,12 +150,12 @@ export default async function Home() {
               return <CardBlog key={item.id} blog={item} />;
             })
           ) : (
-            <p className="text-lg font-medium">記事がありません。</p>
+            <p className="text-lg">記事がありません。</p>
           )}
         </div>
       </section>
 
-      <section className="mt-32">
+      <section className="mt-56">
         <div
           className={cn(
             "flex flex-col flex-wrap items-start gap-2",
@@ -165,9 +165,9 @@ export default async function Home() {
           <HeadingSection en="LIFE" ja="生活" />
           {dataLife.contents.length > 2 && (
             <ButtonText
-              label="一覧を見る"
               link={{ href: "/blog/category/life" }}
-              className="mt-4"
+              className="font-inter"
+              label="MORE"
             />
           )}
         </div>
@@ -177,7 +177,7 @@ export default async function Home() {
               return <CardBlog key={item.id} blog={item} />;
             })
           ) : (
-            <p className="text-lg font-medium">記事がありません。</p>
+            <p className="text-lg">記事がありません。</p>
           )}
         </div>
       </section>

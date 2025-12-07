@@ -14,14 +14,13 @@ const HeadingSection = ({ en, ja, notShowJa = false }: Props) => {
         "md:gap-x-8"
       )}
     >
-      <h2 className="font-inter text-6xl font-bold uppercase">{en}</h2>
+      <h2
+        className={cn("font-inter text-6xl font-bold uppercase", "md:text-8xl")}
+      >
+        {en}
+      </h2>
       {ja && (
-        <span
-          className={cn(
-            "inline text-xl font-medium md:text-3xl",
-            notShowJa && "hidden md:inline"
-          )}
-        >
+        <span className={cn("inline text-lg", notShowJa && "hidden md:inline")}>
           {ja}
         </span>
       )}

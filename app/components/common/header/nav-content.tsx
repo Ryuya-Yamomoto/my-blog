@@ -2,6 +2,8 @@ import type { Category } from "@/app/types/common";
 
 import Image from "next/image";
 import Link from "next/link";
+import ButtonTheme from "./button-theme";
+
 import { cn } from "@/lib/utils";
 
 type NavContentProps = {
@@ -27,7 +29,7 @@ const NavContent = (props: NavContentProps) => {
       ></div>
       <div
         className={cn(
-          "bg-background fixed top-0 right-0 h-screen w-[80%] max-w-80 px-4 pt-28 pb-4 md:shadow-lg",
+          "bg-background fixed top-0 right-0 h-svh w-[80%] max-w-80 px-4 pt-28 pb-10 md:shadow-lg",
           isOpen
             ? "[clip-path:inset(0_0_0_-10%)]"
             : "[clip-path:inset(0_0_0_100%)]",
@@ -93,6 +95,7 @@ const NavContent = (props: NavContentProps) => {
             </ul>
           </div>
         </div>
+        <ButtonTheme />
       </div>
     </>
   );
@@ -110,8 +113,8 @@ const MenuLink = ({
   isOpen: boolean;
 }) => {
   const linkStyle = cn(
-    "text-foreground relative block w-fit text-xl leading-normal font-bold uppercase outline-none",
-    'after:bg-foreground after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-right after:scale-x-0 after:transition-transform after:duration-300 after:content-[""]'
+    "text-foreground relative block w-fit text-lg leading-normal  uppercase outline-none",
+    'after:bg-foreground after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-right after:scale-x-0 after:transition-transform after:duration-300 after:content-[""]'
   );
 
   if (currentPathname === matchPath) {

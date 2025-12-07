@@ -5,7 +5,7 @@ import Link from "next/link";
 
 type ButtonBaseProps = LinkButtonProps | ButtonProps;
 
-const ButtonBase = ({ label, className, ...props }: ButtonBaseProps) => {
+const ButtonBase = ({ children, className, ...props }: ButtonBaseProps) => {
   if ("link" in props && props.link) {
     const { link, ...rest } = props;
     return (
@@ -15,7 +15,7 @@ const ButtonBase = ({ label, className, ...props }: ButtonBaseProps) => {
         className={className}
         {...rest}
       >
-        {label}
+        {children}
       </Link>
     );
   }
@@ -23,7 +23,7 @@ const ButtonBase = ({ label, className, ...props }: ButtonBaseProps) => {
   const { handleClick, ...rest } = props;
   return (
     <button onClick={handleClick} className={className} {...rest}>
-      {label}
+      {children}
     </button>
   );
 };

@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
-import Image from "next/image";
+
+import { X } from "lucide-react";
 
 type ButtonCloseProps = {
   label: string;
@@ -28,12 +29,7 @@ const ButtonClose = ({
       onClick={handleClick}
       {...props}
     >
-      <Image
-        src="/images/common/icon_cross.svg"
-        alt="閉じる"
-        width={20}
-        height={20}
-      />
+      <X strokeWidth={1} size={20} color="white" />
     </button>
   );
 };

@@ -32,12 +32,8 @@ export type Thumbnail = {
   width: number;
 };
 
-export type BaseButtonProps = {
-  label: string;
-  className?: string;
-};
-
-export type LinkButtonProps = BaseButtonProps & {
+export type LinkButtonProps = {
+  children: React.ReactNode;
   link: {
     href: string;
     blank?: boolean;
@@ -45,7 +41,8 @@ export type LinkButtonProps = BaseButtonProps & {
   handleClick?: never;
 } & React.AnchorHTMLAttributes<HTMLAnchorElement>;
 
-export type ButtonProps = BaseButtonProps & {
+export type ButtonProps = {
+  children: React.ReactNode;
   link?: never;
   handleClick?: () => void;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;

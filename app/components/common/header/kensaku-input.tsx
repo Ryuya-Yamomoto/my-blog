@@ -2,9 +2,9 @@
 
 import useStore from "@/app/store/useStore";
 import { cn } from "@/lib/utils";
-
-import Image from "next/image";
 import ButtonClose from "../button/button-close";
+
+import { Search } from "lucide-react";
 
 type KensakuInputProps = {
   handleDeleteSearchQuery: () => void;
@@ -26,13 +26,7 @@ const KensakuInput = ({ handleDeleteSearchQuery }: KensakuInputProps) => {
       )}
     >
       <span className="grid min-h-full w-full place-items-center bg-black/80">
-        <Image
-          src="/images/common/icon_search.svg"
-          alt="検索"
-          width={16}
-          height={16}
-          className="filter-[invert(1)]"
-        />
+        <Search strokeWidth={1} size={16} color="white" />
       </span>
       <input
         type="text"
@@ -40,7 +34,7 @@ const KensakuInput = ({ handleDeleteSearchQuery }: KensakuInputProps) => {
         value={searchQuery}
         onChange={handleInputChange}
         className={cn(
-          "w-full bg-black/50 py-2 pr-8 pl-4 text-base outline-none placeholder:text-white/40",
+          "w-full bg-black/50 py-2 pr-8 pl-4 text-sm outline-none placeholder:text-white/40",
           "md:py-4 md:pr-12"
         )}
       />

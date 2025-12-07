@@ -4,7 +4,7 @@ import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
-import Image from "next/image";
+import { Sun, Moon } from "lucide-react";
 
 const ButtonTheme = () => {
   const { setTheme, resolvedTheme } = useTheme();
@@ -17,30 +17,17 @@ const ButtonTheme = () => {
   if (!mounted) return null;
 
   return (
-    <div className="relative">
+    <div className="absolute bottom-2 left-4">
       <button
         className={cn(
-          "onFocus grid h-7 w-7 cursor-pointer place-items-center rounded-full p-1",
-          resolvedTheme === "dark" ? "bg-green-soft" : "bg-red-soft"
+          "onFocus grid h-7 w-7 cursor-pointer place-items-center rounded-full p-1"
         )}
         onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
       >
         {resolvedTheme === "dark" ? (
-          <Image
-            src="/images/common/icon_dark.svg"
-            alt="ダークモード"
-            width={24}
-            height={24}
-            className="h-full w-full object-contain"
-          />
+          <Moon strokeWidth={1} color="var(--foreground)" size={21} />
         ) : (
-          <Image
-            src="/images/common/icon_light.svg"
-            alt="ライトモード"
-            width={24}
-            height={24}
-            className="h-full w-full object-contain filter-[invert(1)]"
-          />
+          <Sun strokeWidth={1} color="var(--foreground)" size={21} />
         )}
       </button>
     </div>

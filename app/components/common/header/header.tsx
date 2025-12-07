@@ -5,15 +5,14 @@ import useStore from "@/app/store/useStore";
 import { useEffect, useRef } from "react";
 import { useScrollLock } from "@/app/hooks/useScrollLock";
 
-import Image from "next/image";
-
 import { cn } from "@/lib/utils";
 import type { Category, Blog } from "@/app/types/common";
 
 import Logo from "./logo";
-import ButtonTheme from "./button-theme";
 import NavContent from "./nav-content";
 import KensakuContent from "./kensaku-content";
+
+import { Search } from "lucide-react";
 
 type HeaderProps = {
   categories: Category[];
@@ -91,24 +90,15 @@ const Header = ({ categories, blogs }: HeaderProps) => {
         <Logo />
 
         <div className={cn("relative z-10 flex items-center gap-x-4")}>
-          <ButtonTheme />
           <button
             className="onFocus cursor-pointer"
             onClick={() => handleSetKensakuOpen(!isKensakuOpen)}
           >
-            <span>
-              <Image
-                src="/images/common/icon_search.svg"
-                alt="検索"
-                width={28}
-                height={28}
-                className="dark-filter-to-foreground"
-              />
-            </span>
+            <Search strokeWidth={1} size={24} color="var(--foreground)" />
           </button>
           <button
             className={cn(
-              "onFocus relative block h-3 w-10 cursor-pointer",
+              "onFocus relative block h-1.5 w-12 cursor-pointer",
               "hamMenuTransition",
               isMenuOpen ? "open" : ""
             )}
@@ -118,17 +108,17 @@ const Header = ({ categories, blogs }: HeaderProps) => {
             <span
               className={cn(
                 "bar-01 bar",
-                "bg-foreground absolute top-0 right-0 block h-[2px] w-full",
+                "bg-foreground absolute top-0 right-0 block h-px w-full",
                 "transform-origin-center",
-                isMenuOpen ? "top-1.5 rotate-[30deg]" : ""
+                isMenuOpen ? "top-0.75 rotate-[15deg]" : ""
               )}
             ></span>
             <span
               className={cn(
                 "bar-02 bar",
-                "bg-foreground absolute top-3 right-0 block h-[2px] w-1/2",
+                "bg-foreground absolute top-1.5 right-0 block h-px w-1/2",
                 "transform-origin-center",
-                isMenuOpen ? "top-1.5 w-full rotate-[-30deg]" : ""
+                isMenuOpen ? "top-0.75 w-full rotate-[-15deg]" : ""
               )}
             ></span>
           </button>

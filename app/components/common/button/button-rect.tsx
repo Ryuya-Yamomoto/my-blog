@@ -1,9 +1,23 @@
-import type { LinkButtonProps, ButtonProps } from "@/app/types/common";
 import ButtonBase from "./button-base";
 
 import { cn } from "@/lib/utils";
 
-type ButtonRectProps = LinkButtonProps | ButtonProps;
+type ButtonRectProps =
+  | ({
+      label: string;
+      className?: string;
+      link: {
+        href: string;
+        blank?: boolean;
+      };
+      handleClick?: never;
+    } & React.AnchorHTMLAttributes<HTMLAnchorElement>)
+  | ({
+      label: string;
+      className?: string;
+      link?: never;
+      handleClick?: () => void;
+    } & React.ButtonHTMLAttributes<HTMLButtonElement>);
 
 const ButtonRect = ({ label, className, ...props }: ButtonRectProps) => {
   const style = cn(
@@ -16,17 +30,18 @@ const ButtonRect = ({ label, className, ...props }: ButtonRectProps) => {
 
   if ("link" in props && props.link) {
     const { link, ...rest } = props;
-    return <ButtonBase label={label} link={link} className={style} {...rest} />;
+    return (
+      <ButtonBase link={link} className={style} {...rest}>
+        {label}
+      </ButtonBase>
+    );
   }
 
   const { handleClick, ...rest } = props;
   return (
-    <ButtonBase
-      label={label}
-      className={style}
-      handleClick={handleClick}
-      {...rest}
-    />
+    <ButtonBase className={style} handleClick={handleClick} {...rest}>
+      {label}
+    </ButtonBase>
   );
 };
 
