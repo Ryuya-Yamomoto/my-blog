@@ -34,7 +34,7 @@ const KensakuInput = ({ handleDeleteSearchQuery }: KensakuInputProps) => {
         value={searchQuery}
         onChange={handleInputChange}
         className={cn(
-          "w-full bg-black/50 py-2 pr-8 pl-4 text-sm outline-none placeholder:text-white/40",
+          "w-full bg-black/50 py-2 pr-8 pl-4 text-base outline-none placeholder:text-white/40",
           "md:py-4 md:pr-12"
         )}
       />

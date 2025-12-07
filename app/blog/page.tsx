@@ -31,7 +31,7 @@ export default async function Page() {
           currentCategory="all"
         />
         {data.contents.length === 0 ? (
-          <p className="mt-16 text-lg font-medium">記事が存在しません。</p>
+          <p className="mt-16">記事が存在しません。</p>
         ) : (
           <div
             className={cn(
