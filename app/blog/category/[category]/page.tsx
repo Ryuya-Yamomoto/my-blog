@@ -39,7 +39,7 @@ export default async function Page({ params }: Props) {
         <HeadingSection en={isValidCategory.slug} ja={isValidCategory.name} />
       </ViewTransition>
       <ListCategory
-        className="mt-16"
+        className="mt-32"
         categories={categories.contents}
         currentCategory={categorySlug}
       />

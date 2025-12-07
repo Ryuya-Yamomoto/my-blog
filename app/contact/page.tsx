@@ -19,7 +19,7 @@ export default async function Page() {
           <HeadingSection en={"CONTACT"} ja={"お問い合わせ"} />
         </ViewTransition>
 
-        <div className="mt-16 grid gap-y-4">
+        <div className="mt-32 grid gap-y-4">
           <p>
             お気軽にご連絡、ご相談ください。
             <br />

@@ -23,7 +23,7 @@ const ListCategory = ({ categories, currentCategory, className }: Props) => {
         className
       )}
     >
-      <p className="text-lg font-bold">カテゴリ：</p>
+      <p className="text-lg">カテゴリ：</p>
       <ul
         className={cn(
           "relative flex flex-wrap",

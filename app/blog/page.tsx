@@ -26,7 +26,7 @@ export default async function Page() {
           <HeadingSection en={"ALL"} ja={"すべて"} />
         </ViewTransition>
         <ListCategory
-          className="mt-16"
+          className="mt-32"
           categories={categories.contents}
           currentCategory="all"
         />
