@@ -20,9 +20,16 @@ const ButtonTheme = () => {
     <div className="absolute bottom-2 left-4">
       <button
         className={cn(
-          "onFocus grid h-7 w-7 cursor-pointer place-items-center rounded-full p-1"
+          "grid h-7 w-7 cursor-pointer place-items-center rounded-full p-1 outline-none",
+          "before:background before:absolute before:-inset-1 before:rounded-sm before:bg-transparent before:duration-300 before:content-['']",
+          "hover:before:bg-foreground/10",
+          "focus:before:bg-foreground/10"
         )}
-        onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+        onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+          setTheme(resolvedTheme === "dark" ? "light" : "dark");
+          const target = e.currentTarget as HTMLButtonElement;
+          target.blur();
+        }}
       >
         {resolvedTheme === "dark" ? (
           <Moon strokeWidth={1} color="var(--foreground)" size={21} />
