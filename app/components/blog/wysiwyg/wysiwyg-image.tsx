@@ -63,8 +63,8 @@ const WysiwygImage = ({ image, figCaption }: WysiwygImageProps) => {
               onKeyDown={handleToggleModal}
               style={{ aspectRatio: `${width}/${height}` }}
               className={cn(
-                "mx-auto cursor-pointer rounded-sm",
-                "outline-none",
+                "mx-auto cursor-pointer rounded-sm outline-none",
+                "focus-visible:shadow-lg",
                 isPortrait
                   ? "max-h-130 w-auto max-w-full md:h-130"
                   : "h-auto w-130 max-w-full"

@@ -95,7 +95,7 @@ const NavContent = (props: NavContentProps) => {
             </ul>
           </div>
         </div>
-        <ButtonTheme />
+        <ButtonTheme disabled={!isOpen} />
       </div>
     </>
   );

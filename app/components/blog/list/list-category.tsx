@@ -13,7 +13,7 @@ const ListCategory = ({ categories, currentCategory, className }: Props) => {
   const styleActive =
     "bg-foreground text-sm rounded-sm px-4 py-1 font-medium text-foreground-invert hover:[anchor-name:--cover] min-h-full inline-grid items-center";
   const styleNotActive =
-    "px-4 py-1 hover:[anchor-name:--cover] focus:[anchor-name:--cover] inline-grid text-sm rounded";
+    "px-4 py-1 hover:[anchor-name:--cover] focus:[anchor-name:--cover] inline-grid text-sm rounded outline-none";
 
   return (
     <div

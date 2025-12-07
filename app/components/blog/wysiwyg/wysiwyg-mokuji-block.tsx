@@ -94,7 +94,7 @@ const WysiwygMokujiBlock = ({ arrayMokuji }: WysiwygMokujiBlockProps) => {
                 isMokujiOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
               )}
             >
-              <p className="overflow-hidden text-sm font-bold">目次</p>
+              <p className="overflow-hidden text-sm font-medium">目次</p>
             </div>
 
             <ul
@@ -108,9 +108,9 @@ const WysiwygMokujiBlock = ({ arrayMokuji }: WysiwygMokujiBlockProps) => {
                   <button
                     onClick={() => handleClick(item.id)}
                     className={cn(
-                      "hover:text-foreground cursor-pointer text-left text-xs transition-colors",
+                      "onFocus hover:text-foreground cursor-pointer text-left text-xs transition-colors",
                       activeMokujiId === item.id
-                        ? "text-foreground font-bold"
+                        ? "text-foreground font-medium"
                         : "text-foreground/45"
                     )}
                   >

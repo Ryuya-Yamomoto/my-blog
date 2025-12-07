@@ -23,7 +23,7 @@ type ButtonTextProps =
 
 const ButtonText = ({ label, className, ...props }: ButtonTextProps) => {
   const style = cn(
-    "w-fit text-sm relative flex items-center gap-x-2 hover:[&>svg]:translate-x-1",
+    "w-fit text-sm relative flex items-center gap-x-2 hover:[&>svg]:translate-x-1 onFocus",
     className
   );
 

@@ -17,7 +17,7 @@ const BlockArticleBottom = ({
   className,
 }: BlockArticleBottomProps) => {
   return (
-    <div className={cn("mt-32 grid gap-y-4 border-t pt-8", className)}>
+    <div className={cn("mt-28 grid gap-y-4 border-t pt-8", className)}>
       {otherArticles && otherArticles.length > 0 && (
         <SplideCarousel blogs={otherArticles} category={category.name} />
       )}

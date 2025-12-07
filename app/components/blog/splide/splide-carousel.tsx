@@ -82,7 +82,7 @@ const SplideCarousel = ({ blogs, category }: SplideCarouselProps) => {
           >
             <CardBlog
               blog={blog}
-              className={cn("onFocus w-60 p-0", "md:w-80")}
+              className={cn("onFocus w-60 px-0", "md:w-80")}
             />
           </SplideSlide>
         ))}

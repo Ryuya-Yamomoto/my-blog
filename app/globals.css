@@ -139,7 +139,11 @@
   }
 
   .onFocus {
-    @apply outline-none focus-visible:shadow-lg;
+    @apply relative outline-none;
+    @apply before:absolute before:-inset-1 before:z-[-1] before:rounded-sm before:bg-transparent before:duration-300 before:content-[''];
+    &:focus-visible {
+      @apply before:bg-foreground/10;
+    }
   }
 
   /* view transition API スタイル */
