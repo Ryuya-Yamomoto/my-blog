@@ -36,7 +36,7 @@ export default async function Home() {
   return (
     <WrapperContent className="max-w-none">
       <section>
-        <HeadingSection en="ABOUT" ja="私" />
+        <HeadingSection en="ABOUT" ja="私" notShowJa={true} />
         <div className="mt-16 text-sm leading-[1.6]">
           <p>
             1997年3月25日生まれ。栃木県出身。
@@ -108,7 +108,7 @@ export default async function Home() {
             "md:flex-row md:items-end md:justify-between"
           )}
         >
-          <HeadingSection en="TECH" ja="技術" />
+          <HeadingSection en="TECH" ja="技術" notShowJa={true} />
           {dataTech.contents.length > 2 && (
             <ButtonText
               link={{ href: "/blog/category/tech" }}
@@ -135,7 +135,7 @@ export default async function Home() {
             "md:flex-row md:items-end md:justify-between"
           )}
         >
-          <HeadingSection en="MUSIC" ja="音楽" />
+          <HeadingSection en="MUSIC" ja="音楽" notShowJa={true} />
           {dataMusic.contents.length > 2 && (
             <ButtonText
               link={{ href: "/blog/category/music" }}
@@ -162,7 +162,7 @@ export default async function Home() {
             "md:flex-row md:items-end md:justify-between"
           )}
         >
-          <HeadingSection en="LIFE" ja="生活" />
+          <HeadingSection en="LIFE" ja="生活" notShowJa={true} />
           {dataLife.contents.length > 2 && (
             <ButtonText
               link={{ href: "/blog/category/life" }}
