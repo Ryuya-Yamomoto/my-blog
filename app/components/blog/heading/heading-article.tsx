@@ -6,13 +6,15 @@ import BadgeRounded from "../../common/badge/badge-rounded";
 type HeadingArticleProps = {
   title: string;
   category: string;
-  date: string;
+  publishedAt: string;
+  updatedAt?: string;
   className?: string;
 };
 
 const HeadingArticle = ({
   title,
-  date,
+  publishedAt,
+  updatedAt,
   category,
   className,
 }: HeadingArticleProps) => {
@@ -21,11 +23,24 @@ const HeadingArticle = ({
       <h2 className={cn("border-b-2 pb-4 text-3xl font-bold", "md:text-5xl")}>
         {title}
       </h2>
-      <div className="mt-1 flex flex-wrap items-center justify-between">
+      <div className="mt-1 flex flex-wrap items-baseline justify-between">
         <BadgeRounded text={category} />
-        <p className="font-inter text-xs">
-          {format(new Date(date), "yyyy.MM.dd")}
-        </p>
+        <div className="grid grid-cols-[max-content_1fr] justify-end text-xs">
+          <div className="col-span-full grid grid-cols-subgrid items-baseline gap-x-2">
+            <p>公開日</p>
+            <p className="font-inter">
+              {format(new Date(publishedAt), "yyyy.MM.dd")}
+            </p>
+          </div>
+          {updatedAt && (
+            <div className="col-span-full grid grid-cols-subgrid items-baseline gap-x-2">
+              <p>更新日</p>
+              <p className="font-inter">
+                {format(new Date(updatedAt), "yyyy.MM.dd")}
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </hgroup>
   );

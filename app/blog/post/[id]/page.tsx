@@ -61,7 +61,10 @@ export default async function Page({
       </ViewTransition>
       <HeadingArticle
         title={article.title}
-        date={article.publishedAt}
+        publishedAt={article.publishedAt}
+        updatedAt={
+          article.category.slug === "tech" ? article.updatedAt : undefined
+        }
         category={article.category.name}
         className={cn("mt-16", "md:mt-32")}
       />
