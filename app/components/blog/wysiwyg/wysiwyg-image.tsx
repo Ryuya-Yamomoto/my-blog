@@ -4,10 +4,12 @@ import type { WysiwygModalImageProps } from "@/app/blog/post/[id]/page";
 
 import React, { useState, startTransition } from "react";
 
-import { unstable_ViewTransition as ViewTransition } from "react";
+import { unstable_ViewTransition as ViewTransition, useRef } from "react";
 import Image from "next/image";
-import WysiwygModalImage from "./wysiwyg-modal-image";
+import ButtonClose from "../../common/button/button-close";
 import { cn } from "@/lib/utils";
+
+import { useScrollLock } from "@/app/hooks/useScrollLock";
 
 type WysiwygImageProps = {
   image: WysiwygModalImageProps;
@@ -19,6 +21,12 @@ const WysiwygImage = ({ image, figCaption }: WysiwygImageProps) => {
   const { id, src, alt, width, height } = image;
   const isPortrait = height > width; //- 縦長の画像か否か
 
+  const dialogRef = useRef<HTMLDialogElement>(null);
+
+  // スクロールロック（モーダル開閉状態に基づく）
+  useScrollLock({ isLocked: isModalOpen });
+
+  // 画像モーダルの開閉処理
   const handleToggleModal = (
     e:
       | React.MouseEvent<
@@ -27,16 +35,18 @@ const WysiwygImage = ({ image, figCaption }: WysiwygImageProps) => {
         >
       | React.KeyboardEvent<HTMLImageElement>
   ) => {
-    if ("key" in e) {
-      if (e.key !== "Enter" && e.key !== " ") {
-        return;
-      }
-    }
+    if ("key" in e) if (e.key !== "Enter" && e.key !== " ") return;
 
     e.stopPropagation();
     e.preventDefault();
-    startTransition(() => setModalOpen((prev) => !prev));
+    dialogRef.current?.showModal();
+    startTransition(() => setModalOpen(true));
   };
+
+  // モーダルがcloseされた際の処理
+  dialogRef.current?.addEventListener("close", () => {
+    startTransition(() => setModalOpen(false));
+  });
 
   return (
     <>
@@ -76,26 +86,40 @@ const WysiwygImage = ({ image, figCaption }: WysiwygImageProps) => {
       </ClickableImage>
 
       {/* モーダル要素 */}
-      {isModalOpen && (
-        <WysiwygModalImage
-          isOpen={isModalOpen}
-          handleToggleModal={handleToggleModal}
-        >
+      <dialog
+        ref={dialogRef}
+        onClick={(e: React.MouseEvent<HTMLDialogElement>) => {
+          if (e.target === e.currentTarget) {
+            dialogRef.current?.close();
+          }
+        }}
+        style={{ aspectRatio: `${width}/${height}` }}
+        className={cn(
+          "m-auto h-auto max-h-[80%] w-auto max-w-[80%] bg-transparent",
+          "backdrop:bg-black/50 backdrop:backdrop-blur-sm",
+          isModalOpen ? "block" : "hidden"
+        )}
+      >
+        {isModalOpen && (
           <ViewTransition name={`wysiwyg-thumb-${id}`}>
             <Image
               src={src}
               alt={alt}
               width={width}
               height={height}
-              style={{ aspectRatio: `${width}/${height}` }}
-              className={cn(
-                "absolute z-10 block h-auto max-h-[80%] w-auto max-w-[80%]"
-              )}
               onClick={(e) => e.stopPropagation()}
+              className="h-full w-full object-contain"
             />
           </ViewTransition>
-        </WysiwygModalImage>
-      )}
+        )}
+        <ButtonClose
+          label="閉じる"
+          handleClick={() => {
+            dialogRef.current?.close();
+          }}
+          className="fixed top-4 right-4"
+        />
+      </dialog>
     </>
   );
 };

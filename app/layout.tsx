@@ -43,7 +43,7 @@ export default async function RootLayout({
       <LenisProvider />
       <html
         lang="ja"
-        className={`${notoSansJP.variable} ${inter.variable}`}
+        className={`${notoSansJP.variable} ${inter.variable} [scrollbar-gutter:stable]`}
         suppressHydrationWarning
       >
         <body className="font-noto-sans-jp flex min-h-screen flex-col">
