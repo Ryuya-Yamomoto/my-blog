@@ -8,8 +8,9 @@ import FormTextarea from "./form-textarea";
 import FormLabel from "./form-label";
 import ButtonRect from "../../common/button/button-rect";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { actionContactForm } from "@/app/server/action";
+import useStore from "@/app/store/useStore";
 
 const FormBlock = () => {
   const [state, contactAction, isPending] = useActionState(actionContactForm, {
@@ -20,7 +21,20 @@ const FormBlock = () => {
     zodErrors: null,
     contactFormErrors: null,
     message: null,
+    status: undefined,
   });
+  const { toastStatus, setToastStatus } = useStore();
+
+  useEffect(() => {
+    if (state.status === "success") {
+      setToastStatus({
+        status: "success",
+        title: "送信成功",
+        message:
+          "お問い合わせが正常に送信されました。<br />追ってご連絡いたします。",
+      });
+    }
+  }, [state.status, setToastStatus]);
 
   return (
     <form action={contactAction} className={cn("pt-16", "md:px-8")}>

@@ -9,6 +9,16 @@ type StoreState = {
   setActiveMokujiId: (id: string | null) => void;
   searchQuery: string;
   setSearchQuery: (query: string) => void;
+  toastStatus: {
+    status: "success" | "error" | undefined;
+    title: string;
+    message: string;
+  };
+  setToastStatus: (status: {
+    status: "success" | "error" | undefined;
+    title: string;
+    message: string;
+  }) => void;
 };
 
 const useStore = create<StoreState>((set) => ({
@@ -20,6 +30,8 @@ const useStore = create<StoreState>((set) => ({
   setActiveMokujiId: (id) => set({ activeMokujiId: id }),
   searchQuery: "",
   setSearchQuery: (query) => set({ searchQuery: query }),
+  toastStatus: { status: undefined, title: "", message: "" },
+  setToastStatus: (status) => set({ toastStatus: status }),
 }));
 
 export default useStore;

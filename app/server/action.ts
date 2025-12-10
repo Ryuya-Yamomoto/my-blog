@@ -21,6 +21,7 @@ type ContactActionStateProps = ContactFormData & {
   zodErrors: ZodErrors;
   contactFormErrors: ContactFormErrors;
   message: Message;
+  status: "success" | "error" | undefined;
 };
 
 // validation
@@ -72,6 +73,7 @@ export const actionContactForm = async (
       zodErrors: validatedFields.error.flatten().fieldErrors,
       contactFormErrors: null,
       message: "入力エラーがあります。修正してください。",
+      status: "error",
     };
   }
 
@@ -86,5 +88,6 @@ export const actionContactForm = async (
     zodErrors: null,
     contactFormErrors: null,
     message: "お問い合わせを送信しました。ありがとうございました。",
+    status: "success",
   };
 };
