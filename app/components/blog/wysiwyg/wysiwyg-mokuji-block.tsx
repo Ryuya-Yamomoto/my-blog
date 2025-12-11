@@ -44,8 +44,7 @@ const WysiwygMokujiBlock = ({ arrayMokuji }: WysiwygMokujiBlockProps) => {
     <nav
       className={cn(
         "fixed bottom-2 left-1/2 z-10 flex w-[80%] -translate-x-1/2 flex-col items-stretch gap-0 rounded-lg border border-white/20 bg-white/5 shadow-xl backdrop-blur-xs transition-all",
-        "md:top-20 md:right-4 md:bottom-auto md:left-auto md:w-auto md:translate-x-0 md:flex-row",
-        "2xl:top-1/2 2xl:-translate-y-1/2"
+        "md:top-20 md:right-4 md:bottom-auto md:left-auto md:w-auto md:translate-x-0 md:flex-row"
       )}
       aria-label="目次"
     >

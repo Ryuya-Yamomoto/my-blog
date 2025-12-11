@@ -20,7 +20,6 @@ const FormBlock = () => {
     inquiry: "",
     zodErrors: null,
     contactFormErrors: null,
-    message: null,
     status: undefined,
   });
   const { toastStatus, setToastStatus } = useStore();
@@ -29,9 +28,21 @@ const FormBlock = () => {
     if (state.status === "success") {
       setToastStatus({
         status: "success",
-        title: "送信成功",
+        title: "送信されました！",
         message:
-          "お問い合わせが正常に送信されました。<br />追ってご連絡いたします。",
+          "お問い合わせありがとうございます。<br />追ってご連絡いたします。",
+      });
+    } else if (state.status === "validation_error") {
+      setToastStatus({
+        status: "error",
+        title: "送信できませんでした..",
+        message: "必須項目を入力してください。",
+      });
+    } else if (state.status === "error") {
+      setToastStatus({
+        status: "error",
+        title: "送信できませんでした..",
+        message: "申し訳ございません..<br />時間を置いて再度お試しください。",
       });
     }
   }, [state.status, setToastStatus]);

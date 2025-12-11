@@ -16,12 +16,10 @@ type ZodErrors = {
   email?: string[];
   inquiry?: string[];
 } | null;
-type Message = string | null;
 type ContactActionStateProps = ContactFormData & {
   zodErrors: ZodErrors;
   contactFormErrors: ContactFormErrors;
-  message: Message;
-  status: "success" | "error" | undefined;
+  status: "success" | "error" | "validation_error" | undefined;
 };
 
 // validation
@@ -72,8 +70,7 @@ export const actionContactForm = async (
       ...payload,
       zodErrors: validatedFields.error.flatten().fieldErrors,
       contactFormErrors: null,
-      message: "入力エラーがあります。修正してください。",
-      status: "error",
+      status: "validation_error",
     };
   }
 
@@ -87,7 +84,6 @@ export const actionContactForm = async (
     inquiry: "",
     zodErrors: null,
     contactFormErrors: null,
-    message: "お問い合わせを送信しました。ありがとうございました。",
     status: "success",
   };
 };
