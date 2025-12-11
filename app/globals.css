@@ -180,11 +180,6 @@
   --gray-dark: oklch(0.25 0.008 270);
   --code: oklch(0.08 0.01 264);
 
-  --toast-green: oklch(0.938 0.127 124.321);
-  --toast-green-text: oklch(0.405 0.101 131.063);
-  --toast-red: oklch(0.885 0.062 18.334);
-  --toast-red-text: oklch(0.444 0.177 26.899);
-
   --easing: cubic-bezier(0.9, 0.03, 0.49, 1.02);
 
   --filter-in-dark: brightness(0) saturate(100%) invert(100%) sepia(4%)
@@ -208,10 +203,6 @@
   --color-green-soft: var(--green-soft);
   --color-gray-dark: var(--gray-dark);
   --color-code: var(--code);
-  --color-toast-green: var(--toast-green);
-  --color-toast-green-text: var(--toast-green-text);
-  --color-toast-red: var(--toast-red);
-  --color-toast-red-text: var(--toast-red-text);
 
   --font-noto-sans-jp: var(--font-noto-sans-jp);
   --font-inter: var(--font-inter);

@@ -35,8 +35,8 @@ const FormBlock = () => {
     } else if (state.status === "validation_error") {
       setToastStatus({
         status: "error",
-        title: "送信できませんでした..",
-        message: "必須項目を入力してください。",
+        title: "必須項目を入力してください。",
+        message: "",
       });
     } else if (state.status === "error") {
       setToastStatus({
@@ -51,7 +51,9 @@ const FormBlock = () => {
     <form action={contactAction} className={cn("pt-16", "md:px-8")}>
       <div className={cn("grid gap-y-8", "md:grid-cols-[max-content_1fr]")}>
         <FormRow>
-          <FormLabel htmlFor="name">お名前</FormLabel>
+          <FormLabel htmlFor="name" required>
+            お名前
+          </FormLabel>
           <FormInput
             type="text"
             id="name"
@@ -66,7 +68,9 @@ const FormBlock = () => {
           />
         </FormRow>
         <FormRow>
-          <FormLabel htmlFor="department">所属</FormLabel>
+          <FormLabel htmlFor="department" required>
+            所属
+          </FormLabel>
           <FormInput
             type="text"
             id="department"
@@ -81,7 +85,9 @@ const FormBlock = () => {
           />
         </FormRow>
         <FormRow>
-          <FormLabel htmlFor="email">メールアドレス</FormLabel>
+          <FormLabel htmlFor="email" required>
+            メールアドレス
+          </FormLabel>
           <FormInput
             type="email"
             id="email"
@@ -96,7 +102,7 @@ const FormBlock = () => {
           />
         </FormRow>
         <FormRow className="md:items-start">
-          <FormLabel className="mt-5" htmlFor="inquiry">
+          <FormLabel className="mt-5" htmlFor="inquiry" required>
             お問い合わせ内容
           </FormLabel>
           <FormTextarea

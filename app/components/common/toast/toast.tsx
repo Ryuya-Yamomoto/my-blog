@@ -13,8 +13,8 @@ const Toast = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const style = cn(
-    toastStatus.status === "success" && "bg-toast-green text-toast-green-text",
-    toastStatus.status === "error" && "bg-toast-red text-toast-red-text"
+    toastStatus.status === "success" && "bg-green-100 text-green-800",
+    toastStatus.status === "error" && "bg-red-100 text-red-800"
   );
 
   useEffect(() => {
@@ -48,10 +48,10 @@ const Toast = () => {
     >
       <div className={cn("flex items-center gap-x-1 text-xs font-medium")}>
         {toastStatus.status === "success" && (
-          <CircleCheck strokeWidth={1} color="var(--toast-green-text)" />
+          <CircleCheck strokeWidth={1} color="var(--color-green-800)" />
         )}
         {toastStatus.status === "error" && (
-          <CircleX strokeWidth={1} color="var(--toast-red-text)" />
+          <CircleX strokeWidth={1} color="var(--color-red-800)" />
         )}
         <p>{toastStatus.title}</p>
       </div>
