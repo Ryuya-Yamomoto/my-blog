@@ -22,7 +22,7 @@ const FormBlock = () => {
     contactFormErrors: null,
     status: undefined,
   });
-  const { toastStatus, setToastStatus } = useStore();
+  const { setToastStatus } = useStore();
 
   useEffect(() => {
     if (state.status === "success") {
@@ -45,7 +45,7 @@ const FormBlock = () => {
         message: "申し訳ございません..<br />時間を置いて再度お試しください。",
       });
     }
-  }, [state.status, setToastStatus]);
+  }, [state, setToastStatus]);
 
   return (
     <form action={contactAction} className={cn("pt-16", "md:px-8")}>

@@ -56,9 +56,7 @@ export default async function Page({
 
   return (
     <WrapperContent>
-      <ViewTransition name="heading-pageTtl">
-        <HeadingSection en="ARTICLE" ja="記事" />
-      </ViewTransition>
+      <HeadingSection en="ARTICLE" ja="記事" />
       <HeadingArticle
         title={article.title}
         publishedAt={article.publishedAt}

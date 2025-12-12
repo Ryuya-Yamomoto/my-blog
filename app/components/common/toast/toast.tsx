@@ -4,47 +4,78 @@ import parse from "html-react-parser";
 
 import { CircleCheck, CircleX } from "lucide-react";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import useStore from "@/app/store/useStore";
+import { motion, type AnimationDefinition } from "motion/react";
 import { cn } from "@/lib/utils";
 
 const Toast = () => {
   const { toastStatus, setToastStatus } = useStore();
   const [isVisible, setIsVisible] = useState(false);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const style = cn(
+  // ステータスに応じたスタイル
+  const statusStyle = cn(
     toastStatus.status === "success" && "bg-green-100 text-green-800",
     toastStatus.status === "error" && "bg-red-100 text-red-800"
   );
 
-  useEffect(() => {
-    if (toastStatus.status) {
-      setIsVisible(true);
+  // トースト アニメーション 定義
+  const toastVariants = {
+    visible: {
+      right: "16px",
+      opacity: 1,
+      translateX: 0,
+    },
+    hidden: {
+      opacity: 0,
+      right: 0,
+      translateX: 100,
+    },
+  };
 
-      const timer = setTimeout(() => {
+  // トースト アニメーションが完了した際に呼ばれる処理
+  const handleAnimationComplete = (definition: AnimationDefinition) => {
+    if (definition === "visible") {
+      // 表示処理完了後の処理
+      timerRef.current = setTimeout(() => {
         setIsVisible(false);
       }, 3000);
-
-      const timer_02 = setTimeout(() => {
-        setToastStatus({ status: undefined, title: "", message: "" });
-      }, 3500);
-
-      return () => {
-        clearTimeout(timer);
-        clearTimeout(timer_02);
-      };
+    } else {
+      // 非表示処理完了後の処理
+      setToastStatus({
+        status: undefined,
+        title: "",
+        message: "",
+      });
     }
+  };
+
+  useEffect(() => {
+    if (toastStatus.status !== undefined) {
+      setIsVisible(true);
+    }
+
+    // クリーンナップ
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
+    };
   }, [toastStatus, setToastStatus]);
 
   return (
-    <div
+    <motion.div
       className={cn(
-        "easing-(--easing) fixed top-18 z-1 grid w-64 gap-y-1 rounded-sm px-4 py-2 shadow-sm transition-[right,translate,opacity] duration-300",
-        style,
-        isVisible
-          ? "right-4 translate-x-0 opacity-100"
-          : "right-0 translate-x-full opacity-0"
+        "fixed top-18 z-1 grid w-64 gap-y-1 rounded-sm px-4 py-2 shadow-sm",
+        statusStyle
       )}
+      initial={{ right: 0, opacity: 0, translateX: 100 }}
+      variants={toastVariants}
+      animate={isVisible ? "visible" : "hidden"}
+      transition={{ ease: [0.9, 0.03, 0.49, 1.02], duration: 0.3 }}
+      onAnimationComplete={handleAnimationComplete}
     >
       <div className={cn("flex items-center gap-x-1 text-xs font-medium")}>
         {toastStatus.status === "success" && (
@@ -56,7 +87,7 @@ const Toast = () => {
         <p>{toastStatus.title}</p>
       </div>
       <p className={cn("text-xs")}>{parse(toastStatus.message)}</p>
-    </div>
+    </motion.div>
   );
 };
 
