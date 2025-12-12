@@ -1,3 +1,5 @@
+"use client";
+
 import type { Blog } from "@/app/types/common";
 
 import Link from "next/link";
@@ -5,6 +7,8 @@ import Image from "next/image";
 import { unstable_ViewTransition as ViewTransition } from "react";
 import BadgeRounded from "../badge/badge-rounded";
 
+import { useState, useRef, useEffect } from "react";
+import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import StripHtmlTags from "@/utils/common/stripHtmlTags";
@@ -15,17 +19,36 @@ type CardBlogProps = {
 };
 
 const CardBlog = ({ blog, isViewTransition = true }: CardBlogProps) => {
+  const cardRef = useRef<HTMLAnchorElement | null>(null);
+  const [isHover, setIsHover] = useState(false);
+  const [pointX, setPointX] = useState(0);
+  const [pointY, setPointY] = useState(0);
+
   return (
     <Link
+      ref={cardRef}
       href={`/blog/post/${blog.id}`}
       className={cn(
         "group relative grid w-full grid-cols-[40%_1fr] gap-x-2",
-        "lg:aspect-square lg:grid-cols-1 lg:gap-x-0 lg:overflow-hidden lg:rounded-sm"
+        "lg:aspect-square lg:grid-cols-1 lg:gap-x-0 lg:overflow-hidden"
       )}
+      onMouseMove={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+        setIsHover(true);
+        if (cardRef.current) {
+          const rect = cardRef.current.getBoundingClientRect();
+          const x = ((e.clientX - rect.left) / rect.width) * 100;
+          const y = ((e.clientY - rect.top) / rect.height) * 100;
+          setPointX(x);
+          setPointY(y);
+        }
+      }}
+      onMouseLeave={() => {
+        setIsHover(false);
+      }}
     >
       <figure
         className={cn(
-          "block aspect-square w-full overflow-hidden rounded-sm",
+          "block aspect-square w-full overflow-hidden rounded-sm lg:rounded-none",
           blog.thumbnail ?? "bg-foreground/50 grid place-items-center"
         )}
       >
@@ -37,7 +60,7 @@ const CardBlog = ({ blog, isViewTransition = true }: CardBlogProps) => {
                 alt={blog.title}
                 height={blog.thumbnail.height}
                 width={blog.thumbnail.width}
-                className="h-full w-full object-cover transition-[scale] duration-300 group-hover:scale-[1.05]"
+                className="h-full w-full object-cover"
               />
             </ViewTransition>
           ) : (
@@ -46,7 +69,7 @@ const CardBlog = ({ blog, isViewTransition = true }: CardBlogProps) => {
               alt={blog.title}
               height={blog.thumbnail.height}
               width={blog.thumbnail.width}
-              className="h-full w-full object-cover transition-[scale] duration-300 group-hover:scale-[1.05]"
+              className="h-full w-full object-cover"
             />
           ))}
 
@@ -59,14 +82,18 @@ const CardBlog = ({ blog, isViewTransition = true }: CardBlogProps) => {
           />
         )}
       </figure>
-      <div
+      <motion.div
         className={cn(
           "place-items-[start_center] grid w-full",
-          "lg:absolute lg:top-0 lg:left-0 lg:h-full lg:items-center lg:justify-items-start lg:bg-black/50 lg:p-4 lg:backdrop-blur-sm lg:transition-[opacity,filter] lg:duration-400",
-          "lg:opacity-0 lg:blur-sm",
-          "lg:group-hover:opacity-100 lg:group-hover:blur-none",
-          "lg:group-focus:opacity-100 lg:group-focus:blur-none"
+          "lg: lg:absolute lg:top-0 lg:left-0 lg:h-full lg:items-center lg:justify-items-start lg:bg-black/50 lg:p-4"
         )}
+        initial={{ clipPath: `circle(0% at ${pointX}% ${pointY}%)` }}
+        animate={{
+          clipPath: isHover
+            ? `circle(60% at ${pointX}% ${pointY}%)`
+            : `circle(0% at ${pointX}% ${pointY}%)`,
+        }}
+        transition={{ duration: 0.12, delay: 0, ease: "easeOut" }}
       >
         <div className="lg:text-white">
           <p
@@ -91,7 +118,7 @@ const CardBlog = ({ blog, isViewTransition = true }: CardBlogProps) => {
             {StripHtmlTags(blog.body)}
           </p>
         </div>
-      </div>
+      </motion.div>
     </Link>
   );
 };

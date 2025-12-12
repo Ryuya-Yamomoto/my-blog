@@ -88,7 +88,7 @@ export default async function Home() {
             />
           )}
         </div>
-        <div className={cn("mt-4 grid gap-4", "lg:grid-cols-3")}>
+        <div className={cn("mt-4 grid gap-4", "lg:grid-cols-3 lg:gap-0")}>
           {dataRecently.contents.length > 0 ? (
             dataRecently.contents.map((item: Blog) => {
               return (
@@ -117,7 +117,7 @@ export default async function Home() {
             />
           )}
         </div>
-        <div className={cn("mt-4 grid gap-4", "lg:grid-cols-3")}>
+        <div className={cn("mt-4 grid gap-4", "lg:grid-cols-3 lg:gap-0")}>
           {dataTech.contents.length > 0 ? (
             dataTech.contents.map((item: Blog) => {
               return <CardBlog key={item.id} blog={item} />;
@@ -144,7 +144,7 @@ export default async function Home() {
             />
           )}
         </div>
-        <div className={cn("mt-4 grid gap-4", "lg:grid-cols-3")}>
+        <div className={cn("mt-4 grid gap-4", "lg:grid-cols-3 lg:gap-0")}>
           {dataMusic.contents.length > 0 ? (
             dataMusic.contents.map((item: Blog) => {
               return <CardBlog key={item.id} blog={item} />;
@@ -171,7 +171,7 @@ export default async function Home() {
             />
           )}
         </div>
-        <div className={cn("mt-4 grid gap-4", "lg:grid-cols-3")}>
+        <div className={cn("mt-4 grid gap-4", "lg:grid-cols-3 lg:gap-0")}>
           {dataLife.contents.length > 0 ? (
             dataLife.contents.map((item: Blog) => {
               return <CardBlog key={item.id} blog={item} />;

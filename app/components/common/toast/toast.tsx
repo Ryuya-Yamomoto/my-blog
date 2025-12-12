@@ -71,7 +71,7 @@ const Toast = () => {
         "fixed top-18 z-1 grid w-64 gap-y-1 rounded-sm px-4 py-2 shadow-sm",
         statusStyle
       )}
-      initial={{ right: 0, opacity: 0, translateX: 100 }}
+      initial={"hidden"}
       variants={toastVariants}
       animate={isVisible ? "visible" : "hidden"}
       transition={{ ease: [0.9, 0.03, 0.49, 1.02], duration: 0.3 }}
