@@ -19,6 +19,8 @@ type StoreState = {
     title: string;
     message: string;
   }) => void;
+  isLargeScreen: boolean;
+  setIsLargeScreen: (isLarge: boolean) => void;
 };
 
 const useStore = create<StoreState>((set) => ({
@@ -32,6 +34,8 @@ const useStore = create<StoreState>((set) => ({
   setSearchQuery: (query) => set({ searchQuery: query }),
   toastStatus: { status: undefined, title: "", message: "" },
   setToastStatus: (status) => set({ toastStatus: status }),
+  isLargeScreen: false,
+  setIsLargeScreen: (isLarge) => set({ isLargeScreen: isLarge }),
 }));
 
 export default useStore;

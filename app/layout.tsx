@@ -9,6 +9,7 @@ import { ThemeProvider } from "next-themes";
 import Header from "./components/common/header/header";
 import Footer from "./components/common/footer/footer";
 import Toast from "./components/common/toast/toast";
+import MediaQueryProvider from "./provider/media-query-provider";
 
 // Noto Sans JP (Google Fonts)
 const notoSansJP = Noto_Sans_JP({
@@ -49,6 +50,7 @@ export default async function RootLayout({
       >
         <body className="font-noto-sans-jp flex min-h-screen flex-col">
           <ThemeProvider storageKey="theme">
+            <MediaQueryProvider />
             <Toast />
             <Header categories={categories.contents} blogs={blogs.contents} />
             <main className="w-full flex-grow overflow-clip pt-48">

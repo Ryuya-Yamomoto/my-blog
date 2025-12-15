@@ -7,11 +7,11 @@ import Image from "next/image";
 import { unstable_ViewTransition as ViewTransition } from "react";
 import BadgeRounded from "../badge/badge-rounded";
 
-import { useState, useRef, useEffect } from "react";
-import { motion } from "motion/react";
+import { useState, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import StripHtmlTags from "@/utils/common/stripHtmlTags";
+import useStore from "@/app/store/useStore";
 
 type CardBlogProps = {
   blog: Blog;
@@ -20,30 +20,26 @@ type CardBlogProps = {
 
 const CardBlog = ({ blog, isViewTransition = true }: CardBlogProps) => {
   const cardRef = useRef<HTMLAnchorElement | null>(null);
-  const [isHover, setIsHover] = useState(false);
-  const [pointX, setPointX] = useState(0);
-  const [pointY, setPointY] = useState(0);
+  const [pointX, setPointX] = useState(50);
+  const [pointY, setPointY] = useState(50);
+  const isLargeScreen = useStore((state) => state.isLargeScreen);
 
   return (
     <Link
       ref={cardRef}
       href={`/blog/post/${blog.id}`}
       className={cn(
-        "group relative grid w-full grid-cols-[40%_1fr] gap-x-2",
+        "group relative grid w-full grid-cols-[40%_1fr] gap-x-2 outline-0",
         "lg:aspect-square lg:grid-cols-1 lg:gap-x-0 lg:overflow-hidden"
       )}
       onMouseMove={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-        setIsHover(true);
-        if (cardRef.current) {
+        if (cardRef.current && isLargeScreen) {
           const rect = cardRef.current.getBoundingClientRect();
           const x = ((e.clientX - rect.left) / rect.width) * 100;
           const y = ((e.clientY - rect.top) / rect.height) * 100;
-          setPointX(x);
-          setPointY(y);
+          setPointX(Math.trunc(x));
+          setPointY(Math.trunc(y));
         }
-      }}
-      onMouseLeave={() => {
-        setIsHover(false);
       }}
     >
       <figure
@@ -82,18 +78,20 @@ const CardBlog = ({ blog, isViewTransition = true }: CardBlogProps) => {
           />
         )}
       </figure>
-      <motion.div
+      <div
         className={cn(
           "place-items-[start_center] grid w-full",
-          "lg: lg:absolute lg:top-0 lg:left-0 lg:h-full lg:items-center lg:justify-items-start lg:bg-black/50 lg:p-4"
+          "lg:absolute lg:top-0 lg:left-0 lg:h-full lg:items-center lg:justify-items-start lg:bg-black/50 lg:p-4",
+          "lg:[clip-path:circle(0%_at_var(--positionX)_var(--positionY))]",
+          "lg:group-hover:[clip-path:circle(60%_at_var(--positionX)_var(--positionY))]",
+          "lg:group-focus-visible:[clip-path:inset(0_0_0_0)]"
         )}
-        initial={{ clipPath: `circle(0% at ${pointX}% ${pointY}%)` }}
-        animate={{
-          clipPath: isHover
-            ? `circle(60% at ${pointX}% ${pointY}%)`
-            : `circle(0% at ${pointX}% ${pointY}%)`,
-        }}
-        transition={{ duration: 0.12, delay: 0, ease: "easeOut" }}
+        style={
+          {
+            "--positionX": `${pointX}%`,
+            "--positionY": `${pointY}%`,
+          } as React.CSSProperties
+        }
       >
         <div className="lg:text-white">
           <p
@@ -118,7 +116,7 @@ const CardBlog = ({ blog, isViewTransition = true }: CardBlogProps) => {
             {StripHtmlTags(blog.body)}
           </p>
         </div>
-      </motion.div>
+      </div>
     </Link>
   );
 };
