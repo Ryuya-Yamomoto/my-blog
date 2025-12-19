@@ -9,15 +9,19 @@ export function middleware(req: Request) {
   }
 
   if (basicAuth) {
-    const auth = basicAuth.split(" ")[1];
-    const [user, pwd] = Buffer.from(auth, "base64").toString().split(":");
+    return NextResponse.next();
 
-    if (
-      user === process.env.BASIC_AUTH_USER &&
-      pwd === process.env.BASIC_AUTH_PASSWORD
-    ) {
-      return NextResponse.next();
-    }
+    // 本番環境 Basic認証掛けたければ以下コメンアウト解除 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+    // const auth = basicAuth.split(" ")[1];
+    // const [user, pwd] = Buffer.from(auth, "base64").toString().split(":");
+
+    // if (
+    //   user === process.env.BASIC_AUTH_USER &&
+    //   pwd === process.env.BASIC_AUTH_PASSWORD
+    // ) {
+    //   return NextResponse.next();
+    // }
+    // ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
   }
 
   return new NextResponse("Authentication required", {
