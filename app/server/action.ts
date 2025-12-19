@@ -1,14 +1,11 @@
 "use server";
 
 import * as z from "zod";
+import type { ContactFormData } from "@/app/types/common";
+
+import { Resend } from "resend";
 
 // 型
-type ContactFormData = {
-  name: string;
-  department: string;
-  email: string;
-  inquiry: string;
-};
 type ContactFormErrors = string[] | null;
 type ZodErrors = {
   name?: string[];
@@ -41,6 +38,8 @@ const contactScheme = z.object({
     .min(1, "お問い合わせは必須項目です")
     .max(400, "お問い合わせは400文字以内で入力してください"),
 });
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const actionContactForm = async (
   prevState: ContactFormData,
@@ -75,15 +74,68 @@ export const actionContactForm = async (
   }
 
   // ここでresendでメール処理
+  try {
+    const { error } = await resend.emails.send({
+      from: "MY-BLOG <my-blog@resend.dev>",
+      to: ["ryuya.yamamoto.0325@gmail.com"],
+      subject: "my-blog よりお問い合わせがありました",
+      html: `
+        <div>
+          my-blogよりお問い合わせがありました。
+          <br />
+          <br />
+          ------------------------
+          <br />
+          <br />
+          【お名前】
+          <br />
+          ${payload.name}
+          <br />
+          <br />
+          【所属】
+          <br />
+          ${payload.department}
+          <br />
+          <br />
+          【メールアドレス】
+          <br />
+          ${payload.email}
+          <br />
+          <br />
+          【お問い合わせ内容】
+          <br />
+          ${payload.inquiry}
+          <br />
+          <br />
+          ------------------------
+        </div>
+      `,
+    });
 
-  // 一旦受け取った値を返す
-  return {
-    name: "",
-    department: "",
-    email: "",
-    inquiry: "",
-    zodErrors: null,
-    contactFormErrors: null,
-    status: "success",
-  };
+    if (error) {
+      return {
+        ...payload,
+        zodErrors: null,
+        contactFormErrors: null,
+        status: "error",
+      };
+    }
+
+    return {
+      name: "",
+      department: "",
+      email: "",
+      inquiry: "",
+      zodErrors: null,
+      contactFormErrors: null,
+      status: "success",
+    };
+  } catch (error) {
+    return {
+      ...payload,
+      zodErrors: null,
+      contactFormErrors: [`${error}: メールの送信中にエラーが発生しました。`],
+      status: "error",
+    };
+  }
 };

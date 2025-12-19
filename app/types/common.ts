@@ -46,3 +46,10 @@ export type ButtonProps = {
   link?: never;
   handleClick?: () => void;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
+
+export type ContactFormData = {
+  name: string;
+  department: string;
+  email: string;
+  inquiry: string;
+};
