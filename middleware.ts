@@ -1,29 +1,31 @@
-// import { NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-// export function middleware(req: Request) {
-//   const basicAuth = req.headers.get("authorization");
+export function middleware(req: Request) {
+  return NextResponse.next();
 
-//   // Production環境のみ適用
-//   if (process.env.NODE_ENV !== "production") {
-//     return NextResponse.next();
-//   }
+  const basicAuth = req.headers.get("authorization");
 
-//   if (basicAuth) {
-//     const auth = basicAuth.split(" ")[1];
-//     const [user, pwd] = Buffer.from(auth, "base64").toString().split(":");
+  // Production環境のみ適用
+  if (process.env.NODE_ENV !== "production") {
+    return NextResponse.next();
+  }
 
-//     if (
-//       user === process.env.BASIC_AUTH_USER &&
-//       pwd === process.env.BASIC_AUTH_PASSWORD
-//     ) {
-//       return NextResponse.next();
-//     }
-//   }
+  if (basicAuth) {
+    const auth = basicAuth.split(" ")[1];
+    const [user, pwd] = Buffer.from(auth, "base64").toString().split(":");
 
-//   return new NextResponse("Authentication required", {
-//     status: 401,
-//     headers: {
-//       "WWW-Authenticate": 'Basic realm="Secure Area"',
-//     },
-//   });
-// }
+    if (
+      user === process.env.BASIC_AUTH_USER &&
+      pwd === process.env.BASIC_AUTH_PASSWORD
+    ) {
+      return NextResponse.next();
+    }
+  }
+
+  return new NextResponse("Authentication required", {
+    status: 401,
+    headers: {
+      "WWW-Authenticate": 'Basic realm="Secure Area"',
+    },
+  });
+}
