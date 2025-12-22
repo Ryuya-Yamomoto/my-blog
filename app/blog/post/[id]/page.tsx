@@ -92,6 +92,7 @@ export default async function Page({
       </div>
 
       <BlockArticleBottom
+        spotify_album_id={article.spotify_album_id}
         category={article.category}
         otherArticles={otherArticles.contents}
       />

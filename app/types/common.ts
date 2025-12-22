@@ -6,6 +6,7 @@ export type Blog = {
   category: Category;
   thumbnail: Thumbnail;
   body: string;
+  spotify_album_id?: string;
 };
 
 export type BlogArticle = {
@@ -18,6 +19,7 @@ export type BlogArticle = {
   category: Category;
   thumbnail: Thumbnail;
   body: string;
+  spotify_album_id?: string;
 };
 
 export type Category = {

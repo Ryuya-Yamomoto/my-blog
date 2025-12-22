@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useLayoutEffect } from "react";
 import Lenis from "@studio-freight/lenis";
 
 export const LenisProvider = () => {
@@ -31,7 +31,7 @@ export const LenisProvider = () => {
   }, []);
 
   // URL変更時を監視
-  useEffect(() => {
+  useLayoutEffect(() => {
     lenisRef.current?.stop();
     const timer = setTimeout(() => {
       lenisRef.current?.start();
