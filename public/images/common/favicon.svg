@@ -1,0 +1,15 @@
+<svg width="42" height="42" xmlns="http://www.w3.org/2000/svg">
+  <!-- 白い背景 -->
+  <rect width="42" height="42" fill="white"/>
+  
+
+  
+  <!-- 左目 -->
+  <circle cx="14" cy="14" r="4" fill="black"/>
+  
+  <!-- 右目 -->
+  <circle cx="28" cy="14" r="4" fill="black"/>
+  
+  <!-- 笑顔の口（溶けているエフェクト） -->
+  <path d="M 8 26 Q 12 35 16 34 Q 18 31 20 35 Q 21 38 22 35 Q 24 31 26 34 Q 30 35 34 26" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
