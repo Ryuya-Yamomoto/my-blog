@@ -34,3 +34,25 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## サムネ画像
+
+### サイズ
+
+1000px × 1000px
+
+### フォント
+
+color | #333333
+font-family | Helvetica
+font-size | 72px
+font-weight | Light
+line-height | 150%
+
+### 背景色
+
+#ffffff
+
+### 背景の円
+
+900px × 900px の正円 中心に配置

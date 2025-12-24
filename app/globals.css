@@ -46,17 +46,17 @@
       @apply mt-16 text-5xl leading-normal font-bold;
     }
     h2 {
-      @apply mt-16 border-b-2 text-4xl leading-normal font-bold;
+      @apply mt-16 mb-8 border-b-2 text-4xl leading-normal font-bold;
     }
     h3 {
-      @apply relative mt-8 pl-5 text-3xl leading-normal font-bold;
+      @apply relative mt-8 mb-4 pl-5 text-3xl leading-normal font-bold;
       @apply before:bg-foreground before:absolute before:top-4.5 before:left-0 before:block before:aspect-square before:h-2 before:content-[''];
     }
     h4 {
-      @apply mt-8 text-2xl leading-normal font-bold;
+      @apply mt-8 mb-4 text-2xl leading-normal font-bold;
     }
     h5 {
-      @apply mt-4 text-xl leading-normal font-bold;
+      @apply mt-4 mb-4 text-xl leading-normal font-bold;
     }
 
     > p {
@@ -123,8 +123,16 @@
       }
     }
 
+    pre {
+      @apply grid;
+    }
+
     div:has(> iframe) {
-      @apply mt-8;
+      @apply mt-8 grid;
+    }
+
+    div:has(> iframe[src*="codepen.io"]) {
+      @apply h-100 md:!h-125;
     }
   }
 
