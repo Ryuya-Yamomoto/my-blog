@@ -35,24 +35,40 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
-## サムネ画像
+## サムネイル画像 生成YAML title subTitle 箇所を記事に合わせ変更してください
 
-### サイズ
-
-1000px × 1000px
-
-### フォント
-
-color | #333333
-font-family | Helvetica
-font-size | 72px
-font-weight | Light
-line-height | 150%
-
-### 背景色
-
-#ffffff
-
-### 背景の円
-
-900px × 900px の正円 中心に配置
+<!-- prettier-ignore-start -->
+thumbnail_image:
+  format: svg
+  size:
+    width: 1000px
+    height: 1000px
+  background:
+    color: rgba(0, 0, 0, 0.5)
+    blur: blur(4px)
+  font:
+    family: Helvetica
+    weight: Light
+    color: "#FFFFFF"
+  font_size:
+    title: 72px
+    subtitle: 64px
+  layout:
+    title:
+      position: center
+      size: large
+    subtitle:
+      position: below_title
+      decorator: "~~"
+    decoration:
+      type: circle
+      size: 900px
+      position: center
+      background_color: rgba(0, 0, 0, 0.1)
+      border:
+        width: 1px
+        color: "#ffffff"
+  content:
+    title: "Title"
+    subtitle: "SubTitle"
+<!-- prettier-ignore-end -->
