@@ -29,6 +29,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Ryuya Yamamoto",
   description: "Ryuya Yamamoto's Portfolio Site",
+  openGraph: {
+    images: "/images/og.png",
+  },
 };
 
 export default async function RootLayout({

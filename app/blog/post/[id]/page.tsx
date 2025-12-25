@@ -123,6 +123,16 @@ export const generateMetadata = async ({
 
   return {
     title: `${article.title} | Ryuya Yamamoto`,
+    openGraph: {
+      images: article.thumbnail
+        ? {
+            url: article.thumbnail.url,
+            width: article.thumbnail.width,
+            height: article.thumbnail.height,
+            alt: "サムネイル画像",
+          }
+        : undefined,
+    },
   };
 };
 
