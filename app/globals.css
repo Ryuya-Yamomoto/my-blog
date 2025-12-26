@@ -183,6 +183,9 @@
 @layer utilities {
   /* about ページ @layer components だと負けてしまうので utilities で定義 */
   body:has(.is-about-page) {
+    main {
+      @apply pt-0;
+    }
     header {
       @apply border-none bg-transparent;
     }
