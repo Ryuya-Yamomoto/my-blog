@@ -35,7 +35,7 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
-## サムネイル画像 生成YAML title subTitle 箇所を記事に合わせ変更してください
+## サムネイル画像生成YAML title subTitle 箇所を記事に合わせ変更してください
 
 <!-- prettier-ignore-start -->
 thumbnail_image:
