@@ -82,7 +82,7 @@ const Header = ({ categories, blogs }: HeaderProps) => {
       className={cn(
         "transition-background fixed top-0 right-0 left-0 z-100 h-16 duration-300",
         isMenuOpen || isKensakuOpen
-          ? "bg-background"
+          ? "!bg-background"
           : "bg-background/70 border-border border-b backdrop-blur-[2px]"
       )}
     >

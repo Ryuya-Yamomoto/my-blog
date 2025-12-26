@@ -180,6 +180,15 @@
   }
 }
 
+@layer utilities {
+  /* about ページ @layer components だと負けてしまうので utilities で定義 */
+  body:has(.is-about-page) {
+    header {
+      @apply border-none bg-transparent;
+    }
+  }
+}
+
 :root {
   --background: oklch(0.84 0.006 106.1);
   --foreground: oklch(0.19 0.008 270);
