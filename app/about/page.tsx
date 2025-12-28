@@ -1,11 +1,13 @@
 import SectionMv from "../components/about/section-mv";
 import SectionTech from "../components/about/section-tech";
+import SectionAttitude from "../components/about/section-attitude";
 
 export default async function Page() {
   return (
     <div className="is-about-page">
       <SectionMv />
       <SectionTech />
+      <SectionAttitude />
     </div>
   );
 }

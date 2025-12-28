@@ -41,6 +41,14 @@ const NavContent = (props: NavContentProps) => {
             <li>
               <MenuLink
                 currentPathname={currentPathname}
+                matchPath="/about"
+                slug="about"
+                isOpen={isOpen}
+              />
+            </li>
+            <li>
+              <MenuLink
+                currentPathname={currentPathname}
                 matchPath="/blog"
                 slug="all"
                 isOpen={isOpen}
