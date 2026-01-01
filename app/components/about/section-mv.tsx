@@ -27,6 +27,15 @@ const SectionMv = () => {
       return;
 
     // img01のScrollTrigger
+    gsap.to(img01.current.querySelector("img"), {
+      y: -200,
+      scrollTrigger: {
+        trigger: img01.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
     gsap.to(".overlay_01 .slit", {
       scaleY: 1,
       stagger: {
@@ -43,6 +52,15 @@ const SectionMv = () => {
     });
 
     // img02のScrollTrigger
+    gsap.to(img02.current.querySelector("img"), {
+      y: -200,
+      scrollTrigger: {
+        trigger: img02.current,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
     gsap.to(".overlay_02 .slit", {
       scaleY: 1,
       stagger: {
@@ -59,6 +77,15 @@ const SectionMv = () => {
     });
 
     // img03のScrollTrigger
+    gsap.to(img03.current.querySelector("img"), {
+      y: -200,
+      scrollTrigger: {
+        trigger: img03.current,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
     gsap.to(".overlay_03 .slit", {
       scaleY: 1,
       stagger: {
@@ -81,13 +108,13 @@ const SectionMv = () => {
         {/* 画像 1枚目 */}
         <div ref={img01} className="relative h-svh w-full [clip-path:inset(0)]">
           <Overlay className="overlay_01" />
-          <figure className={cn("fixed inset-0")}>
+          <figure className={cn("fixed inset-0 overflow-hidden")}>
             <Image
               src="/images/about/mv_01.jpg"
               alt="MV"
               height={785}
               width={589}
-              className={cn("h-full w-full object-cover")}
+              className={cn("h-full w-full origin-top scale-140 object-cover")}
             />
           </figure>
         </div>
@@ -98,13 +125,13 @@ const SectionMv = () => {
           className="relative h-[70svh] w-full [clip-path:inset(0)]"
         >
           <Overlay className="overlay_02" />
-          <figure className={cn("fixed inset-0")}>
+          <figure className={cn("fixed inset-0 overflow-hidden")}>
             <Image
               src="/images/about/mv_02.jpg"
               alt="MV"
               height={785}
               width={589}
-              className={cn("h-full w-full object-cover")}
+              className={cn("h-full w-full origin-top scale-140 object-cover")}
             />
           </figure>
         </div>
@@ -115,13 +142,13 @@ const SectionMv = () => {
           className="relative h-[70svh] w-full [clip-path:inset(0)]"
         >
           <Overlay className="overlay_03" />
-          <figure className={cn("fixed inset-0")}>
+          <figure className={cn("fixed inset-0 overflow-hidden")}>
             <Image
               src="/images/about/mv_03.jpg"
               alt="MV"
               height={785}
               width={589}
-              className={cn("h-full w-full object-cover")}
+              className={cn("h-full w-full origin-top scale-140 object-cover")}
             />
           </figure>
         </div>
