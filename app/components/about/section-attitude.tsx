@@ -41,12 +41,21 @@ const SectionAttitude = () => {
         scrub: true,
       },
     });
-    gsap.to(section_03.current.querySelector(".content"), {
+    gsap.to(section_03.current.querySelector(".content_01"), {
       clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
       scrollTrigger: {
-        trigger: section_03.current,
-        start: "top center",
-        end: "top top",
+        trigger: section_03.current.querySelector(".content_01"),
+        start: "top 125%",
+        end: "top 25%",
+        scrub: true,
+      },
+    });
+    gsap.to(section_03.current.querySelector(".content_02"), {
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+      scrollTrigger: {
+        trigger: section_03.current.querySelector(".content_02"),
+        start: "top 125%",
+        end: "top 25%",
         scrub: true,
       },
     });
@@ -123,10 +132,10 @@ const SectionAttitude = () => {
 };
 
 const Section03 = forwardRef<HTMLDivElement>((_, ref) => {
-  const array = [
+  const attitudeArray = [
     {
       title: "コミュニケーション",
-      text: "会話を大切にして、同じ方向を向くことを心がけます。",
+      text: "会話を大切にして、同じ方向を向いていきます。",
     },
     {
       title: "常に学ぶ姿勢",
@@ -134,7 +143,7 @@ const Section03 = forwardRef<HTMLDivElement>((_, ref) => {
     },
     {
       title: "広い視野",
-      text: "自分一人で終わる仕事はありえません。同じよりよい成果を目指すチームとして、自分の役割、前後の仕事の流れを意識して制作します。",
+      text: "自分一人で終わる仕事はそうありません。同じよりよい成果を目指すチームとして、自分の役割、前後の仕事の流れを意識して制作します。",
     },
     {
       title: "遊び心",
@@ -142,30 +151,63 @@ const Section03 = forwardRef<HTMLDivElement>((_, ref) => {
     },
   ];
 
+  const profileArray = [
+    {
+      title: "好きなこと",
+      text: "映画、音楽、テニス、散歩",
+    },
+    {
+      title: "性格",
+      text: "おしゃべり",
+    },
+    {
+      title: "好きな食べ物",
+      text: "から揚げ",
+    },
+  ];
+
   return (
-    <div ref={ref}>
+    <div ref={ref} className="relative z-10 pb-16">
       <div
         className={cn(
           "bg",
-          "grid w-full origin-top scale-30 place-items-center bg-black px-4 py-20"
+          "sticky top-0 -z-1 h-lvh w-full origin-top scale-30 bg-[url(/images/about/attitude_bg.jpg)] bg-cover bg-center",
+          "before:absolute before:inset-0 before:z-1 before:bg-black/60 before:backdrop-blur-sm before:content-['']"
+        )}
+      />
+
+      <div
+        className={cn(
+          "content_01",
+          "relative z-1 mx-auto w-[80%] max-w-100 bg-white/70 px-4 py-10 text-black [clip-path:polygon(50%_0,50%_0,50%_100%,50%_100%)]"
         )}
       >
-        <div
-          className={cn(
-            "content",
-            "w-[80%] max-w-100 bg-white/80 px-4 py-10 text-black [clip-path:polygon(0_0,0_0,0_0,0_0)]"
-          )}
-        >
-          <h2 className="text-lg font-normal">仕事に対しての姿勢</h2>
-          <ul className="mt-16 grid gap-y-12 text-sm">
-            {array.map((item, index) => (
-              <li key={index} className="grid gap-y-2">
-                <p>{item.title}</p>
-                <p>{item.text}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <h2 className="text-lg font-normal">自己紹介</h2>
+        <ul className="mt-16 grid gap-y-12 text-sm">
+          {profileArray.map((item, index) => (
+            <li key={index} className="grid gap-y-2">
+              <p>{item.title}</p>
+              <p>{item.text}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div
+        className={cn(
+          "content_02",
+          "relative z-1 mx-auto my-16 w-[80%] max-w-100 bg-white/70 px-4 py-10 text-black [clip-path:polygon(50%_0,50%_0,50%_100%,50%_100%)]"
+        )}
+      >
+        <h2 className="text-lg font-normal">大切にしていること</h2>
+        <ul className="mt-16 grid gap-y-12 text-sm">
+          {attitudeArray.map((item, index) => (
+            <li key={index} className="grid gap-y-2">
+              <p>{item.title}</p>
+              <p>{item.text}</p>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
@@ -175,7 +217,7 @@ Section03.displayName = "Section03";
 const Section02 = forwardRef<HTMLDivElement>((_, ref) => {
   return (
     <div ref={ref} className={cn("absolute inset-0 grid")}>
-      <h2 className="font-inter absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-normal whitespace-nowrap">
+      <h2 className="font-inter pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-normal whitespace-nowrap">
         <span className="inline-block">A</span>
         <span className="inline-block">B</span>
         <span className="inline-block">O</span>
@@ -225,7 +267,8 @@ const Section01 = forwardRef<HTMLDivElement>((_, ref) => {
       ref={ref}
       className={cn(
         "absolute inset-0 z-10",
-        "pointer-events-none grid grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1.4fr)] grid-rows-[minmax(0,1fr)_minmax(0,1.2fr)_minmax(0,1fr)] gap-1"
+        "pointer-events-none grid grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)_minmax(0,1fr)] grid-rows-[minmax(0,1fr)_minmax(0,1.2fr)_minmax(0,1fr)] gap-1",
+        "md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1.4fr)] md:grid-rows-[minmax(0,1fr)_minmax(0,1.2fr)_minmax(0,1fr)]"
       )}
     >
       {gridArray.map((item, index) => {
@@ -236,7 +279,9 @@ const Section01 = forwardRef<HTMLDivElement>((_, ref) => {
               alt=""
               height={450}
               width={450}
-              className="object-top-center h-full w-full translate-y-10 scale-140 object-cover filter-[grayscale(1)]"
+              className={cn(
+                "object-top-center h-full w-full translate-y-10 scale-140 object-cover filter-[grayscale(1)]"
+              )}
             />
           </figure>
         ) : (
