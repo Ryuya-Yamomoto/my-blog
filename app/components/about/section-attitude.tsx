@@ -32,8 +32,18 @@ const SectionAttitude = () => {
       return;
 
     // Section03 アニメーション
+    gsap.to(section_03.current.querySelector(".bg img"), {
+      y: -80,
+      scrollTrigger: {
+        trigger: section_03.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
     gsap.to(section_03.current.querySelector(".bg"), {
       scale: 1,
+      filter: "grayscale(1) brightness(0.3)",
       scrollTrigger: {
         trigger: section_03.current,
         start: "top bottom",
@@ -96,6 +106,12 @@ const SectionAttitude = () => {
         start: "top bottom",
         end: "bottom top",
         scrub: true,
+        onLeave: () => {
+          gsap.set(section_01_target.current, { visibility: "hidden" });
+        },
+        onEnterBack: () => {
+          gsap.set(section_01_target.current, { visibility: "visible" });
+        },
       },
     });
     gsap.to(section_01_target.current.querySelectorAll("img"), {
@@ -113,7 +129,7 @@ const SectionAttitude = () => {
     <section
       id="section-attitude"
       ref={sectionAttitude}
-      className={cn("relative w-full")}
+      className={cn("relative w-full overflow-clip")}
     >
       {/* コンテンツ */}
       <div className="sticky top-0 z-10 h-svh w-full">
@@ -153,6 +169,14 @@ const Section03 = forwardRef<HTMLDivElement>((_, ref) => {
 
   const profileArray = [
     {
+      title: "職種",
+      text: "フロントエンドエンジニア",
+    },
+    {
+      title: "技術スタック",
+      text: "HTML, CSS, JavaScript, TypeScript, React, Next.js, GSAP, Tailwind CSS ...etc.",
+    },
+    {
       title: "好きなこと",
       text: "映画、音楽、テニス、散歩",
     },
@@ -171,18 +195,34 @@ const Section03 = forwardRef<HTMLDivElement>((_, ref) => {
       <div
         className={cn(
           "bg",
-          "sticky top-0 -z-1 h-lvh w-full origin-top scale-30 bg-[url(/images/about/attitude_bg.jpg)] bg-cover bg-center",
-          "before:absolute before:inset-0 before:z-1 before:bg-black/60 before:backdrop-blur-sm before:content-['']"
+          "sticky top-0 -z-1 h-lvh w-full origin-top scale-30 filter-[grayscale(1)_brightness(0)]"
         )}
-      />
+      >
+        <Image
+          src="/images/about/attitude_bg.jpg"
+          alt=""
+          height={500}
+          width={500}
+          className={cn(
+            "object-position-top h-full w-full scale-150 object-cover"
+          )}
+        />
+      </div>
 
       <div
         className={cn(
           "content_01",
-          "relative z-1 mx-auto w-[80%] max-w-100 bg-white/70 px-4 py-10 text-black [clip-path:polygon(50%_0,50%_0,50%_100%,50%_100%)]"
+          "relative z-1 mx-auto w-[80%] max-w-100 rounded-sm bg-white/70 px-4 py-10 text-black backdrop-blur-sm [clip-path:polygon(50%_0,50%_0,50%_100%,50%_100%)]"
         )}
       >
-        <h2 className="text-lg font-normal">自己紹介</h2>
+        <h2
+          className={cn(
+            "relative text-lg font-normal",
+            "before:absolute before:-bottom-4 before:left-0 before:h-px before:w-3 before:bg-black before:content-['']"
+          )}
+        >
+          自己紹介
+        </h2>
         <ul className="mt-16 grid gap-y-12 text-sm">
           {profileArray.map((item, index) => (
             <li key={index} className="grid gap-y-2">
@@ -196,10 +236,17 @@ const Section03 = forwardRef<HTMLDivElement>((_, ref) => {
       <div
         className={cn(
           "content_02",
-          "relative z-1 mx-auto my-16 w-[80%] max-w-100 bg-white/70 px-4 py-10 text-black [clip-path:polygon(50%_0,50%_0,50%_100%,50%_100%)]"
+          "relative z-1 mx-auto mt-16 w-[80%] max-w-100 rounded-sm bg-white/70 px-4 py-10 text-black backdrop-blur-sm [clip-path:polygon(50%_0,50%_0,50%_100%,50%_100%)]"
         )}
       >
-        <h2 className="text-lg font-normal">大切にしていること</h2>
+        <h2
+          className={cn(
+            "relative text-lg font-normal",
+            "before:absolute before:-bottom-4 before:left-0 before:h-px before:w-3 before:bg-black before:content-['']"
+          )}
+        >
+          大切にしていること
+        </h2>
         <ul className="mt-16 grid gap-y-12 text-sm">
           {attitudeArray.map((item, index) => (
             <li key={index} className="grid gap-y-2">
@@ -216,7 +263,12 @@ Section03.displayName = "Section03";
 
 const Section02 = forwardRef<HTMLDivElement>((_, ref) => {
   return (
-    <div ref={ref} className={cn("absolute inset-0 grid")}>
+    <div
+      ref={ref}
+      className={cn(
+        "absolute inset-0 grid shadow-[inset_0_0_20px_rgba(0,0,0,0.5)]"
+      )}
+    >
       <h2 className="font-inter pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-normal whitespace-nowrap">
         <span className="inline-block">A</span>
         <span className="inline-block">B</span>
@@ -234,31 +286,20 @@ Section02.displayName = "Section02";
 const Section01 = forwardRef<HTMLDivElement>((_, ref) => {
   const gridArray = [
     {
+      pos: "area01",
       img: "attitude_img_01.jpg",
     },
     {
+      pos: "area02",
       img: "attitude_img_02.jpg",
     },
     {
+      pos: "area03",
       img: "attitude_img_03.jpg",
     },
     {
+      pos: "area04",
       img: "attitude_img_04.jpg",
-    },
-    {
-      img: "attitude_img_06.jpg",
-    },
-    {
-      img: "attitude_img_07.jpg",
-    },
-    {
-      img: "attitude_img_08.jpg",
-    },
-    {
-      img: "attitude_img_09.jpg",
-    },
-    {
-      img: "attitude_img_10.jpg",
     },
   ];
 
@@ -267,13 +308,19 @@ const Section01 = forwardRef<HTMLDivElement>((_, ref) => {
       ref={ref}
       className={cn(
         "absolute inset-0 z-10",
-        "pointer-events-none grid grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)_minmax(0,1fr)] grid-rows-[minmax(0,1fr)_minmax(0,1.2fr)_minmax(0,1fr)] gap-1",
+        "pointer-events-none grid grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)_minmax(0,1fr)] grid-rows-[minmax(0,1fr)_minmax(0,1.2fr)_minmax(0,1fr)] gap-1 [grid-template-areas:'area01_area02_area02'_'area01_center_area03'_'area04_area04_area03']",
         "md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1.4fr)] md:grid-rows-[minmax(0,1fr)_minmax(0,1.2fr)_minmax(0,1fr)]"
       )}
     >
       {gridArray.map((item, index) => {
-        return index !== 4 ? (
-          <figure key={index} className={cn("h-full w-full overflow-hidden")}>
+        return (
+          <figure
+            key={index}
+            className={cn("h-full w-full overflow-clip")}
+            style={{
+              gridArea: item.pos,
+            }}
+          >
             <Image
               src={`/images/about/${item.img}`}
               alt=""
@@ -284,13 +331,9 @@ const Section01 = forwardRef<HTMLDivElement>((_, ref) => {
               )}
             />
           </figure>
-        ) : (
-          <div
-            key={index}
-            className="bg-transparent shadow-[inset_0_0_20px_rgba(0,0,0,0.5)]"
-          ></div>
         );
       })}
+      <div className="bg-transparent shadow-[inset_0_0_20px_rgba(0,0,0,0.5)] [grid-area:center]"></div>
     </div>
   );
 });

@@ -1,6 +1,14 @@
+import type { Metadata } from "next";
+
 import SectionMv from "../components/about/section-mv";
 import SectionTech from "../components/about/section-tech";
 import SectionAttitude from "../components/about/section-attitude";
+import SectionMovie from "../components/about/section-movie";
+import SectionContact from "../components/about/section-contact";
+
+export const metadata: Metadata = {
+  title: "私 | Ryuya Yamamoto",
+};
 
 export default async function Page() {
   return (
@@ -8,6 +16,8 @@ export default async function Page() {
       <SectionMv />
       <SectionTech />
       <SectionAttitude />
+      <SectionMovie />
+      <SectionContact />
     </div>
   );
 }

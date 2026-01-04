@@ -189,6 +189,9 @@
     header {
       @apply border-none bg-transparent backdrop-blur-none;
     }
+    footer {
+      @apply mt-0;
+    }
   }
 }
 
