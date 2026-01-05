@@ -212,13 +212,13 @@ const Section03 = forwardRef<HTMLDivElement>((_, ref) => {
       <div
         className={cn(
           "content_01",
-          "relative z-1 mx-auto w-[80%] max-w-100 rounded-sm bg-white/70 px-4 py-10 text-black backdrop-blur-sm [clip-path:polygon(50%_0,50%_0,50%_100%,50%_100%)]"
+          "bg-background/70 relative z-1 mx-auto w-[80%] max-w-100 rounded-sm px-4 py-10 backdrop-blur-sm [clip-path:polygon(50%_0,50%_0,50%_100%,50%_100%)]"
         )}
       >
         <h2
           className={cn(
             "relative text-lg font-normal",
-            "before:absolute before:-bottom-4 before:left-0 before:h-px before:w-3 before:bg-black before:content-['']"
+            "before:bg-foreground before:absolute before:-bottom-4 before:left-0 before:h-px before:w-3 before:content-['']"
           )}
         >
           自己紹介
@@ -236,13 +236,13 @@ const Section03 = forwardRef<HTMLDivElement>((_, ref) => {
       <div
         className={cn(
           "content_02",
-          "relative z-1 mx-auto mt-16 w-[80%] max-w-100 rounded-sm bg-white/70 px-4 py-10 text-black backdrop-blur-sm [clip-path:polygon(50%_0,50%_0,50%_100%,50%_100%)]"
+          "bg-background/70 relative z-1 mx-auto mt-16 w-[80%] max-w-100 rounded-sm px-4 py-10 backdrop-blur-sm [clip-path:polygon(50%_0,50%_0,50%_100%,50%_100%)]"
         )}
       >
         <h2
           className={cn(
             "relative text-lg font-normal",
-            "before:absolute before:-bottom-4 before:left-0 before:h-px before:w-3 before:bg-black before:content-['']"
+            "before:bg-foreground before:absolute before:-bottom-4 before:left-0 before:h-px before:w-3 before:content-['']"
           )}
         >
           大切にしていること

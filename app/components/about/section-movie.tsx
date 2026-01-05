@@ -34,7 +34,7 @@ const SectionMovie = () => {
     <section
       ref={sectionMovie}
       id="section-movie"
-      className="h-[90lvh] [clip-path:inset(0)]"
+      className="h-[60lvh] [clip-path:inset(0)]"
     >
       <div className="fixed inset-0 overflow-clip">
         <figure

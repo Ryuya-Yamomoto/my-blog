@@ -4,6 +4,7 @@ import SectionMv from "../components/about/section-mv";
 import SectionTech from "../components/about/section-tech";
 import SectionAttitude from "../components/about/section-attitude";
 import SectionMovie from "../components/about/section-movie";
+import SectionGallery from "../components/about/section-gallery";
 import SectionContact from "../components/about/section-contact";
 
 export const metadata: Metadata = {
@@ -17,6 +18,7 @@ export default async function Page() {
       <SectionTech />
       <SectionAttitude />
       <SectionMovie />
+      <SectionGallery />
       <SectionContact />
     </div>
   );
