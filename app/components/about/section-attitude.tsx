@@ -204,7 +204,7 @@ const Section03 = forwardRef<HTMLDivElement>((_, ref) => {
           height={500}
           width={500}
           className={cn(
-            "object-position-top h-full w-full scale-150 object-cover"
+            "object-position-top pointer-events-none h-full w-full scale-150 object-cover"
           )}
         />
       </div>
@@ -212,7 +212,7 @@ const Section03 = forwardRef<HTMLDivElement>((_, ref) => {
       <div
         className={cn(
           "content_01",
-          "bg-background/70 relative z-1 mx-auto w-[80%] max-w-100 rounded-sm px-4 py-10 backdrop-blur-sm [clip-path:polygon(50%_0,50%_0,50%_100%,50%_100%)]"
+          "bg-background/90 relative z-1 mx-auto w-[80%] max-w-100 rounded-sm px-4 py-10 backdrop-blur-sm [clip-path:polygon(50%_0,50%_0,50%_100%,50%_100%)]"
         )}
       >
         <h2
@@ -236,7 +236,7 @@ const Section03 = forwardRef<HTMLDivElement>((_, ref) => {
       <div
         className={cn(
           "content_02",
-          "bg-background/70 relative z-1 mx-auto mt-16 w-[80%] max-w-100 rounded-sm px-4 py-10 backdrop-blur-sm [clip-path:polygon(50%_0,50%_0,50%_100%,50%_100%)]"
+          "bg-background/90 relative z-1 mx-auto mt-16 w-[80%] max-w-100 rounded-sm px-4 py-10 backdrop-blur-sm [clip-path:polygon(50%_0,50%_0,50%_100%,50%_100%)]"
         )}
       >
         <h2

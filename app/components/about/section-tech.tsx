@@ -51,7 +51,7 @@ const SectionTech = () => {
     if (!sectionTech.current || !bgText.current) return;
 
     gsap.to(bgText.current, {
-      x: "30%",
+      x: "50vw",
       scrollTrigger: {
         trigger: sectionTech.current,
         start: "top bottom",
