@@ -50,7 +50,6 @@ const SectionGallery = () => {
 
     // 最終的な位置とスタイルを設定（画面全体に表示）
     gsap.set(dialogRef.current, { clearProps: true });
-    gsap.set(dialogRef.current, { display: "grid" });
 
     // アニメーション実行
     Flip.from(state, {
@@ -252,7 +251,8 @@ const SectionGallery = () => {
           }
         }}
         className={cn(
-          "m-auto h-auto max-h-[80%] w-auto max-w-[80%] place-items-center bg-transparent outline-none",
+          "m-auto h-full max-h-[80%] w-full max-w-[80%] bg-transparent outline-none",
+          "lg:h-fit lg:w-fit",
           "backdrop:bg-black/50 backdrop:backdrop-blur-sm"
         )}
       >
