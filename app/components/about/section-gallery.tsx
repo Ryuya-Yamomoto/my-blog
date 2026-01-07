@@ -9,6 +9,7 @@ import { Flip } from "gsap/all";
 import ButtonClose from "../common/button/button-close";
 
 import { useScrollLock } from "@/app/hooks/useScrollLock";
+import useStore from "@/app/store/useStore";
 
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(Flip);
@@ -21,6 +22,8 @@ const SectionGallery = () => {
     year: string;
     spotify: string;
   } | null>(null);
+
+  const isLargeScreen = useStore((state) => state.isLargeScreen);
 
   const sectionGallery = useRef<HTMLElement>(null);
   const grid = useRef<HTMLDivElement>(null); //- ギャラリーグリッド要素
@@ -47,6 +50,7 @@ const SectionGallery = () => {
 
     // 最終的な位置とスタイルを設定（画面全体に表示）
     gsap.set(dialogRef.current, { clearProps: true });
+    gsap.set(dialogRef.current, { display: "grid" });
 
     // アニメーション実行
     Flip.from(state, {
@@ -78,9 +82,14 @@ const SectionGallery = () => {
 
   // 詳細ダイアログ 非表示処理
   const handleCloseDetail = () => {
+    // ウィンドウ幅に応じて clipPath を変更
+    const closeClipPath = isLargeScreen
+      ? "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)" // 1024px以上: 左から閉じる
+      : "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)"; // 1024px未満: 上から閉じる
+
     // コンテンツを閉じる
     gsap.to(detailContent.current, {
-      clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)",
+      clipPath: closeClipPath,
       duration: 0.25,
       onStart: () => {
         const closeButton = dialogRef.current?.querySelector("#close-button");
@@ -96,7 +105,7 @@ const SectionGallery = () => {
         // クリックされた要素の位置とサイズに設定
         Flip.fit(dialogRef.current, clickedItem.current, {
           scale: true,
-          fitChild: detailImage.current,
+          fitChild: detailImage.current!,
         });
 
         // アニメーション実行（現在の状態から小さい位置へ）
@@ -126,7 +135,10 @@ const SectionGallery = () => {
 
   useEffect(() => {
     if (detailItem) {
-      handleShowDetail();
+      // DOM のレンダリングが完了するまで待つ
+      requestAnimationFrame(() => {
+        handleShowDetail();
+      });
     }
   }, [detailItem]);
 
@@ -217,7 +229,6 @@ const SectionGallery = () => {
               onClick={(e) => {
                 clickedItem.current = e.currentTarget as HTMLElement;
                 setDetailItem(item);
-                handleShowDetail();
               }}
             >
               <Image
@@ -241,7 +252,7 @@ const SectionGallery = () => {
           }
         }}
         className={cn(
-          "m-auto h-auto max-h-[80%] w-auto max-w-[80%] bg-transparent outline-none",
+          "m-auto h-auto max-h-[80%] w-auto max-w-[80%] place-items-center bg-transparent outline-none",
           "backdrop:bg-black/50 backdrop:backdrop-blur-sm"
         )}
       >
@@ -267,7 +278,8 @@ const SectionGallery = () => {
               <div
                 ref={detailContent}
                 className={cn(
-                  "bg-background overflow-clip rounded-r-md p-4 [clip-path:polygon(0_0,0_0,0_100%,0_100%)]"
+                  "bg-background overflow-clip rounded-r-md p-4 [clip-path:polygon(0_0,100%_0,100%_0,0_0)]",
+                  "lg:[clip-path:polygon(0_0,0_0,0_100%,0_100%)]"
                 )}
               >
                 <div
