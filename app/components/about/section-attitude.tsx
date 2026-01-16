@@ -32,30 +32,11 @@ const SectionAttitude = () => {
       return;
 
     // Section03 アニメーション
-    gsap.to(section_03.current.querySelector(".bg img"), {
-      y: -80,
-      scrollTrigger: {
-        trigger: section_03.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
-    gsap.to(section_03.current.querySelector(".bg"), {
-      scale: 1,
-      filter: "grayscale(1) brightness(0.3)",
-      scrollTrigger: {
-        trigger: section_03.current,
-        start: "top bottom",
-        end: "top top",
-        scrub: true,
-      },
-    });
     gsap.to(section_03.current.querySelector(".content_01"), {
       clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
       scrollTrigger: {
         trigger: section_03.current.querySelector(".content_01"),
-        start: "top 125%",
+        start: "top bottom",
         end: "top 25%",
         scrub: true,
       },
@@ -64,7 +45,7 @@ const SectionAttitude = () => {
       clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
       scrollTrigger: {
         trigger: section_03.current.querySelector(".content_02"),
-        start: "top 125%",
+        start: "top bottom",
         end: "top 25%",
         scrub: true,
       },
@@ -93,7 +74,7 @@ const SectionAttitude = () => {
       scrollTrigger: {
         trigger: section_02_trigger.current,
         start: "top bottom",
-        end: "bottom top",
+        end: "bottom center",
         scrub: true,
       },
     });
@@ -191,22 +172,26 @@ const Section03 = forwardRef<HTMLDivElement>((_, ref) => {
   ];
 
   return (
-    <div ref={ref} className="relative z-10 pb-16">
-      <div
-        className={cn(
-          "bg",
-          "sticky top-0 -z-1 h-lvh w-full origin-top scale-30 filter-[grayscale(1)_brightness(0)]"
-        )}
-      >
-        <Image
-          src="/images/about/attitude_bg.jpg"
-          alt=""
-          height={500}
-          width={500}
+    <div
+      ref={ref}
+      className="relative z-10 pt-[150lvh] pb-[100lvh] [clip-path:inset(0)]"
+    >
+      <div className={"fixed inset-0 -z-1 grid place-items-center"}>
+        <figure
           className={cn(
-            "object-position-top pointer-events-none h-full w-full scale-150 object-cover"
+            "bg",
+            "aspect-video w-full origin-top filter-[grayscale(1)]",
+            "md:w-1/3"
           )}
-        />
+        >
+          <Image
+            src="/images/about/attitude_bg.jpg"
+            alt=""
+            height={500}
+            width={500}
+            className={cn("pointer-events-none h-full w-full object-cover")}
+          />
+        </figure>
       </div>
 
       <div
