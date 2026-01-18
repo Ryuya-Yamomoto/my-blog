@@ -69,6 +69,11 @@ export default async function Home() {
             <br />
             お気軽にご相談ください。
           </p>
+          <ButtonText
+            link={{ href: "/about" }}
+            className="font-inter mt-4"
+            label="About Me"
+          />
         </div>
       </section>
 
