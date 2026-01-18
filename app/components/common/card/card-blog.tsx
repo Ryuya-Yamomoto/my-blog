@@ -11,7 +11,12 @@ import { useState, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import StripHtmlTags from "@/utils/common/stripHtmlTags";
-import useStore from "@/app/store/useStore";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { Observer } from "gsap/all";
+
+gsap.registerPlugin(Observer);
+gsap.registerPlugin(useGSAP);
 
 type CardBlogProps = {
   blog: Blog;
@@ -22,7 +27,59 @@ const CardBlog = ({ blog, isViewTransition = true }: CardBlogProps) => {
   const cardRef = useRef<HTMLAnchorElement | null>(null);
   const [pointX, setPointX] = useState(50);
   const [pointY, setPointY] = useState(50);
-  const isLargeScreen = useStore((state) => state.isLargeScreen);
+
+  useGSAP(
+    () => {
+      if (!cardRef.current) return;
+
+      // デスクトップサイズかどうかを判定（768px以上）
+      const isDesktop = window.matchMedia("(min-width: 768px)").matches;
+      if (!isDesktop) return;
+
+      // アニメーション用のオブジェクトを作成
+      const animatedValues = { x: 50, y: 50 };
+
+      const xTo = gsap.quickTo(animatedValues, "x", {
+        duration: 0.6,
+        ease: "power3.out",
+        onUpdate: () => {
+          setPointX(Math.trunc(animatedValues.x));
+        },
+      });
+      const yTo = gsap.quickTo(animatedValues, "y", {
+        duration: 0.6,
+        ease: "power3.out",
+        onUpdate: () => {
+          setPointY(Math.trunc(animatedValues.y));
+        },
+      });
+
+      const observer = Observer.create({
+        target: cardRef.current,
+        type: "pointer,mouse",
+        // eslint-disable-next-line
+        onMove: (e: any) => {
+          const { clientX, clientY } = e.event; // e.eventから座標を取得
+          const rect = cardRef.current?.getBoundingClientRect();
+          if (!rect) return;
+
+          // パーセンテージで計算
+          const x = ((clientX - rect.left) / rect.width) * 100;
+          const y = ((clientY - rect.top) / rect.height) * 100;
+
+          // GSAPでスムーズにアニメーション（状態も自動更新）
+          xTo(x);
+          yTo(y);
+        },
+      });
+
+      // クリーンアップ関数
+      return () => {
+        observer.kill();
+      };
+    },
+    { scope: cardRef }
+  );
 
   return (
     <Link
@@ -32,15 +89,6 @@ const CardBlog = ({ blog, isViewTransition = true }: CardBlogProps) => {
         "group relative grid w-full grid-cols-[40%_1fr] gap-x-2 outline-0",
         "lg:aspect-square lg:grid-cols-1 lg:gap-x-0 lg:overflow-hidden"
       )}
-      onMouseMove={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-        if (cardRef.current && isLargeScreen) {
-          const rect = cardRef.current.getBoundingClientRect();
-          const x = ((e.clientX - rect.left) / rect.width) * 100;
-          const y = ((e.clientY - rect.top) / rect.height) * 100;
-          setPointX(Math.trunc(x));
-          setPointY(Math.trunc(y));
-        }
-      }}
     >
       <figure
         className={cn(
