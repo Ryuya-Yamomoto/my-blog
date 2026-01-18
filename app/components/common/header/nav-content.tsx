@@ -3,8 +3,32 @@ import type { Category } from "@/app/types/common";
 import Image from "next/image";
 import Link from "next/link";
 import ButtonTheme from "./button-theme";
+import {
+  Accordion,
+  AccordionTrigger,
+  AccordionTarget,
+  AccordionTargetInner,
+} from "@/app/components/common/accordion/accordion";
 
 import { cn } from "@/lib/utils";
+
+// 再利用可能なリンクスタイル関数
+const createLinkStyle = (options?: {
+  isActive?: boolean;
+  isInteractive?: boolean;
+}) => {
+  const { isActive = false, isInteractive = true } = options || {};
+
+  return cn(
+    "text-foreground relative block w-fit text-lg leading-normal uppercase outline-none",
+    isActive && "before:content-['・']",
+    isInteractive && [
+      'after:bg-foreground after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-right after:scale-x-0 after:transition-transform after:duration-300 after:content-[""]',
+      "hover:after:origin-left hover:after:scale-x-100",
+      "focus-visible:after:origin-left focus-visible:after:scale-x-100",
+    ]
+  );
+};
 
 type NavContentProps = {
   categories: Category[];
@@ -46,26 +70,55 @@ const NavContent = (props: NavContentProps) => {
                 isOpen={isOpen}
               />
             </li>
+
+            {/* アコーディオン */}
             <li>
-              <MenuLink
-                currentPathname={currentPathname}
-                matchPath="/blog"
-                slug="all"
-                isOpen={isOpen}
-              />
+              <Accordion>
+                <AccordionTrigger
+                  className={cn(
+                    createLinkStyle({
+                      isActive: false,
+                      isInteractive: false,
+                    }),
+                    "relative cursor-pointer pr-5",
+                    "before:bg-foreground before:absolute before:top-1/2 before:right-0 before:h-px before:w-2 before:-translate-y-1/2 before:content-['']",
+                    "after:bg-foreground after:absolute after:top-1/2 after:right-0 after:h-px after:w-2 after:-translate-y-1/2 after:rotate-90 after:content-['']",
+                    "group-data-[open=true]:after:rotate-0"
+                  )}
+                >
+                  <p>Articles</p>
+                </AccordionTrigger>
+                <AccordionTarget>
+                  <AccordionTargetInner className={cn("pl-4")}>
+                    <ul className="grid gap-y-2">
+                      <li>
+                        <MenuLink
+                          currentPathname={currentPathname}
+                          matchPath="/blog"
+                          slug="all"
+                          isOpen={isOpen}
+                          className={cn("text-sm")}
+                        />
+                      </li>
+                      {categories.map((category) => {
+                        return (
+                          <li key={category.id}>
+                            <MenuLink
+                              currentPathname={currentPathname}
+                              matchPath={`/blog/category/${category.slug}`}
+                              slug={category.slug}
+                              isOpen={isOpen}
+                              className={cn("text-sm")}
+                            />
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </AccordionTargetInner>
+                </AccordionTarget>
+              </Accordion>
             </li>
-            {categories.map((category) => {
-              return (
-                <li key={category.id}>
-                  <MenuLink
-                    currentPathname={currentPathname}
-                    matchPath={`/blog/category/${category.slug}`}
-                    slug={category.slug}
-                    isOpen={isOpen}
-                  />
-                </li>
-              );
-            })}
+
             <li>
               <MenuLink
                 currentPathname={currentPathname}
@@ -114,29 +167,34 @@ const MenuLink = ({
   matchPath,
   slug,
   isOpen,
+  className,
 }: {
   currentPathname: string;
   matchPath: string;
   slug: string;
   isOpen: boolean;
+  className?: string;
 }) => {
-  const linkStyle = cn(
-    "text-foreground relative block w-fit text-lg leading-normal  uppercase outline-none",
-    'after:bg-foreground after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-right after:scale-x-0 after:transition-transform after:duration-300 after:content-[""]'
-  );
+  const isActive = currentPathname === matchPath;
 
-  if (currentPathname === matchPath) {
+  if (isActive) {
     return (
-      <span className={cn(linkStyle, "before:content-['・']")}>{slug}</span>
+      <span
+        className={cn(
+          createLinkStyle({ isActive: true, isInteractive: false }),
+          className
+        )}
+      >
+        {slug}
+      </span>
     );
   } else {
     return (
       <Link
         href={matchPath}
         className={cn(
-          linkStyle,
-          "hover:after:origin-left hover:after:scale-x-100",
-          "focus:after:origin-left focus:after:scale-x-100"
+          createLinkStyle({ isActive: false, isInteractive: true }),
+          className
         )}
         tabIndex={isOpen ? 0 : -1}
         aria-disabled={!isOpen}
