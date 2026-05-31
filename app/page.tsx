@@ -47,11 +47,9 @@ export default async function Home() {
             <br />
             その後、地元の栃木に戻り、
             <br className="md:hidden" />
-            2022年3月からWeb制作会社に転職、
-            <br className="md:hidden" />
             フロントエンドエンジニアとして従事。
             <br />
-            趣味は音楽と料理。あとプログラミング。
+            現在は都内のweb制作会社に勤務しております。
           </p>
           <p className="mt-4">
             当サイトは

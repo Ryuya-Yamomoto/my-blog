@@ -115,6 +115,7 @@ const SectionMv = () => {
               height={785}
               width={589}
               className={cn("h-full w-full origin-top scale-140 object-cover")}
+              priority
             />
           </figure>
         </div>
@@ -132,6 +133,7 @@ const SectionMv = () => {
               height={785}
               width={589}
               className={cn("h-full w-full origin-top scale-140 object-cover")}
+              priority
             />
           </figure>
         </div>
@@ -149,6 +151,7 @@ const SectionMv = () => {
               height={785}
               width={589}
               className={cn("h-full w-full origin-top scale-140 object-cover")}
+              priority
             />
           </figure>
         </div>

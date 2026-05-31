@@ -190,6 +190,7 @@ const Section03 = forwardRef<HTMLDivElement>((_, ref) => {
             height={500}
             width={500}
             className={cn("pointer-events-none h-full w-full object-cover")}
+            priority
           />
         </figure>
       </div>
