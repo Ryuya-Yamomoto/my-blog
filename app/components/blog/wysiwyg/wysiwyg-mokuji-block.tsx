@@ -15,7 +15,7 @@ type WysiwygMokujiBlockProps = {
 
 const WysiwygMokujiBlock = ({ arrayMokuji }: WysiwygMokujiBlockProps) => {
   const headerRef = useRef<HTMLElement | null>(null);
-  const { activeMokujiId } = useStore();
+  const { activeMokujiId, setActiveMokujiId } = useStore();
   const [isMokujiOpen, setIsMokujiOpen] = useState(true);
 
   useEffect(() => {
@@ -25,6 +25,62 @@ const WysiwygMokujiBlock = ({ arrayMokuji }: WysiwygMokujiBlockProps) => {
 
     headerRef.current = window.document.querySelector("header");
   }, []);
+
+  // スクロール位置から「現在のセクション」を判定してアクティブな目次を更新する
+  // セクション = 見出しから次の見出しの手前までの塊
+  useEffect(() => {
+    if (arrayMokuji.length === 0) return;
+
+    let rafId: number | null = null;
+
+    const updateActiveMokuji = () => {
+      rafId = null;
+
+      // 判定の基準ライン（ヘッダーの下端）
+      const readingLine = (headerRef.current?.clientHeight ?? 0) + 1;
+
+      const headings = arrayMokuji
+        .map((item) => document.getElementById(item.id))
+        .filter((el): el is HTMLElement => el !== null);
+      if (headings.length === 0) return;
+
+      // 基準ラインを越えている最後の見出し = 現在のセクション
+      let activeId: string | null = null;
+      for (const heading of headings) {
+        if (heading.getBoundingClientRect().top <= readingLine) {
+          activeId = heading.id;
+        }
+      }
+
+      // 記事本文の下端（= 最後のセクションの終わり）を越えたらアクティブを外す
+      const articleBottom = headings[headings.length - 1]
+        .closest(".wysiwyg")
+        ?.getBoundingClientRect().bottom;
+      if (articleBottom !== undefined && articleBottom < readingLine) {
+        activeId = null;
+      }
+
+      if (useStore.getState().activeMokujiId !== activeId) {
+        setActiveMokujiId(activeId);
+      }
+    };
+
+    const onScrollOrResize = () => {
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(updateActiveMokuji);
+    };
+
+    updateActiveMokuji();
+    window.addEventListener("scroll", onScrollOrResize, { passive: true });
+    window.addEventListener("resize", onScrollOrResize);
+
+    return () => {
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      window.removeEventListener("scroll", onScrollOrResize);
+      window.removeEventListener("resize", onScrollOrResize);
+      setActiveMokujiId(null);
+    };
+  }, [arrayMokuji, setActiveMokujiId]);
 
   const handleClick = (id: string) => {
     const element = document.getElementById(id);

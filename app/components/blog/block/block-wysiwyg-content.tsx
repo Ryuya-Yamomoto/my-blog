@@ -4,7 +4,6 @@ import { v4 as uuidv4 } from "uuid";
 import ParseWysiwyg from "@/utils/blog/post/parseWysiwyg";
 
 import WysiwygImage from "../wysiwyg/wysiwyg-image";
-import WysiwygMokujiHeading from "../wysiwyg/wysiwyg-mokuji-heading";
 import WysiwygMokujiBlock from "../wysiwyg/wysiwyg-mokuji-block";
 
 const BlockWysiwygContent = ({ html }: { html: string }): React.ReactNode => {
@@ -13,7 +12,7 @@ const BlockWysiwygContent = ({ html }: { html: string }): React.ReactNode => {
 
   // ReactNodeに置換
   // figure → onClickイベントを付与
-  // h2 → IntersectionObserver付与 / h2要素の情報を用いて目次を生成
+  // h2 → idを付与 / h2要素の情報を用いて目次を生成
   const arrayMokuji: { id: string; text: string }[] = [];
   const parsedReactNode: React.ReactNode = parse(parsedArticleBody, {
     replace: (domNode: DOMNode) => {
@@ -94,8 +93,8 @@ const BlockWysiwygContent = ({ html }: { html: string }): React.ReactNode => {
         const text = getTextContent(domNode);
         arrayMokuji.push({ id, text });
 
-        // h2 クライアントサイドコンポーネントとして生成
-        return <WysiwygMokujiHeading id={id} text={text} />;
+        // 目次のアクティブ判定は WysiwygMokujiBlock がスクロール位置から行う
+        return <h2 id={id}>{text}</h2>;
       }
 
       // その他の要素はそのまま返す
