@@ -7,7 +7,7 @@ import Image from "next/image";
 import { unstable_ViewTransition as ViewTransition } from "react";
 import BadgeRounded from "../badge/badge-rounded";
 
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import StripHtmlTags from "@/utils/common/stripHtmlTags";
@@ -25,51 +25,81 @@ type CardBlogProps = {
 
 const CardBlog = ({ blog, isViewTransition = true }: CardBlogProps) => {
   const cardRef = useRef<HTMLAnchorElement | null>(null);
-  const [pointX, setPointX] = useState(50);
-  const [pointY, setPointY] = useState(50);
+  const overlayRef = useRef<HTMLDivElement | null>(null);
 
   useGSAP(
     () => {
-      if (!cardRef.current) return;
+      if (!cardRef.current || !overlayRef.current) return;
 
       // デスクトップサイズかどうかを判定（768px以上）
       const isDesktop = window.matchMedia("(min-width: 768px)").matches;
       if (!isDesktop) return;
 
-      // アニメーション用のオブジェクトを作成
-      const animatedValues = { x: 50, y: 50 };
+      const overlay = overlayRef.current;
 
+      // アニメーション用のオブジェクトを作成
+      const animatedValues = { x: 50, y: 50, size: 0 };
+
+      // React の state を介さず DOM へ直接 CSS 変数を書き込むことで
+      // 毎フレームの再レンダリングを避け、滑らかに追従させる
       const xTo = gsap.quickTo(animatedValues, "x", {
         duration: 0.6,
         ease: "power3.out",
         onUpdate: () => {
-          setPointX(Math.trunc(animatedValues.x));
+          overlay.style.setProperty("--positionX", `${animatedValues.x}%`);
         },
       });
       const yTo = gsap.quickTo(animatedValues, "y", {
         duration: 0.6,
         ease: "power3.out",
         onUpdate: () => {
-          setPointY(Math.trunc(animatedValues.y));
+          overlay.style.setProperty("--positionY", `${animatedValues.y}%`);
         },
       });
+      const sizeTo = gsap.quickTo(animatedValues, "size", {
+        duration: 0.5,
+        ease: "power3.out",
+        onUpdate: () => {
+          overlay.style.setProperty("--size", `${animatedValues.size}%`);
+        },
+      });
+
+      const getPointerPercent = (event: PointerEvent | MouseEvent) => {
+        const rect = cardRef.current?.getBoundingClientRect();
+        if (!rect) return null;
+
+        // パーセンテージで計算
+        return {
+          x: ((event.clientX - rect.left) / rect.width) * 100,
+          y: ((event.clientY - rect.top) / rect.height) * 100,
+        };
+      };
 
       const observer = Observer.create({
         target: cardRef.current,
         type: "pointer,mouse",
         // eslint-disable-next-line
-        onMove: (e: any) => {
-          const { clientX, clientY } = e.event; // e.eventから座標を取得
-          const rect = cardRef.current?.getBoundingClientRect();
-          if (!rect) return;
+        onHover: (e: any) => {
+          const position = getPointerPercent(e.event);
+          if (!position) return;
 
-          // パーセンテージで計算
-          const x = ((clientX - rect.left) / rect.width) * 100;
-          const y = ((clientY - rect.top) / rect.height) * 100;
+          // 第2引数に開始値を渡し、前回の位置からの補間をスキップして
+          // カーソル位置へ即座にジャンプさせる
+          xTo(position.x, position.x);
+          yTo(position.y, position.y);
+          sizeTo(60);
+        },
+        onHoverEnd: () => {
+          sizeTo(0);
+        },
+        // eslint-disable-next-line
+        onMove: (e: any) => {
+          const position = getPointerPercent(e.event);
+          if (!position) return;
 
           // GSAPでスムーズにアニメーション（状態も自動更新）
-          xTo(x);
-          yTo(y);
+          xTo(position.x);
+          yTo(position.y);
         },
       });
 
@@ -127,17 +157,18 @@ const CardBlog = ({ blog, isViewTransition = true }: CardBlogProps) => {
         )}
       </figure>
       <div
+        ref={overlayRef}
         className={cn(
           "place-items-[start_center] grid w-full",
           "lg:absolute lg:top-0 lg:left-0 lg:h-full lg:items-center lg:justify-items-start lg:bg-black/50 lg:p-4",
-          "lg:[clip-path:circle(0%_at_var(--positionX)_var(--positionY))]",
-          "lg:group-hover:[clip-path:circle(60%_at_var(--positionX)_var(--positionY))]",
+          "lg:[clip-path:circle(var(--size)_at_var(--positionX)_var(--positionY))]",
           "lg:group-focus-visible:[clip-path:inset(0_0_0_0)]"
         )}
         style={
           {
-            "--positionX": `${pointX}%`,
-            "--positionY": `${pointY}%`,
+            "--positionX": "50%",
+            "--positionY": "50%",
+            "--size": "0%",
           } as React.CSSProperties
         }
       >
