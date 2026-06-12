@@ -2,7 +2,7 @@
 
 import type { WysiwygModalImageProps } from "@/app/blog/post/[id]/page";
 
-import React, { useState, startTransition } from "react";
+import React, { useState, useLayoutEffect, startTransition } from "react";
 
 import { unstable_ViewTransition as ViewTransition, useRef } from "react";
 import Image from "next/image";
@@ -26,8 +26,8 @@ const WysiwygImage = ({ image, figCaption }: WysiwygImageProps) => {
   // スクロールロック（モーダル開閉状態に基づく）
   useScrollLock({ isLocked: isModalOpen });
 
-  // 画像モーダルの開閉処理
-  const handleToggleModal = (
+  // 画像モーダルを開く処理
+  const handleOpenModal = (
     e:
       | React.MouseEvent<
           HTMLImageElement | HTMLDivElement | HTMLButtonElement,
@@ -39,14 +39,27 @@ const WysiwygImage = ({ image, figCaption }: WysiwygImageProps) => {
 
     e.stopPropagation();
     e.preventDefault();
-    dialogRef.current?.showModal();
     startTransition(() => setModalOpen(true));
   };
 
-  // モーダルがcloseされた際の処理
-  dialogRef.current?.addEventListener("close", () => {
+  // 画像モーダルを閉じる処理
+  const handleCloseModal = () => {
     startTransition(() => setModalOpen(false));
-  });
+  };
+
+  // stateに追従してdialogの開閉を反映する
+  // View Transitionのスナップショットがdialogの開いた状態で撮影されるよう、
+  // showModal/closeはstate更新後のコミット内で実行する
+  useLayoutEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
+    if (isModalOpen) {
+      if (!dialog.open) dialog.showModal();
+    } else if (dialog.open) {
+      dialog.close();
+    }
+  }, [isModalOpen]);
 
   return (
     <>
@@ -69,8 +82,8 @@ const WysiwygImage = ({ image, figCaption }: WysiwygImageProps) => {
               alt={alt}
               width={width}
               height={height}
-              onClick={handleToggleModal}
-              onKeyDown={handleToggleModal}
+              onClick={handleOpenModal}
+              onKeyDown={handleOpenModal}
               style={{ aspectRatio: `${width}/${height}` }}
               className={cn(
                 "mx-auto cursor-pointer rounded-sm outline-none",
@@ -90,14 +103,22 @@ const WysiwygImage = ({ image, figCaption }: WysiwygImageProps) => {
         ref={dialogRef}
         onClick={(e: React.MouseEvent<HTMLDialogElement>) => {
           if (e.target === e.currentTarget) {
-            dialogRef.current?.close();
+            handleCloseModal();
           }
+        }}
+        onCancel={(e: React.SyntheticEvent<HTMLDialogElement>) => {
+          // Escキーによる即時closeを抑止し、View Transition経由で閉じる
+          e.preventDefault();
+          handleCloseModal();
+        }}
+        onClose={() => {
+          // 想定外の経路でcloseされた場合にstateを同期するフォールバック
+          startTransition(() => setModalOpen(false));
         }}
         style={{ aspectRatio: `${width}/${height}` }}
         className={cn(
           "m-auto h-auto max-h-[80%] w-auto max-w-[80%] bg-transparent",
-          "backdrop:bg-black/50 backdrop:backdrop-blur-sm",
-          isModalOpen ? "block" : "hidden"
+          "backdrop:bg-black/50 backdrop:backdrop-blur-sm"
         )}
       >
         {isModalOpen && (
@@ -114,9 +135,7 @@ const WysiwygImage = ({ image, figCaption }: WysiwygImageProps) => {
         )}
         <ButtonClose
           label="閉じる"
-          handleClick={() => {
-            dialogRef.current?.close();
-          }}
+          handleClick={handleCloseModal}
           className="fixed top-4 right-4"
         />
       </dialog>
