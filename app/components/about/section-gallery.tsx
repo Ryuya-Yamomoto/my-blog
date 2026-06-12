@@ -33,6 +33,7 @@ const SectionGallery = () => {
   const detailContent = useRef<HTMLDivElement>(null); //- 詳細ダイアログ内 コンテンツ要素
 
   const clickedItem = useRef<HTMLElement | null>(null); //- クリックされたギャラリーアイテム
+  const isClosing = useRef(false); //- クローズアニメーション実行中の多重実行防止
 
   // 詳細ダイアログ 表示処理
   const handleShowDetail = () => {
@@ -81,6 +82,9 @@ const SectionGallery = () => {
 
   // 詳細ダイアログ 非表示処理
   const handleCloseDetail = () => {
+    if (isClosing.current) return;
+    isClosing.current = true;
+
     // ウィンドウ幅に応じて clipPath を変更
     const closeClipPath = isLargeScreen
       ? "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)" // 1024px以上: 左から閉じる
@@ -118,14 +122,16 @@ const SectionGallery = () => {
               clickedItem.current.style.opacity = "1";
             }
 
+            // 詳細ダイアログ 初期化
+            // closeイベントのフォールバック処理が走らないよう、close()より先に行う
+            setDetailItem(null);
+            clickedItem.current = null;
+            isClosing.current = false;
+
             // ダイアログを閉じる
             if (dialogRef.current?.open) {
               dialogRef.current.close();
             }
-
-            // 詳細ダイアログ 初期化
-            setDetailItem(null);
-            clickedItem.current = null;
           },
         });
       },
@@ -249,6 +255,26 @@ const SectionGallery = () => {
           if (e.target === e.currentTarget) {
             handleCloseDetail();
           }
+        }}
+        onCancel={(e: React.SyntheticEvent<HTMLDialogElement>) => {
+          // Escキーによる即時closeを抑止し、既存のアニメーション経由で閉じる
+          e.preventDefault();
+          handleCloseDetail();
+        }}
+        onClose={() => {
+          // 想定外の経路でcloseされた場合（連続Escでcancelが抑止できない場合など）の後始末
+          if (!clickedItem.current) return;
+
+          gsap.killTweensOf([dialogRef.current, detailContent.current]);
+          gsap.set(dialogRef.current, { clearProps: true });
+
+          clickedItem.current.style.opacity = "1";
+          clickedItem.current = null;
+          isClosing.current = false;
+          setDetailItem(null);
+
+          const closeButton = dialogRef.current?.querySelector("#close-button");
+          closeButton?.setAttribute("style", "visibility: hidden");
         }}
         className={cn(
           "m-auto h-full max-h-[80%] w-full max-w-[80%] bg-transparent outline-none",
