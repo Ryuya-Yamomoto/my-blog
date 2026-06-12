@@ -1,6 +1,9 @@
 import { create } from "zustand";
+import type Lenis from "@studio-freight/lenis";
 
 type StoreState = {
+  lenis: Lenis | null;
+  setLenis: (lenis: Lenis | null) => void;
   isMenuOpen: boolean;
   setMenuOpen: (isOpen: boolean) => void;
   isKensakuOpen: boolean;
@@ -24,6 +27,8 @@ type StoreState = {
 };
 
 const useStore = create<StoreState>((set) => ({
+  lenis: null,
+  setLenis: (lenis) => set({ lenis }),
   isMenuOpen: false,
   setMenuOpen: (isOpen) => set({ isMenuOpen: isOpen }),
   isKensakuOpen: false,

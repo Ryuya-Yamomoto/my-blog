@@ -1,52 +1,31 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
+import useStore from "@/app/store/useStore";
 
-export const useScrollLock = ({
-  isLocked,
-  resetPositionY = false,
-}: {
-  isLocked: boolean;
-  resetPositionY?: boolean;
-}) => {
-  const scrollPositionY = useRef(0);
-  const wasLocked = useRef(false); //- 前回ロック処理が行われたかの判別 ページリロード時の実行を防止
+// スクロールロック
+// body を position: fixed にする方式は window.scrollY が 0 にリセットされ、
+// ScrollTrigger（scrub）や position: sticky が巻き戻ってしまうため、
+// スクロール位置を保持したまま overflow: hidden + Lenis の停止でロックする
+export const useScrollLock = ({ isLocked }: { isLocked: boolean }) => {
+  const lenis = useStore((state) => state.lenis);
 
   useEffect(() => {
-    if (isLocked) {
-      // スクロール固定処理
-      // 現在のスクロール位置を取得
-      scrollPositionY.current = window.scrollY;
+    if (!isLocked) return;
 
-      // スタイル指定
-      document.body.style.position = "fixed";
-      document.body.style.top = `-${scrollPositionY.current}px`;
-      document.body.style.left = "0";
-      document.body.style.width = `100%`;
+    // スクロールバー消失によるガタつき防止
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
 
-      wasLocked.current = true;
-    } else if (wasLocked.current) {
-      // スクロール解放処理
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.left = "";
-      document.body.style.width = "";
+    lenis?.stop();
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
 
-      if (resetPositionY) scrollPositionY.current = 0;
-
-      window.scrollTo({
-        top: scrollPositionY.current,
-        left: 0,
-        behavior: "instant",
-      });
-    }
-
-    // クリーンナップ関数
+    // クリーンナップ関数（ロック解除）
     return () => {
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
-      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      document.body.style.paddingRight = "";
+      lenis?.start();
     };
-  }, [isLocked, resetPositionY]);
+  }, [isLocked, lenis]);
 };

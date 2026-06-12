@@ -22,16 +22,12 @@ type HeaderProps = {
 const Header = ({ categories, blogs }: HeaderProps) => {
   // 現在のパスを取得
   const pathname = usePathname();
-  const prevPathnameRef = useRef(pathname);
 
   // main 要素を取得
   const mainRef = useRef<HTMLElement | null>(null);
 
   // Storeから開閉の状態を取得
   const { isMenuOpen, setMenuOpen, isKensakuOpen, setKensakuOpen } = useStore();
-
-  // pathname変更検知
-  const hasPathnameChanged = prevPathnameRef.current !== pathname;
 
   // URL変更を監視
   useEffect(() => {
@@ -40,7 +36,6 @@ const Header = ({ categories, blogs }: HeaderProps) => {
     // バーガーメニューを閉じる
     setMenuOpen(false);
     setKensakuOpen(false);
-    prevPathnameRef.current = pathname;
   }, [pathname, setMenuOpen, setKensakuOpen]);
 
   // マウント時を監視
@@ -59,10 +54,9 @@ const Header = ({ categories, blogs }: HeaderProps) => {
     }
   }, [isMenuOpen, isKensakuOpen]);
 
-  // スクロール固定処理（pathname変更時はリセット）
+  // スクロール固定処理
   useScrollLock({
     isLocked: isMenuOpen || isKensakuOpen,
-    resetPositionY: hasPathnameChanged,
   });
 
   // バーガーメニュー 状態更新ハンドラー

@@ -3,10 +3,12 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useLayoutEffect } from "react";
 import Lenis from "@studio-freight/lenis";
+import useStore from "@/app/store/useStore";
 
 export const LenisProvider = () => {
   const lenisRef = useRef<Lenis | null>(null);
   const pathname = usePathname();
+  const setLenis = useStore((state) => state.setLenis);
 
   useEffect(() => {
     lenisRef.current = new Lenis({
@@ -16,6 +18,9 @@ export const LenisProvider = () => {
       touchMultiplier: 1,
       infinite: false,
     });
+
+    // スクロールロックなどから参照できるようストアに共有
+    setLenis(lenisRef.current);
 
     const raf = (time: number) => {
       lenisRef.current?.raf(time);
@@ -27,8 +32,9 @@ export const LenisProvider = () => {
     return () => {
       lenisRef.current?.destroy();
       lenisRef.current = null;
+      setLenis(null);
     };
-  }, []);
+  }, [setLenis]);
 
   // URL変更時を監視
   useLayoutEffect(() => {
